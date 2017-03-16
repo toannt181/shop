@@ -1,0 +1,9 @@
+/node_modules
+/resources/build
+config.json
+/app/config.js
+.env
+/.idea
+/public/assets/css
+/public/assets/js
+/public/assets/rev-manifest.json
