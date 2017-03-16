@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="gApp">
+<head>
+
+    <!-- CSS (load bootstrap) -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style>
+        .navbar { border-radius:0; }
+    </style>
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+<!--     <script src="/assets/js/app.config.js"></script>
+    <script src="/assets/js/app.module.js"></script> -->
+</head>
+
+<body>
+
+<div id="fb-root"></div>
+<div ui-view="content"></div>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

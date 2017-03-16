@@ -8,3 +8,10 @@ Homestead.json
 /.idea
 composer.lock
 storage/
+/node_modules
+/resources/build
+config.json
+/app/config.js
+/public/assets/css
+/public/assets/js
+/public/assets/rev-manifest.json
