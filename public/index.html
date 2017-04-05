@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html ng-app="gApp">
+<!doctype html>
+<html lang="en" ng-app="gApp">
 <head>
-
-    <!-- CSS (load bootstrap) -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <style>
-        .navbar { border-radius:0; }
-    </style>
-
-    <!-- JS (load angular, ui-router, and our custom js file) -->
-    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
-    <script src="/assets/js/app.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
-
-<!--     <script src="/assets/js/app.config.js"></script>
-    <script src="/assets/js/app.module.js"></script> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>VNPAY Shop</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/css/app.css">
 </head>
-
 <body>
-
-<div id="fb-root"></div>
+<div ui-view="header"></div>
 <div ui-view="content"></div>
+<div ui-view="footer"></div>
+<script src="/assets/js/libs.js"></script>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

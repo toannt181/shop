@@ -1,16 +1,12 @@
 {
-  "name": "vnshop-web",
+  "name": "gangularjs",
   "version": "1.0.0",
-  "description": "vnshop-web",
+  "description": "G-AngularJS app core",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "http://git.teko.vn/vnshop/vnshop-web.git"
-  },
-  "author": "luc",
+  "author": "Vnshop",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.0.0",
