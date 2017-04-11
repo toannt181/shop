@@ -1,8 +1,8 @@
 <div class="header clearfix">
-	<div class="wrapper">
-		<a href="#">Tra cứ thông tin</a>
-		<a href="#">Chăm sóc khách hàng</a>
-	</div>
+    <div class="wrapper">
+        <a href="#">Tra cứ thông tin</a>
+        <a href="#">Chăm sóc khách hàng</a>
+    </div>
 </div>
 <section class="wrapper">
     <div class="container">
@@ -15,11 +15,19 @@
 					<img src="/assets/images/icon_cart.png"/>
 					<span>Giỏ hàng</span>
 				</a>
-				<a href="javascript:;" ng-click="headerCtrl.openLogin()">
-					<img src="/assets/images/icon_user.png"/>
-					<span>Đăng nhập</span>
-				</a> 
-				<span>| <a href="javascript:;" ng-click="headerCtrl.openRegister()">Đăng ký</a></span>
+				<span ng-if="!headerCtrl.profileData.email">
+					<a href="javascripts:;" ng-click="headerCtrl.openLogin()">
+						<img src="/assets/images/icon_user.png"/>
+						<span>Đăng nhập</span>
+					</a>
+					<span>| <a href="javascripts:;" ng-click="headerCtrl.openRegister()">Đăng ký</a></span>
+				</span>
+				<span ng-if="headerCtrl.profileData.email">
+					<a href="javascripts:;" >
+						<img src="/assets/images/icon_user.png"/>
+						{{headerCtrl.profileData.username.substring(0,15)}}
+					</a>
+				</span>
 			</div>
 			<div class="left w55">
 				<form class="from-search">
@@ -70,3 +78,4 @@
 		</form>
 	</div>
 </div>
+</section>

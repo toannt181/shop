@@ -14,6 +14,7 @@
 		vm.searchResult = [];
 		vm.provinceId = $localStorage.provinceId;
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
+        vm.profileData = $localStorage.profileData;
 		
 		getSubMenu();
         function getSubMenu() {
@@ -33,7 +34,7 @@
                 return;
             });
         }
-		
+
         vm.gotoCatPage = function (catId, typeId) {
             if (typeof typeId !== 'undefined' && typeId != '0') {
 				if (typeId == 1) {

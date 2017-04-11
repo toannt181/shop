@@ -6,14 +6,14 @@
 		<div class="wrap-login">
 			<form class="from-register">
 				<label>E-mail</label>
-				<input type="text" />
+				<input type="text" ng-model="ctrl.email" required/>
 				<label>Mật khẩu</label>
-				<input type="password" />
+				<input type="password" ng-model="ctrl.password" required/>
 				<p class="text-right"><a href="">Quên mật khẩu?</a></p>
-				<button>ĐĂNG NHẬP</button>
+				<button ng-click="ctrl.login()">ĐĂNG NHẬP</button>
 				<p class="login-more">Đăng nhập với  &nbsp &nbsp
-					<a href=""><img src="/assets/images/icon_login_facebook.png" /></a> &nbsp &nbsp
-					<a href=""><img src="/assets/images/icon_login_google.png" /></a> 
+					<span style="cursor: pointer" ng-click="ctrl.authenticate('facebook')"><img src="/assets/images/icon_login_facebook.png" /></span> &nbsp &nbsp
+					<span style="cursor: pointer" ng-click="ctrl.authenticate('google')"><img src="/assets/images/icon_login_google.png" /></span>
 					 &nbsp &nbsp / Hoặc với tài khoản Mobile Banking của bạn
 				</p>
 			</form>
