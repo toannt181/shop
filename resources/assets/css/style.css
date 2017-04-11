@@ -15,30 +15,51 @@ a:hover {color: #ec2c39}
 .header a{color:#fff;padding-left:20px;}
 
 /* 21,55,24 */
+.w20{width:20%}
 .w21{width:21%}
 .w24{width:24%}
 .w25{width:25%}
 .w50{width:50%}
+.w60{width:60%}
 .w55{width:55%}
 .w71{width:71%}
+.w80{width:80%}
 .w100{width:100%}
+.p10{padding:10px;}
 .pl2{padding-left:2px;}
 .pr5{padding-right:5px;}
 .pl5{padding-left:5px;}
+.pl10{padding-left:10px;}
 .pb2{padding-bottom:2px;}
+.pt10{padding-top:10px;}
 .pb10{padding-bottom:10px;}
+.mb10{margin-bottom:10px;}
+.mt10{margin-top:10px;}
+.ml5{margin-left:5px;}
+.ml20{margin-left:20px;}
+.ml10{margin-left:10px;}
+.mr5{margin-right:5px;}
+.mr20{margin-right:20px;}
+.mr10{margin-right:10px;}
 .bgfbf9f9{background-color: #fbf9f9;}
+.bgf6f6f6{background-color: #f6f6f6;}
+.bgffffff{background-color: #ffffff;}
+.bgebebeb{background-color: #ebebeb;}
 .hide{display:none}
 
 .left {float:left;}
 .right {float:right;}
 .text-center {text-align:center;}
 .text-right {text-align:right;}
+.fw {font-weight:700;}
+.fw100 {font-weight:100;}
 
 .more_products {padding-bottom:10px;}
 .more_products .img{height:100px}
 .more_products .link{line-height:100px;background: rgba(0, 0, 0, 0.64);margin-top: -100px;text-align: center;width: 100%;text-transform:uppercase;}
 .more_products .link a{color:#fff;}
+
+.block_menu a{line-height:40px;padding-left:5px;padding-right:5px;text-transform:uppercase;}
 
 .menu-primary {}
 .menu-primary  li {padding: 0px 5px 0px 40px;line-height:45px;}
@@ -114,6 +135,146 @@ a:hover {color: #ec2c39}
 .wrap-login input{width:100%;border:1px #ebebeb solid;height:20px;padding:10px 0px;margin:5px 0px 15px 0px}
 .wrap-login button{width:100%;border:2px #f80b43 solid;padding:0px 10px;height:44px;margin:30px 0px 20px 0px;background-color:#f80b43;color:#fff;}
 
+.wrap-register {background-color:#f6f6f6;padding-bottom:60px;padding-top:50px;}
+.wrap-register .register a{color:#256fba}
+.wrap-register .register {margin:20px 250px;padding:50px 60px;background-color:#fff}
+.wrap-register .register .from-register{padding:30px 0px 0px 50px;}
+.wrap-register .register input{width:100%;border:1px #ebebeb solid;height:20px;padding:10px 0px;margin:5px 0px 15px 0px}
+.wrap-register .register button{width:100%;border:2px #1e66ae solid;padding:0px 10px;height:44px;margin:30px 0px 20px 0px;background-color:#1e66ae;color:#fff;}
+.wrap-register .register label{display:inline-block;width:100%}
+.wrap-register .register .checkbox{width:initial}
+.wrap-register .register .capchar{width:initial;float:left}
+
+.cat .cart .product-content{}
+.cat .cart .product-content .left{width:30%;}
+.cat .cart .product-content .left .img{margin-right:5px;}
+.cat .cart .product-content .right{width: 70%;}
+.cat .cart .product-content{border-top:1px #d7d7d7 solid;padding:10px 0px;}
+.cat .cart .product-content .discount{font-size:15px;font-weight:700}
+.cat .cart .product-content span{font-size:13px;text-decoration:line-through;}
+
+.icheckbox_square{position:_absolute;top:-1px;left:0}
+.iradio_square{left:37px}
+.iradio_square{position:_absolute;top:-1px;left:0}
+.icheckbox_square, .iradio_square {display: inline-block;vertical-align: middle;margin: 0;padding: 0;width: 18px;height: 18px;background: url(../images/blue.png) no-repeat;border: none;cursor: pointer;margin: 5px 10px 5px 0px;}
+.icheckbox_square.checked {background-position: -40px 0;}
+
+.cat .display-product, .order-product{margin: 10px 10px 10px 0px;}
+.cat .display-product select,.order-product select{padding: 0px 5px 0px 30px;width:100%;height:50px;}
+.cat .brand-price {margin: 10px 10px 0px 0px;padding: 10px 5px 5px 30px;}
+.cat .brand-price .brand{border-bottom:1px #d7d7d7 solid;margin-bottom: 20px;}
+.cat .cat-child {margin: 10px 10px 0px 0px;padding: 10px 5px 5px 30px;line-height:30px}
+.cat .sale-off {position: absolute;top: 0px;right: 0px;background-color:#ff0000;border-radius:50%;color:#fff;padding:8px 5px;width: 35px;line-height: 12px;}
+
+.cat .category .product{float:left;width:33.3333333%;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed #e1e1e1}
+.cat .category .product .product-content {padding-left:3px;position: relative;}
+.cat .category .product .title{padding:20px 0px 25px 0px}
+.cat .category .product .price{text-align:right;}
+.cat .category .product .price .discount{color:#ff082b;font-size:15px;font-weight:700}
+.cat .category .product .price span{font-weight:100;font-size:13px;text-decoration:line-through;}
+.cat .category .product .price p{padding-bottom:0px;}
+.cat .category .product .buy{padding-top:15px;width:90%;padding-left:5%}
+.cat .category .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;}
+.cat .category .product .buy div:hover{color:#fff;background-color:#ec2c39;}
+.cat .category .product .img img{width:100%;}
+
+.cat .category-deal .product{float:left;width:50%;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed #e1e1e1}
+.cat .category-deal .product .product-content:hover{border:2px solid #ec2c39}
+.cat .category-deal .product .product-content {border:2px solid #f6f6f6;position: relative;}
+.cat .category-deal .product .title{padding:5px 15px 10px 15px;}
+.cat .category-deal .product .position{background: url(../images/location.png) right no-repeat;margin-right: 10px;padding-right: 20px !important;}
+.cat .category-deal .product .due div{font-weight:700}
+.cat .category-deal .product .position,
+.cat .category-deal .product .due,
+.cat .category-deal .product .price{text-align:right;padding:0px 15px 5px 15px}
+.cat .category-deal .product .price .discount{color:#ff082b;font-size:15px;font-weight:700}
+.cat .category-deal .product .price span{font-weight:100;font-size:13px;text-decoration:line-through;}
+.cat .category-deal .product .price p{padding-bottom:0px;}
+.cat .category-deal .product .buy{padding:0px 15px 5px 15px}
+.cat .category-deal .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;}
+.cat .category-deal .product:hover .buy div{color:#fff;background-color:#ec2c39;}
+.cat .category-deal .product .img img{width:100%;}
+
+.cat .category-food .product{float:left;width:25%;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed #e1e1e1}
+.cat .category-food .product .product-content {padding-left:3px;position: relative;}
+.cat .category-food .product .title{padding:20px 0px 25px 0px}
+.cat .category-food .product .price{text-align:right;}
+.cat .category-food .product .price .discount{color:#ff082b;font-size:15px;font-weight:700}
+.cat .category-food .product .price span{font-weight:100;font-size:13px;text-decoration:line-through;}
+.cat .category-food .product .price p{padding-bottom:0px;}
+.cat .category-food .product .buy{padding-top:15px;width:90%;padding-left:5%}
+.cat .category-food .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;}
+.cat .category-food .product:hover .buy div{color:#fff;background-color:#ec2c39;}
+.cat .category-food .product .img{border:2px solid #fff}
+.cat .category-food .product:hover .img{border:2px solid #ec2c39}
+.cat .category-food .product .img img{width:100%;}
+
+.paging {padding:70px 0px;line-height:50px;}
+.paging ul{float:right;}
+.paging li{margin:0px 5px;float:left;height:50px;width:50px;text-align:center;background-color:#e7e7e7}
+.paging li:hover,.paging li.active{background-color:#ec2c39}
+.paging li a{color:#fff;display:inline-block}
+
+.progress[data-percent] {
+    position: relative;
+}
+.progress {
+    border-radius: 0;
+    height: 18px;
+    box-shadow: none;
+    background: #dadada;
+}
+.progress {
+    height: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f7f7f7;
+    background-image: -moz-linear-gradient(top,#f5f5f5,#f9f9f9);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#f5f5f5),to(#f9f9f9));
+    background-image: -webkit-linear-gradient(top,#f5f5f5,#f9f9f9);
+    background-image: -o-linear-gradient(top,#f5f5f5,#f9f9f9);
+    background-image: linear-gradient(to bottom,#f5f5f5,#f9f9f9);
+    background-repeat: repeat-x;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5',endColorstr='#fff9f9f9',GradientType=0);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+.progress .bar {
+    background-image: none;
+    background-color: #2a91d8;
+    box-shadow: none;
+    line-height: 18px;
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #0e90d2;
+    background-image: -moz-linear-gradient(top,#149bdf,#0480be);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#149bdf),to(#0480be));
+    background-image: -webkit-linear-gradient(top,#149bdf,#0480be);
+    background-image: -o-linear-gradient(top,#149bdf,#0480be);
+    background-image: linear-gradient(to bottom,#149bdf,#0480be);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff149bdf',endColorstr='#ff0480be',GradientType=0);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+    -moz-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: width .6s ease;
+    -moz-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+
 @media screen and (max-width:1400px) {
 	.wrapper {width:100%}
 }
@@ -124,6 +285,7 @@ a:hover {color: #ec2c39}
 	.wrapper {width:100%}
 	.footer .register .from-register input{width:80%;}
 	.footer .register .from-register button{padding:0px;width:20%;}
+	
 	.cat-top{display:none}
 	.w21{width:50%}
 	.w24{width:50%}
@@ -136,7 +298,10 @@ a:hover {color: #ec2c39}
 	.product-deal .product-deal-left .product{padding-right:1px;}
 
 	.w25{width:50%}
+	.w20{width:0%;display:none}
 	.w50{width:100%}
+	.w60{width:100%}
+	.w80{width:100%}
 	.wrapper {width:100%}
 	.register .w50 .w50{width:auto}
 	.product-deal-middle .w50{width:50%}
@@ -151,6 +316,8 @@ a:hover {color: #ec2c39}
 	.register span{display:none;}
 	
 	.wrap-login{margin:20px 0px;padding: 50px 20px;}
+	.wrap-register .register{margin:20px 0px;padding: 50px 20px;}
+	.wrap-register .register .from-register{padding:30px 20px 0px 0px;}
 }
 @media screen and (max-width:480px) {
 	.header{padding-top:40px;}

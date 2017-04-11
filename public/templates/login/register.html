@@ -1,0 +1,33 @@
+<div class="wrap-register">
+	<div class="text-center">
+		<img src="/assets/images/logo.png" />
+	</div>
+	<div class="wrapper">
+		<div class="register">
+			<p class="">TẠO TÀI KHOẢN MỚI</p>
+			<form class="from-register">
+				<label>E-mail</label>
+				<input type="text" />
+				<label>Mật khẩu</label>
+				<input type="password" />
+				<label>Nhập lại mật khẩu</label>
+				<input type="password" />
+				<label>Mã bảo vệ</label>
+				<input type="text" class="capchar"/> <img src=""/>
+				<div class="clearfix"></div>
+				<input type="checkbox" class="checkbox"/> <span>Tôi đồng ý với các điều khoản và quy định của VnShop</span>
+				<div class="clearfix"></div>
+				<button>ĐĂNG KÝ</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('.wrap-register input').iCheck({
+			checkboxClass: 'icheckbox_square',
+			radioClass: 'iradio_square',
+			increaseArea: '20%'
+		});
+	});
+</script>

@@ -32,6 +32,7 @@ var paths = {
         'resources/assets/js/jquery-1.11.0.min.js',
         'resources/assets/js/mobile-menu.js',
         'resources/assets/js/allscript.js',
+        'resources/assets/js/icheck.js',
     ],
     appScripts: [
         './app/app.module.js',

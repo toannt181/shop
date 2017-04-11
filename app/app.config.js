@@ -77,6 +77,66 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'header': header
             }
         })
+        .state('category', {
+            url: '/category?id',
+            views: {
+                content: {
+                    controller: 'CategoryController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/category/index.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('deal', {
+            url: '/deal?id',
+            views: {
+                content: {
+                    controller: 'DealController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/category/deal.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('food', {
+            url: '/food?id',
+            views: {
+                content: {
+                    controller: 'FoodController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/category/food.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('login', {
+            url: '/login',
+            views: {
+                content: {
+                    controller: 'LoginController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/login/login.html'
+                },
+                'footer': footer
+                // 'header': header
+            }
+        })
+        .state('register', {
+            url: '/register',
+            views: {
+                content: {
+                    controller: 'LoginController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/login/register.html'
+                },
+                'footer': footer
+                // 'header': header
+            }
+        })
         .state('401', {
             url: '/401',
             views: {

@@ -22,7 +22,9 @@ angular
         'gApp.shared',
         'gApp.vnpayAuth',
         'gApp.home',
-        'gApp.product',
+        'gApp.category',
+        'gApp.deal',
+        'gApp.food',
         'gApp.address',
         'gApp.cartConfirm',
         'gApp.cart',
@@ -30,7 +32,9 @@ angular
         'gApp.order',
         'gApp.collection',
         'gApp.notifications',
-        'gApp.article'
+        'gApp.article',
+        'gApp.login',
+        'gApp.register',
     ]);
 
 angular
@@ -62,7 +66,13 @@ angular
     .module('gApp.home', ['slickCarousel']);
 
 angular
-    .module('gApp.product', []);
+    .module('gApp.category', []);
+
+angular
+    .module('gApp.deal', []);
+
+angular
+    .module('gApp.food', []);
 
 angular
     .module('gApp.address', []);
@@ -87,3 +97,9 @@ angular
 
 angular
     .module('gApp.article', []);
+
+angular
+    .module('gApp.login', []);
+
+angular
+    .module('gApp.register', []);
