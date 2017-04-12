@@ -77,6 +77,18 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'header': header
             }
         })
+        .state('cart', {
+            url: '/cart',
+            views: {
+                content: {
+                    controller: 'CartController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/cart/index.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         .state('products', {
             url: '/products?categoryId&brandId&sort&limit&ratePrice',
             views: {
