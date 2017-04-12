@@ -77,37 +77,37 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'header': header
             }
         })
-        .state('category', {
-            url: '/category?id',
+        .state('products', {
+            url: '/products?categoryId&brandId&sort&limit&ratePrice',
             views: {
                 content: {
-                    controller: 'CategoryController',
+                    controller: 'ProductController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/category/index.html'
+                    templateUrl: '/templates/products/index.html'
                 },
                 'footer': footer,
                 'header': header
             }
         })
-        .state('deal', {
-            url: '/deal?id',
+        .state('deals', {
+            url: '/deal?categoryId',
             views: {
                 content: {
                     controller: 'DealController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/category/deal.html'
+                    templateUrl: '/templates/product/deal.html'
                 },
                 'footer': footer,
                 'header': header
             }
         })
-        .state('food', {
-            url: '/food?id',
+        .state('foods', {
+            url: '/food?categoryId',
             views: {
                 content: {
                     controller: 'FoodController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/category/food.html'
+                    templateUrl: '/templates/product/food.html'
                 },
                 'footer': footer,
                 'header': header
