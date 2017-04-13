@@ -299,7 +299,7 @@ section{overflow:hidden}
 
 /* The Modal (background) */
 .modal {display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.4);}
-.modal .modal-content {background-color: #fefefe;color: #fff;margin: 5% auto;padding: 10px;width: 60%;}
+.modal .modal-content {background-color: #fefefe;color: #000;margin: 5% auto;padding: 10px;width: 60%;}
 .modal .modal-content.location{background: url(../images/bg_location.png) bottom center no-repeat;min-height: 450px;}
 .modal .close {float: right;background: url(../images/icon_close.png) center no-repeat;width: 40px;height: 39px;cursor: pointer;}
 .modal .title {font-size: 16px;text-transform:uppercase}
@@ -359,4 +359,30 @@ section{overflow:hidden}
 	.header .w50{width:50%}
 	.product-deal-middle .w50{width:25%}
 	.product-deal .w50 .w50 .w50{width:100%}
+}
+
+/*=== popup up===*/
+.modal { padding-right:0 !important}
+.modal-dialog { top:10% !important; position:relative;}
+.modal-header { padding:7px;}
+.modal-header h4 { font-weight:bold; text-align: center;}
+.modal-content .contmid { padding:15px}
+.modal-footer { padding:0px;}
+.modal-footer .bt{ text-align:center;display:inline-block; width:49%; padding:10px; border:none; background-color:transparent; font-weight:bold}
+
+.modal-footer .btright { border-left:1px solid #ddd}
+#popupInfo{top: 20%}
+
+.coupon-status-ok img, .coupon-status-wrong img{
+	padding: 10px 0 0 5px;
+}
+
+.coupon-status-wrong{
+	margin-top: 60px;
+	color: red;
+}
+
+.coupon-status-wrong span{
+	padding-left: 50px;
+	color: #f65d00;
 }
