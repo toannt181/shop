@@ -27,6 +27,7 @@ var paths = {
     styles: [
         'resources/assets/css/style.css',
         'resources/assets/css/menu-mobile.css',
+        'resources/assets/css/bootstrap.css',
     ],
     scripts: [
         'resources/assets/js/jquery-1.11.0.min.js',
@@ -34,6 +35,7 @@ var paths = {
         'resources/assets/js/allscript.js',
         'resources/assets/js/jquery.modal.js',
         'resources/assets/js/icheck.js',
+        'resources/assets/js/bootstrap.min.js',
     ],
     appScripts: [
         './app/app.module.js',
