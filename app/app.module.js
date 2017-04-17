@@ -101,11 +101,9 @@ angular
     .module('gApp.article', []);
 
 angular
-<<<<<<< HEAD
+
     .module('gApp.login', []);
 
 angular
     .module('gApp.register', []);
-=======
-    .module('gApp.login', []);
->>>>>>> 57f4cd5... home
+
