@@ -89,8 +89,20 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'header': header
             }
         })
+        .state('productsDetail', {
+            url: '/products/:productId',
+            views: {
+                content: {
+                    controller: 'ProductsDetailController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/products/detail.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         .state('products', {
-            url: '/products?categoryId&brandId&sort&limit&ratePrice',
+            url: '/products?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {
                 content: {
                     controller: 'ProductController',

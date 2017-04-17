@@ -12,7 +12,7 @@
             getListByCategoryId: getListByCategoryId,
             findById: findById,
             getList: getList,
-            getListDeal: getListDeal
+            countProduct: countProduct
         };
 
         function getListByCategoryId(categoryId, offset, limit) {
@@ -47,9 +47,7 @@
             }
         }
 
-        function getList(params, offset, limit) {
-            offset = typeof offset !== 'undefined' ? offset : 0;
-            limit = typeof limit !== 'undefined' ? limit : 15;
+        function countProduct(params) {
             var query = '';
             for (var i = 0; i < params.length; i++) {
                 if (typeof params[i].name !== 'undefined' && typeof params[i].value !== 'undefined') {
@@ -57,7 +55,7 @@
                 }
             }
             return $http
-                .get(env.API_URL + '/v1/products?offset=' + offset + '&limit=' + limit + query)
+                .get(env.API_URL + '/v1/products/count?' + query)
                 .then(getListCompleted, getListFailed);
 
             function getListCompleted(response) {
@@ -69,7 +67,7 @@
             }
         }
 
-        function getListDeal(params, offset, limit) {
+        function getList(params, offset, limit) {
             offset = typeof offset !== 'undefined' ? offset : 0;
             limit = typeof limit !== 'undefined' ? limit : 15;
             var query = '';

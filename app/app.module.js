@@ -35,6 +35,7 @@ angular
         'gApp.article',
         'gApp.login',
         'gApp.register',
+        'gApp.product',
     ]);
 
 angular
@@ -103,3 +104,6 @@ angular
 
 angular
     .module('gApp.register', []);
+
+angular
+    .module('gApp.product', []);

@@ -1,0 +1,119 @@
+<section class="bgf6f6f6">
+	<div class="wrapper">
+		<div class="container cat">
+			<div class="block_menu bgebebeb mb10 pl5 clearfix">
+				<a ng-click="ctrl.openHome()"><img src="/assets/images/icon_home.png"/> VNSHOP</a>>
+				<a ng-repeat="parent in ctrl.parents track by $index" ng-click="ctrl.openCategory(parent.id)">{{parent.name}}</a>
+				<a ng-click="ctrl.openCategory(ctrl.category.id)" class="fw">{{ctrl.category.name}}</a>
+			</div>
+			<div class="product-detail pb10 clearfix">
+				<div class="left w80">
+					<div class="mt10 pr10">
+						<div class="left w40">
+							<div class="text-center pb10">
+								<img id="img_detail_show" class="w100" src="{{ ctrl.product.image }}" />
+							</div>
+							<div class="slider-images">
+								<ul class="list-images">
+									<li ng-repeat="slideImage in ctrl.product.images"><a href="javascript:;"><img src="{{ slideImage.path }}" /></a></li>
+								</ul>
+								<div class="bt-control">
+									<a href="javascript:;" class="slider-arrow s-left">&nbsp;</a>
+									<a href="javascript:;" class="slider-arrow s-right">&nbsp;</a>
+								</div>
+							</div>
+						</div>
+						<div class="left w60">
+							<div class="pl10">
+								<div class="fw pb10">{{ ctrl.product.name }}</div>
+								<div class="price">
+									<div class="pt10"><span>{{ ctrl.price | number }}</span> (Chú thích giá)</div>
+									<div class="" ng-if="ctrl.discountPercent > 0">{{ ctrl.compareAtPrice | number }}<span class="sale_off"> (-{{ctrl.discountPercent}}%)</span></div>
+								</div>
+								
+								<div is-open="ctrl.accordionStatus1" class="option" ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option1')">
+									<div class="left w30"> {{ctrl.product.options.option1 | uppercase}}</div>
+									<div class="left w70">
+										<span ng-repeat="variant in ctrl.product.variants | unique:'option1'">{{variant.option1}}</span>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								
+								<div is-open="ctrl.accordionStatus2" class="option" ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option2')">
+									<div class="left w30"> {{ctrl.product.options.option2 | uppercase}}</div>
+									<div class="left w70">
+										<span ng-repeat="variant in ctrl.product.variants | filter: { option1: ctrl.option1Selected } | unique:'option2'">{{variant.option2}}</span>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								
+								<div class="option quantity">
+									<div class="left w30">Số lượng</div>
+									<div class="left w70">
+										<span>1</span>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="add-to-cart" ng-disabled="ctrl.isAddingCart" ng-click="ctrl.addProductToCart(0)">
+									<div class="left img"><img src="/assets/images/icon_cart_white.png"></div>
+									<div class="left text">Cho vào giỏ hàng</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="mt10 p10 bgffffff">
+						<div class="mt10">THÔNG TIN SẢN PHẨM</div>
+						<div>
+							{{ctrl.product.description}}
+						</div>
+					</div>
+				</div>
+				<div class="left w20">
+					<div class="bgebebeb ml10 mt10 p10">
+						<div class="text-center mb10 fw">
+							GIỎ HÀNG CỦA BẠN
+						</div>
+						<div class="cart">
+							<div class="product-content" ng-repeat="cart in ctrl.carts track by $index">
+								<div class="left">
+									<div class="pt10 img text-center">
+										{{cart.quantity}}
+									</div>
+								</div>
+								<div class="right">
+									<div class="product-name pb10" ng-click="ctrl.openDetail(cart.id)">
+										{{cart.name}}
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="left">
+									<div class="img" ng-click="ctrl.openDetail(cart.id)">
+										<img src="{{cart.image}}" />
+									</div>
+								</div>
+								<div class="right">
+									<div class="price">
+										<p class="mt10 discount"><br ng-if="cart.compare_at_price >= cart.price" />{{cart.compare_at_price | number}} VND</p>
+										<span ng-if="cart.compare_at_price < cart.price">{{cart.price | number}} VND</span>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- The Modal -->
+<div id="popupInfo" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+		<a class="close" rel="modal:close"></a>
+		<div class="clearfix"></div>
+		<div class="text-center title"></div>
+	</div>
+</div>

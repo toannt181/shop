@@ -5,9 +5,9 @@
         .module('gApp.shared')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$state','$location', '$stateParams', '$localStorage'];
+    HeaderController.$inject = ['$state','$location', '$stateParams', 'categoryService', '$localStorage'];
 
-    function HeaderController($state, $location, $stateParams, $localStorage) {
+    function HeaderController($state, $location,categoryService,  $stateParams, $localStorage) {
         var vm = this;
 
         vm.keySearch = '';
