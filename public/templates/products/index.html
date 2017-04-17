@@ -2,13 +2,12 @@
 	<div class="wrapper">
 		<div class="container cat">
 			<div class="pb10 clearfix">
-				<img src="/assets/upload/p-cat.jpg" />
+				<img src="{{ctrl.category.product_image}}" />
 			</div>
 			<div class="block_menu bgebebeb mb10 pl5 clearfix">
-				<a href=""><img src="/assets/images/icon_home.png"/></a>
-				<a href="">VNSHOP</a>>
-				<a href="">Thời trang nữ</a>>
-				<a href="" class="fw">{{category.name}}</a>
+				<a ng-click="ctrl.openHome()"><img src="/assets/images/icon_home.png"/> VNSHOP</a>>
+				<a ng-repeat="parent in ctrl.parents track by $index" ng-click="ctrl.openCategory(parent.id)">{{parent.name}}</a>
+				<a href="javascript:;" class="fw">{{ctrl.category.name}}</a>
 			</div>
 			<div class="product pb10 clearfix">
 				<div class="left w20">
@@ -30,11 +29,11 @@
 						</select>
 					</div>
 					
-					<div class="cat-child bgffffff"> 
+					<div ng-if="ctrl.subMenu.children.length > 0" class="cat-child bgffffff"> 
 						<div class="pb10 pt10 fw">LỌC THEO NGÀNH HÀNG</div>
 						<div class="child pl10">
 							<div class="pl10 pb10">
-								<div ng-repeat="cat in ctrl.category track by $index"><a href="">{{cat.name}}</a></div>
+								<div ng-repeat="menu in ctrl.subMenu.children track by $index"><a ng-click="ctrl.openCategory(menu.id)">{{menu.name}}</a></div>
 							</div>
 						</div>
 					</div>
@@ -43,55 +42,80 @@
 						<div class="brand">
 							<div class="pb10 fw">THƯƠNG HIỆU</div>
 							<div class="pb10">
+								<div ng-if="ctrl.brandId !== ''" ng-click="ctrl.openBrand()">
+									<input type="checkbox" /><span>Tất cả</span>
+								</div>
 								<div ng-repeat="brand in ctrl.brands track by $index" ng-click="ctrl.openBrand(brand.id)">
-									<input type="checkbox" value="{{brand.id}}"/><span>{{brand.name}}</span>
+									<div ng-if="brand.id == ctrl.brandId">
+										<input type="checkbox" checked value="{{brand.id}}" /><span>{{brand.name}}</span>
+									</div>
+									<div ng-if="brand.id != ctrl.brandId">
+										<input type="checkbox" value="{{brand.id}}" /><span>{{brand.name}}</span>
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="price">
 							<div class="pb10 fw">KHOẢNG GIÁ</div>
 							<div class="pb10">
-								<div><input type="checkbox" /><a>0 - 500.000</a></div>
-								<div><input type="checkbox" /><a>500.000 - 1.500.000</a></div>
-								<div><input type="checkbox" /><a>1.500.000 - 2.500.000</a></div>
-								<div><input type="checkbox" /><a>2.500.000 - 10.000.000</a></div>
-								<div><input type="checkbox" /><a>Trên 10.000.000</a></div>
+								<div ng-if="'0,500000' == ctrl.ratePrice">
+									<div><input type="checkbox" checked /><span>Dưới 500.000</span></div>
+								</div>
+								<div ng-if="'0,500000' != ctrl.ratePrice">
+									<div ng-click="ctrl.openRatePrice('0,500000')"><input type="checkbox" /><span>Dưới 500.000</span></div>
+								</div>
+								<div ng-if="'500000,1500000' == ctrl.ratePrice">
+									<div><input type="checkbox" checked /><span>500.000 - 1.500.000</span></div>
+								</div>
+								<div ng-if="'500000,1500000' != ctrl.ratePrice">
+									<div ng-click="ctrl.openRatePrice('500000,1500000')"><input type="checkbox" /><span>500.000 - 1.500.000</span></div>
+								</div>
+								<div ng-if="'1500000,2500000' == ctrl.ratePrice">
+									<div><input type="checkbox" checked /><span>1.500.000 - 2.500.000</span></div>
+								</div>
+								<div ng-if="'1500000,2500000' != ctrl.ratePrice">
+									<div ng-click="ctrl.openRatePrice('1500000,2500000')"><input type="checkbox" /><span>1.500.000 - 2.500.000</span></div>
+								</div>
+								<div ng-if="2500000 == ctrl.ratePrice">
+									<div><input type="checkbox" checked /><span>Trên 2.500.000</span></div>
+								</div>
+								<div ng-if="2500000 != ctrl.ratePrice">
+									<div ng-click="ctrl.openRatePrice('2500000')"><input type="checkbox" /><span>Trên 2.500.000</span></div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="left w60">
 					<div class="category">
+						<div ng-if="!ctrl.hasData">Không tìm thấy sản phẩm</div>
 						<div class="product" ng-repeat="product in ctrl.products track by $index">
-							<div class="product-content" ng-click="ctrl.openDetail(product.id)">
-								<div class="img">
+							<div class="product-content">
+								<div class="img" ng-click="ctrl.openDetail(product.id)">
 									<img src="{{ product.image }}" />
 								</div>
 								<div class="sale-off" ng-if="product.discount_percent > 0">
 									{{ product.discount_percent }}% <div class="fw100">&nbsp OFF</div>
 								</div>
-								<div class="title"><a href="">{{ product.name }}</a></div>
+								<div class="title" ng-click="ctrl.openDetail(product.id)">{{ product.name | limitTo: 60 }}{{product.name.length > 60 ? '...' : ''}}</div>
 								<div class="price">
-									<p class="discount">{{ product.compare_at_price | number }} VND</p>
-									<span>{{ product.price | number }} VND</span>
+									<p class="discount"><br ng-if="cart.compare_at_price >= cart.price" />{{ product.compare_at_price | number }} VND</p>
+									<span ng-if="product.compare_at_price < product.price">{{ product.price | number }} VND</span>
 								</div>
-								<div class="buy"><div>Thêm vào giỏ hàng</div></div>
+								<div class="buy"><div ng-click="ctrl.addProductToCart(product.id)">Thêm vào giỏ hàng</div></div>
 							</div>
 						</div>
 					</div>
 					<div class="clearfix"></div>
-					<div class="paging">
+					<div class="paging" ng-if="ctrl.paging.length && ctrl.hasData">
 						<ul>
-							<li class="active"><a>&lsaquo;</a></li>
-							<li><a>1</a></li>
-							<li><a>2</a></li>
-							<li><a>3</a></li>
-							<li><a>4</a></li>
-							<li><a>5</a></li>
-							<li><a>&rsaquo;</a></li>
+							<li ng-if="ctrl.pageCurrent > 5" ng-click="ctrl.openPage(1)" ><a>&lsaquo;</a></li>
+							<li ng-repeat="(key, value) in ctrl.paging" ng-click="ctrl.openPage(value)" ng-class="{true: 'active', false: ''}[ctrl.pageCurrent == value]"><a>{{value}}</a></li>
+							<li ng-if="ctrl.pageCurrent < +ctrl.total - 4" ng-click="ctrl.openPage(ctrl.total)" ><a>&rsaquo;</a></li>
 						</ul>
-						<div class="right">TỪ 1 ĐẾN 12 CỦA 65 SẢN PHẨM | </div>
+						<div class="right">TỪ {{+ctrl.offset + 1}} ĐẾN {{+ctrl.offset + +ctrl.limit}} CỦA {{+ctrl.total * +ctrl.limit}} SẢN PHẨM <span ng-if="ctrl.hasData">|<span> </div>
 					</div>
+					&nbsp
 					<div class="clearfix"></div>
 				</div>
 				<div class="left w20">
@@ -114,20 +138,20 @@
 									</div>
 								</div>
 								<div class="right">
-									<div class="product-name pb10">
+									<div class="product-name pb10" ng-click="ctrl.openDetail(cart.id)">
 										{{cart.name}}
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="left">
-									<div class="img">
+									<div class="img" ng-click="ctrl.openDetail(cart.id)">
 										<img src="{{cart.image}}" />
 									</div>
 								</div>
 								<div class="right">
 									<div class="price">
-										<p class="mt10 discount">{{cart.price}} VND</p>
-										<span>{{cart.price}} VND</span>
+										<p class="mt10 discount"><br ng-if="cart.compare_at_price >= cart.price" />{{cart.compare_at_price | number}} VND</p>
+										<span ng-if="cart.compare_at_price < cart.price">{{cart.price | number}} VND</span>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -139,6 +163,16 @@
 		</div>
 	</div>
 </section>
+<!-- The Modal -->
+<div id="popupInfo" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+		<a class="close" rel="modal:close"></a>
+		<div class="clearfix"></div>
+		<div class="title">Thông báo</div>
+		<div class="text-center content"></div>
+	</div>
+</div>
 <script>
 	$(document).ready(function(){
 		$('.product input').iCheck({

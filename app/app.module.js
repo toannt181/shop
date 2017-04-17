@@ -36,7 +36,7 @@ angular
 
         'gApp.login',
         'gApp.register',
-
+        'gApp.product',
     ]);
 
 angular
@@ -101,9 +101,10 @@ angular
     .module('gApp.article', []);
 
 angular
-
     .module('gApp.login', []);
 
 angular
     .module('gApp.register', []);
-
+	
+angular
+    .module('gApp.product', []);
