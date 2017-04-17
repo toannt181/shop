@@ -47,10 +47,10 @@
 								</div>
 								<div ng-repeat="brand in ctrl.brands track by $index" ng-click="ctrl.openBrand(brand.id)">
 									<div ng-if="brand.id == ctrl.brandId">
-										<input type="checkbox" checked value="{{brand.id}}" /><span>{{brand.name}}</span>
+										<input type="checkbox" checked value="{{brand.id}}" /><span>{{ brand.name | limitTo: 20 }}{{brand.name.length > 20 ? '...' : ''}}</span>
 									</div>
 									<div ng-if="brand.id != ctrl.brandId">
-										<input type="checkbox" value="{{brand.id}}" /><span>{{brand.name}}</span>
+										<input type="checkbox" value="{{brand.id}}" /><span>{{ brand.name | limitTo: 20 }}{{brand.name.length > 20 ? '...' : ''}}</span>
 									</div>
 								</div>
 							</div>
@@ -91,13 +91,13 @@
 						<div ng-if="!ctrl.hasData">Không tìm thấy sản phẩm</div>
 						<div class="product" ng-repeat="product in ctrl.products track by $index">
 							<div class="product-content">
-								<div class="img" ng-click="ctrl.openDetail(product.id)">
-									<img src="{{ product.image }}" />
+								<div class="img">
+									<a ng-click="ctrl.openDetail(product.id)"><img src="{{ product.image }}" /></a>
 								</div>
 								<div class="sale-off" ng-if="product.discount_percent > 0">
 									{{ product.discount_percent }}% <div class="fw100">&nbsp OFF</div>
 								</div>
-								<div class="title" ng-click="ctrl.openDetail(product.id)">{{ product.name | limitTo: 60 }}{{product.name.length > 60 ? '...' : ''}}</div>
+								<div class="title"><a ng-click="ctrl.openDetail(product.id)">{{ product.name | limitTo: 60 }}{{product.name.length > 60 ? '...' : ''}}</a></div>
 								<div class="price">
 									<p class="discount"><br ng-if="cart.compare_at_price >= cart.price" />{{ product.compare_at_price | number }} VND</p>
 									<span ng-if="product.compare_at_price < product.price">{{ product.price | number }} VND</span>
@@ -138,14 +138,14 @@
 									</div>
 								</div>
 								<div class="right">
-									<div class="product-name pb10" ng-click="ctrl.openDetail(cart.id)">
-										{{cart.name}}
+									<div class="product-name pb10">
+										<a ng-click="ctrl.openDetail(cart.product_id)">{{cart.name}}</a>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="left">
-									<div class="img" ng-click="ctrl.openDetail(cart.id)">
-										<img src="{{cart.image}}" />
+									<div class="img">
+										<a ng-click="ctrl.openDetail(cart.product_id)"><img src="{{cart.image}}" /></a>
 									</div>
 								</div>
 								<div class="right">
@@ -156,7 +156,9 @@
 								</div>
 								<div class="clearfix"></div>
 							</div>
+
 						</div>
+						<div>Tổng cộng: {{ctrl.totalAmount}}</div>
 					</div>
 				</div>
 			</div>

@@ -83,14 +83,14 @@
 									</div>
 								</div>
 								<div class="right">
-									<div class="product-name pb10" ng-click="ctrl.openDetail(cart.id)">
-										{{cart.name}}
+									<div class="product-name pb10">
+										<a ng-click="ctrl.openDetail(cart.product_id)">{{cart.name}}</a>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="left">
-									<div class="img" ng-click="ctrl.openDetail(cart.id)">
-										<img src="{{cart.image}}" />
+									<div class="img">
+										<a ng-click="ctrl.openDetail(cart.product_id)"><img src="{{cart.image}}" /></a>
 									</div>
 								</div>
 								<div class="right">
