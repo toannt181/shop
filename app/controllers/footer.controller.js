@@ -5,19 +5,25 @@
         .module('gApp.shared')
         .controller('FooterController', FooterController);
 
-    FooterController.$inject = ['$state', '$localStorage', '$location'];
+    FooterController.$inject = ['$state','homeService', '$localStorage', '$location'];
 
-    function FooterController($state, $localStorage, $location) {
+    function FooterController($state, homeService ,$localStorage, $location) {
 
         var vm = this;
 
         vm.countCartItems = $localStorage.totalItem;
         vm.countNotifications = 0;
         vm.state = '';
-
-        if($state.current.name !== 'productsList'){
+        if($state.current.name !== 'productsList') {
             $(window).scrollTop(0);
         }
+        vm.addEmail = function(data) {
+            return homeService.addEmail(data).then(function(response) {
+                vm.emailData = response.data;
+                return vm.emailData;
+            });
+        };
+
 
         // getActiveMenu();
         // countCartItems();

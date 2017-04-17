@@ -6,9 +6,9 @@
         .controller('HomeController', HomeController)
         .directive('initBanner', initBanner);
 
-    HomeController.$inject = ['categoryService', 'bannerService', '$state', '$localStorage'];
+    HomeController.$inject = ['categoryService', 'homeService' , 'bannerService', '$state', '$localStorage'];
 
-    function HomeController(categoryService, bannerService, $state, $localStorage) {
+    function HomeController(categoryService, homeService, $state, $localStorage) {
         var vm = this;
 
         vm.categories = [];
@@ -21,6 +21,7 @@
         vm.myInterval = 5000;
         vm.noWrapSlides = false;
         vm.active = 0;
+        vm.email = 1;
 
         delete $localStorage.products;
         delete $localStorage.scrollPos;
@@ -38,8 +39,8 @@
         $localStorage.filterOffsetTop = 0;
 
         getCategories();
-        getBanners();
         getHomePage();
+        
 
         function getCategories() {
             var param = {
@@ -51,19 +52,20 @@
             });
         }
 
-        function getBanners() {
-            return bannerService.getList().then(function(response) {
-                vm.banners = response.data;
-                return vm.banners;
+        vm.addEmail = function(data) {
+            console.log(1);
+            return homeService.addEmail(data).then(function(response) {
+                vm.emailData = response.data;
+                return vm.emailData;
             });
-        }
+        };
 
         vm.search = function(){
             $state.go('productsList',{name:vm.keySearch});
         };
 
         function getHomePage(){
-            return bannerService.getHomePage().then(function(response) {
+            return homeService.getHomePage().then(function(response) {
                 vm.homeData = response.data;
                 return vm.homeData;
             });

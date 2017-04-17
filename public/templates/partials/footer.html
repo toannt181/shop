@@ -89,8 +89,8 @@
 			</div>
 			<div class="w50 right">
 				<form class="from-register">
-					<input type="text" />
-					<button>Xác nhận</button>
+					<input type="text" ng-model="footerCtrl.email" />
+					<button ng-click="footerCtrl.addEmail(footerCtrl.email)">Xác nhận</button>
 				</form>
 			</div>
 		</div>
