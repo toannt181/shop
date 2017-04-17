@@ -47,10 +47,10 @@
 								</div>
 								<div ng-repeat="brand in ctrl.brands track by $index" ng-click="ctrl.openBrand(brand.id)">
 									<div ng-if="brand.id == ctrl.brandId">
-										<input type="checkbox" checked value="{{brand.id}}" /><span>{{brand.name}}</span>
+										<input type="checkbox" checked value="{{brand.id}}" /><span>{{ brand.name | limitTo: 20 }}{{brand.name.length > 20 ? '...' : ''}}</span>
 									</div>
 									<div ng-if="brand.id != ctrl.brandId">
-										<input type="checkbox" value="{{brand.id}}" /><span>{{brand.name}}</span>
+										<input type="checkbox" value="{{brand.id}}" /><span>{{ brand.name | limitTo: 20 }}{{brand.name.length > 20 ? '...' : ''}}</span>
 									</div>
 								</div>
 							</div>
