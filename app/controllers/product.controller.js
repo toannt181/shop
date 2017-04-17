@@ -21,6 +21,8 @@
         vm.isSearch = false;
 		vm.isAddingCart = false;
         vm.total = 0;
+        vm.totalAmount = 0;
+        vm.totalFee = 0;
         vm.pageCurrent = 0;
 
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : '');
@@ -43,6 +45,8 @@
         function getCart() {
             cartService.countItems().then(function (response) {
                 vm.totalItem = Math.floor(response.data) === 0 ? -1 : Math.floor(response.data);
+                vm.totalAmount = response.total_amount;
+                vm.totalFee = response.total_fee;
                 if (vm.totalItem > 0) {
                     cartService.getCart(vm.voucherCode).then(function (response) {
                         vm.carts = response.data;
@@ -133,8 +137,9 @@
 				showClose: false
 			});
             return cartService.addProduct(item).then(function (response) {
+                getCart();
                 if (response === true) {
-                    $('#popupInfo .content').html('Đã thêm vào giỏ hàng thành công');
+                    $('#popupInfo .content').html('Đã thêm vào giỏ hàng thành công abc');
                     vm.isAddingCart = false;
                 } else {
                     if (response.error.code === 10) {
