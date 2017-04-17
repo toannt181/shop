@@ -33,10 +33,9 @@ angular
         'gApp.collection',
         'gApp.notifications',
         'gApp.article',
-        
+
         'gApp.login',
         'gApp.register',
-
 
     ]);
 
