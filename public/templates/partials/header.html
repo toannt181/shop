@@ -7,19 +7,19 @@
 <section class="wrapper">
     <div class="container">
 		<div class="search pb10 clearfix">
-			<div class="left w21">
+			<div class="left w21" ng-click="headerCtrl.openHome()">
 				<img src="/assets/images/logo.png" />
 			</div>
 			<div class="right w24 cart">
-				<a href="gio-hang.html">
+				<a href="javascripts:;" ng-click="headerCtrl.openCart()">
 					<img src="/assets/images/icon_cart.png"/>
 					<span>Giỏ hàng</span>
 				</a>
-				<a href="dang-nhap.html">
+				<a href="javascripts:;" ng-click="headerCtrl.openLogin()">
 					<img src="/assets/images/icon_user.png"/>
 					<span>Đăng nhập</span>
 				</a> 
-				<span>| <a href="dang-ky.html">Đăng ký</a></span>
+				<span>| <a href="javascripts:;" ng-click="headerCtrl.openRegister()">Đăng ký</a></span>
 			</div>
 			<div class="left w55">
 				<form class="from-search">
@@ -43,12 +43,7 @@
 			</div>
 		</div>
 		<div class="cat-more">
-			<a href="">Du lịch</a>
-			<a href="">Thời trang nữ</a>
-			<a href="">Ẩm thực</a>
-			<a href="">Đồ công nghệ</a>
-			<a href="">Làm đẹp</a>
-			<a href="">Làm đẹp</a>
+			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascripts:;" ng-click="headerCtrl.openCategory(menu.id)">{{menu.name}}</a>
 		</div>
 		<div class="clearfix"></div>
 	</div>
