@@ -55,9 +55,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
     };
 
     var cart_right = {
-        controller: 'ProductController',
-        controllerAs: 'cartRightCtrl',
-        templateUrl: '/templates/partials/header.html'
+        templateUrl: '/templates/partials/cart-right.html'
     };
 
     // use a state provider for routing
@@ -117,7 +115,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 },
                 'footer': footer,
                 'header': header,
-                'cart_right':cart_right
+                'cart_right@productsDetail': cart_right
             }
         })
         .state('products', {
@@ -126,11 +124,11 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 content: {
                     controller: 'ProductController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/products/index.html'
+                    templateUrl: '/templates/products/index.html',
                 },
+                'cart_right@products': cart_right,
                 'footer': footer,
-                'header': header,
-                'cart_right':cart_right,
+                'header': header
             }
         })
         .state('deals', {

@@ -70,40 +70,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="left w20">
-					<div class="bgebebeb ml10 mt10 p10">
-						<div class="text-center mb10 fw">
-							GIỎ HÀNG CỦA BẠN
-						</div>
-						<div class="cart">
-							<div class="product-content" ng-repeat="cart in ctrl.carts track by $index">
-								<div class="left">
-									<div class="pt10 img text-center">
-										{{cart.quantity}}
-									</div>
-								</div>
-								<div class="right">
-									<div class="product-name pb10">
-										<a ng-click="ctrl.openDetail(cart.product_id)">{{cart.name}}</a>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-								<div class="left">
-									<div class="img">
-										<a ng-click="ctrl.openDetail(cart.product_id)"><img src="{{cart.image}}" /></a>
-									</div>
-								</div>
-								<div class="right">
-									<div class="price">
-										<p class="mt10 discount"><br ng-if="cart.compare_at_price >= cart.price" />{{cart.compare_at_price | number}} VND</p>
-										<span ng-if="cart.compare_at_price < cart.price">{{cart.price | number}} VND</span>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div ui-view="cart_right"></div>
 			</div>
 		</div>
 	</div>
