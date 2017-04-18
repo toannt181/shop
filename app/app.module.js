@@ -37,6 +37,7 @@ angular
         'gApp.login',
         'gApp.register',
         'gApp.product',
+        'gApp.productSearches',
     ]);
 
 angular
@@ -108,3 +109,6 @@ angular
 	
 angular
     .module('gApp.product', []);
+	
+angular
+    .module('gApp.productSearches', []);
