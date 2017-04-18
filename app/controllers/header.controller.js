@@ -11,6 +11,8 @@
         var vm = this;
 		
 		vm.subMenu = [];
+		vm.searchResult = [];
+		vm.searched = false;
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
 		
 		getSubMenu();
@@ -47,6 +49,30 @@
                 $state.go("products", {categoryId: catId});
             }
         };
+
+        vm.getSearchResult = function () {
+            if (vm.keySearch === '') {
+                vm.searchResult = [];
+                vm.searched = false;
+                return false;
+            }
+            return categoryService.getSearchResult(vm.keySearch).then(function (response) {
+                vm.searchResult = response.data;
+                vm.searched = true;
+                var keepGoing = 0;
+                vm.searchResultCatId = '';
+                angular.forEach(vm.searchResult.categories.data, function (value) {
+                    if (keepGoing <= 3) {
+                        vm.searchResultCatId = vm.searchResultCatId + value.id;
+                        keepGoing += keepGoing + 1;
+                    }
+                    if (keepGoing <= 3) {
+                        vm.searchResultCatId = vm.searchResultCatId + ',';
+                    }
+                });
+                return vm.searchResult;
+            });
+        };
 		
         vm.openLogin = function(){
             $state.go('login');
@@ -68,8 +94,16 @@
             $state.go('products',{categoryId: catId});
         };
 
+        vm.search = function(){
+            $state.go('productSearches',{name: vm.keySearch});
+        };
+
         vm.openHome = function(){
             $state.go('home');
+        };
+
+        vm.toggleSearch = function () {
+            vm.isShowSearch = !vm.isShowSearch;
         };
 
     }
