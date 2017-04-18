@@ -23,9 +23,19 @@
 			</div>
 			<div class="left w55">
 				<form class="from-search">
-					<input type="text" />
-					<button>Tìm kiếm</button>
+					<input type="text" enter-click="headerCtrl.getSearchResult();"
+                       ng-change="headerCtrl.getSearchResult()"
+                       ng-model-options="{debounce: 750}" ng-model="headerCtrl.keySearch" aria-label="Search"
+                       type="search" autofocus="autofocus" placeholder="Tìm kiếm"/>
+					<button ng-click="headerCtrl.search()">Tìm kiếm</button>
 				</form>
+				<div ng-class="{ true: 'active', false: ''}[headerCtrl.searched]" class="search-quick">
+					<ul>
+						<li ng-repeat="product in headerCtrl.searchResult.products.data|limitTo:4">
+							<a href="javascript:;" ng-click="headerCtrl.openDetail(product.id)">{{product.name}}</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
