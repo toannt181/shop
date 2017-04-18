@@ -27,7 +27,6 @@
 
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : '');
         vm.brandId = (typeof $location.search().brandId !== 'undefined' ?  $location.search().brandId : '');
-
         vm.keySearch = (typeof $location.search().name !== 'undefined' ?  $location.search().name : '');
         vm.sort = (typeof $location.search().sort !== 'undefined' ?  $location.search().sort : '');
         vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : 12);
@@ -35,29 +34,18 @@
         vm.ratePrice = (typeof $location.search().ratePrice !== 'undefined' ?  $location.search().ratePrice : '');
 		
         getBrands(vm.categoryId);
+
         function getBrands(catId) {
             return categoryService.getBrands(catId).then(function(response) {
                 vm.brands = response.data;
                 return vm.brands;
             });
         }
-		getCart();
-        function getCart() {
-            cartService.countItems().then(function (response) {
-                vm.totalItem = Math.floor(response.data) === 0 ? -1 : Math.floor(response.data);
-                vm.totalAmount = response.total_amount;
-                vm.totalFee = response.total_fee;
-                if (vm.totalItem > 0) {
-                    cartService.getCart(vm.voucherCode).then(function (response) {
-                        vm.carts = response.data;
-                    });
-                }
-            });
-        }
-		
+		 
 		if(vm.categoryId !== ''){
             getCategoryById(vm.categoryId);
         }
+
         function getCategoryById(catId) {
             return categoryService.getById(catId).then(function(response) {
                 vm.category = response.data;
@@ -125,11 +113,24 @@
 				}
             });
         }
+//Cart
+        getCart();
+        function getCart() {
+            cartService.countItems().then(function (response) {
+                vm.totalItem = Math.floor(response.data) === 0 ? -1 : Math.floor(response.data);
+                if (vm.totalItem > 0) {
+                    cartService.getCart(vm.voucherCode).then(function (response) {
+                        vm.carts = response.data;
+                        vm.totalAmount = response.total_amount;
+                        vm.totalFee = response.total_fee;
+                    });
+                }
+            });
+        }
 
         vm.addProductToCart = function (product_id, variantId) {
             vm.isAddingCart = true;
             var item = {product_id: product_id, product_variant_id : variantId, quantity: 1};
-			
 			$('#popupInfo .content').html('Đang xử lý...');
 			$('#popupInfo').modal({
 				escapeClose: false,
@@ -139,7 +140,7 @@
             return cartService.addProduct(item).then(function (response) {
                 getCart();
                 if (response === true) {
-                    $('#popupInfo .content').html('Đã thêm vào giỏ hàng thành công abc');
+                    $('#popupInfo .content').html('Đã thêm vào giỏ hàng thành công');
                     vm.isAddingCart = false;
                 } else {
                     if (response.error.code === 10) {
@@ -160,7 +161,29 @@
                 vm.isAddingCart = false;
             });
         };
+
+        vm.removeCart = function (cartid) {
+            for (var i = 0; i < vm.carts.length; i++) {
+                if (vm.carts[i].id == cartid && vm.carts[i].quantity > 1) {
+                    vm.carts[i].quantity = vm.carts[i].quantity - 1;
+                    vm.total = vm.total - vm.carts[i].price;
+                    vm.totalItem = vm.totalItem - 1;
+                    $localStorage.totalItem = vm.totalItem;
+
+                    var item = {
+                        product_id: vm.carts[i].product_id,
+                        product_variant_id: (vm.carts[i].product_variant_id!==null ? vm.carts[i].product_variant_id : 0),
+                        quantity: -1
+                    };
+
+                    return cartService.addProduct(item);
+
+                }
+            }
+        };
 		
+//End Cart
+
         if (typeof $localStorage.subMenu == 'undefined') {
             getSubMenu();
         } else {
