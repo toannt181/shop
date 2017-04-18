@@ -6,6 +6,7 @@
 			</div>
 			<div class="block_menu bgebebeb mb10 pl5 clearfix">
 				<a ng-click="ctrl.openHome()"><img src="/assets/images/icon_home.png"/> VNSHOP</a>>
+				<a ng-repeat="parent in ctrl.parents track by $index" ng-click="ctrl.openCategory(parent.id)">{{parent.name}}</a>
 				<a href="javascript:;" class="fw">{{ctrl.category.name}}</a>
 			</div>
 			<div class="product pb10 clearfix">

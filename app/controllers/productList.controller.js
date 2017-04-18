@@ -162,7 +162,49 @@
             });
         };
 
-        vm.removeCart = function (cartid) {
+        vm.updateCart = function () {
+            var cartAdd = [];
+                for (var i = 0; i < vm.cart.length; i++) {
+
+                    var add = {id: vm.cart[i].id, quantity: vm.cart[i].quantity};
+                    cartAdd.push(add);
+                }
+                return cartService.updateCart(cartAdd, vm.voucherCode).then(function (response) {
+                    if (response === false) {
+                        vm.popMessage = 'Có lỗi trong quá trình cập nhật giỏ hàng, vui lòng thử lại sau';
+                        $('#popupAlert').modal('show');
+                    } else {
+                        if (response.data.error) {
+                            cartService.getCart(vm.voucherCode).then(function (response) {
+                                vm.cart = response.data;
+                                vm.total = Math.floor(response.total_amount) - Math.floor(response.voucher_amount);
+                                vm.voucherAmount = Math.floor(response.voucher_amount);
+                                vm.isUserVerified = response.user_is_verify;
+                            });
+                            for (i = 0; i < vm.cart.length; i++) {
+                                if (vm.cart[i].is_active === 0 || vm.cart[i].is_active === '0') {
+                                    vm.popMessage = 'Có sản phẩm đã bị hủy hoặc không đủ hàng, vui lòng kiểm tra lại giỏ hàng';
+                                }
+                            }
+                            $('#popupAlert').modal('show');
+                        } else {
+                            vm.voucherAmount = Math.floor(response.data.voucher_amount);
+                            vm.total = Math.floor(response.data.total_amount) - Math.floor(response.data.voucher_amount);
+                            vm.isEditMode = false;
+                            if (vm.totalItem === 0) {
+                                vm.totalItem = -1;
+                            }
+                        }
+
+                    }
+                }, function (response) {
+                    vm.popMessage = 'Có lỗi trong quá trình cập nhật giỏ hàng, vui lòng thử lại sau';
+                    $('#popupAlert').modal('show');
+                });
+
+        };
+
+        vm.removeProduct = function (cartid) {
             for (var i = 0; i < vm.carts.length; i++) {
                 if (vm.carts[i].id == cartid && vm.carts[i].quantity > 1) {
                     vm.carts[i].quantity = vm.carts[i].quantity - 1;
@@ -179,6 +221,49 @@
                     return cartService.addProduct(item);
 
                 }
+            }
+        };
+
+        vm.removeCart = function (id) {
+            vm.id = id;
+            var whatIndex = null;
+            angular.forEach(vm.carts, function (cb, index) {
+                if (cb.id === vm.id) {
+                    whatIndex = index;
+                }
+            });
+            console.log(whatIndex);
+            if (vm.carts[whatIndex].id == vm.id) {
+                $localStorage.totalItem = $localStorage.totalItem - vm.carts[whatIndex].quantity;
+                vm.carts.splice(whatIndex, 1);
+            }
+            getCart();
+            vm.updateCart();
+
+            if(vm.carts.length === 0){
+                vm.totalItem = -1;
+            }
+        };
+
+        vm.submitRemove = function () {
+
+            var whatIndex = null;
+            angular.forEach(vm.cart, function (cb, index) {
+                if (cb.id === vm.id) {
+                    whatIndex = index;
+                }
+            });
+            if (vm.cart[whatIndex].id == vm.id) {
+                $localStorage.totalItem = $localStorage.totalItem - vm.cart[whatIndex].quantity;
+                vm.cart.splice(whatIndex, 1);
+            }
+
+            vm.updateCart();
+            angular.element(document.getElementById('footer')).scope().footerCtrl.countCartItems = $localStorage.totalItem;
+            $('#confirm-delete').modal('hide');
+
+            if(vm.cart.length === 0){
+                vm.totalItem = -1;
             }
         };
 		

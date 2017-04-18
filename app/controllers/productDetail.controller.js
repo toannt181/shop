@@ -29,6 +29,8 @@
         vm.keySearch = '';
         vm.isAddingCart = false;
         vm.variantExtra = null;
+        vm.totalAmount = 0;
+        vm.totalFee = 0;
 
         vm.accordionStatus1 = '';
         vm.accordionStatus2 = '';
@@ -67,33 +69,36 @@
             });
         }
 
-        vm.addProductToCart = function (isPayNow) {
+        vm.addProductToCart = function (product_id, variantId) {
             vm.isAddingCart = true;
-            var item = {product_id: vm.product.id, product_variant_id : (vm.variantId!==null ? vm.variantId : 0), quantity: vm.quantity};
-            $localStorage.totalItem += vm.quantity;
+            var item = {product_id: product_id, product_variant_id : variantId, quantity: 1};
+            $('#popupInfo .content').html('Đang xử lý...');
+            $('#popupInfo').modal({
+                escapeClose: false,
+                clickClose: false,
+                showClose: false
+            });
             return cartService.addProduct(item).then(function (response) {
+                getCart();
                 if (response === true) {
-                    if (isPayNow === 1) {
-                        if (typeof $localStorage.totalItem === 'undefined' || $localStorage.totalItem === 0) {
-                            $localStorage.totalItem = vm.quantity;
-                        }
-                        $state.go("cart");
-                        return false;
-                    }
-                    vm.popMessage = 'Đã thêm vào giỏ hàng thành công';
+                    $('#popupInfo .content').html('Đã thêm vào giỏ hàng thành công');
                     vm.isAddingCart = false;
                 } else {
                     if (response.error.code === 10) {
-                        vm.popMessage = 'Sản phẩm đã bị hủy hoặc không đủ hàng';
+                        $('#popupInfo .content').html('Sản phẩm đã bị hủy hoặc không đủ hàng');
                     } else {
-                        vm.popMessage = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
+                        $('#popupInfo .content').html('Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau');
                     }
-                    $('#popup').modal('show');
                     vm.isAddingCart = false;
                 }
+                setTimeout(function () {
+                    $("#popupInfo a.close").click();
+                }, 1500);
             }, function (response) {
-                vm.popMessage = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
-                $('#popup').modal('show');
+                $('#popupInfo .content').html('Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau');
+                setTimeout(function () {
+                    $("#popupInfo a.close").click();
+                }, 1500);
                 vm.isAddingCart = false;
             });
         };
@@ -105,6 +110,8 @@
                 if (vm.totalItem > 0) {
                     cartService.getCart(vm.voucherCode).then(function (response) {
                         vm.carts = response.data;
+                        vm.totalAmount = response.total_amount;
+                        vm.totalFee = response.total_fee;
                     });
                 }
             });
