@@ -26,20 +26,6 @@
                 console.log(response.data);
             }
         }
-        //
-        // function addEmail(data){
-        //     return $http.post(env.API_URL + '/v2/follow', angular.toJson(data))
-        //         .then(successCallback, errorCallback);
-        //
-        //     function successCallback(response) {
-        //         return true;
-        //     }
-        //
-        //     function errorCallback(response) {
-        //         return response.error;
-        //     }
-        //
-        // }
 
 
         function addEmail(data) {
