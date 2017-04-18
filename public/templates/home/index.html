@@ -10,7 +10,7 @@
                     <nav class="wsmenu slideLeft" id="nav">
                         <ul id="menu" class="menu-primary" ng-repeat="category in ctrl.categories">
                             <li data-id="1">
-                                <a href="#">
+                                <a href="javascript:;" ng-click="ctrl.openCategory(category.id)">
                                     <img src="{{ category.icon }}"/>
                                     {{ category.name }}
                                 </a>
@@ -30,7 +30,7 @@
             <div class="left w24" ng-repeat="banner in ctrl.homeData"
                  ng-if="banner.type == 1 && banner.sort_weigh == 1">
                 <div class="pb10"  ng-repeat="image in banner.details">
-                    <a href="#"><img src="{{image['image']}}"/></a>
+                    <a href="{{image['link']}}"><img src="{{image['image']}}"/></a>
                 </div>
             </div>
         </div>
@@ -45,23 +45,25 @@
         <div ng-repeat="product in ctrl.homeData" ng-if="product.type == 3 ">
             <div class="product-deal pb10 clearfix">
                 <div class="cat">
-                    <div class="red">
+                    <div href="javascript:;" class="red">
                         <div class="title-cat left">
                             <img src="{{product.icon}}"/>
-                            <span>{{product.category}}</span>
+                            <span ng-click="ctrl.openCategory(product.category_id)">{{product.category}}</span>
                         </div>
                         <div class="arrow left"></div>
                     </div>
                 </div>
-                <div class="cat-more" >
-                    <a href="" ng-repeat="category in product.categories_child" ng-if="$index <= 4">{{category['name']}}</a>
+                <div class="cat-more">
+                    <a ng-repeat="category in product.categories_child" ng-if="$index <= 4" href="javascript:;" ng-click="ctrl.openCategory(category['id'])">{{category['name']}}</a>
                 </div>
                 <div class="clearfix"></div>
                 <div class="product-deal-left left w25">
                     <div class="product bgfbf9f9" ng-repeat="detail in product.details"
                          ng-if="detail['sort_weigh'] == 1 ">
                         <div class="img">
-                            <img src="{{detail['image']}}"/>
+                            <a href="{{detail['link']}}">
+                                <img src="{{detail['image']}}"/>
+                            </a>
                         </div>
                         <div class="position">{{detail['location']}}</div>
                         <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
@@ -73,7 +75,9 @@
                     <div class="product pl2" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] == 2 ">
                         <div class="bgfbf9f9">
                             <div class="img">
-                                <img href="{{detail['link']}}" src="{{detail['image']}}"/>
+                                <a href="{{detail['link']}}">
+                                    <img src="{{detail['image']}}"/>
+                                </a>
                             </div>
                             <div class="position">{{detail['location']}}</div>
                             <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
@@ -87,13 +91,15 @@
                         <div class="product-content pl2">
                             <div class="bgfbf9f9">
                                 <div class="left w50">
-                                    <div class="title"><a href="">{{detail['title']}}</a></div>
+                                    <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
                                     <div class="pl5">{{detail['location']}}</div>
                                     <div class="price">Giá chỉ từ:<br/> <span>{{detail['price']}} VND</span></div>
                                 </div>
-                                <div class="left w50">
+                                <div class="left w50" >
                                     <div class="img">
-                                        <img href="{{detail['link']}}" src="{{detail['image']}}"/>
+                                        <a href="{{detail['link']}}">
+                                        <img src="{{detail['image']}}"/>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -113,13 +119,15 @@
                                 <div class="blue">
                                     <div class="title-cat left">
                                         <img src="{{product.icon}}"/>
-                                        <span>{{product.category}}</span>
+                                        <span ng-click="ctrl.openCategory(product.category_id)">{{product.category}}</span>
                                     </div>
                                     <div class="arrow left"></div>
                                 </div>
                             </div>
                             <div class="img">
-                                <img src="{{detail['image']}}"/>
+                                <a href="{{detail['link']}}">
+                                    <img src="{{detail['image']}}"/>
+                                </a>
                             </div>
                             <div class="position">{{detail['location']}}</div>
                             <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
@@ -130,7 +138,9 @@
                         <div class="product pl2">
                             <div class="bgfbf9f9">
                                 <div class="img">
-                                    <img src="{{detail['image']}}"/>
+                                    <a href="{{detail['link']}}">
+                                        <img src="{{detail['image']}}"/>
+                                    </a>
                                 </div>
                                 <div class="position">{{detail['location']}}</div>
                                 <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
@@ -153,7 +163,9 @@
                              ng-if="detail['sort_weigh'] == 3 ">
                             <div class="product-content">
                                 <div class="img">
-                                    <img src="{{detail['image']}}"/>
+                                    <a href="{{detail['link']}}">
+                                        <img src="{{detail['image']}}"/>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +173,9 @@
                             <div class="product-content pl2">
                                 <div class="bgfbf9f9">
                                     <div class="img">
-                                        <img src="{{detail['image']}}"/>
+                                        <a href="{{detail['link']}}">
+                                            <img src="{{detail['image']}}"/>
+                                        </a>
                                     </div>
                                     <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
                                     <div class="price">Giá chỉ từ: <span>{{detail['price']}} VND</span></div>
@@ -175,7 +189,9 @@
                             <div class="product-content">
                                 <div class="bgfbf9f9">
                                     <div class="img">
-                                        <img src="{{detail['image']}}"/>
+                                        <a href="{{detail['link']}}">
+                                            <img src="{{detail['image']}}"/>
+                                        </a>
                                     </div>
                                     <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
                                     <div class="price">Giá chỉ từ: <span>{{detail['price']}} VND</span></div>
