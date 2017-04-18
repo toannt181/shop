@@ -3,40 +3,15 @@
 
     angular
         .module('gApp.home')
-        .controller('HomeController', HomeController)
-        .directive('initBanner', initBanner);
+        .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['categoryService', 'homeService' , 'bannerService', '$state', '$localStorage'];
+    HomeController.$inject = ['categoryService', 'homeService', '$state'];
 
-    function HomeController(categoryService, homeService, $state, $localStorage) {
+    function HomeController(categoryService, homeService, $state) {
         var vm = this;
 
         vm.categories = [];
-        vm.banners = [];
         vm.homeData = [];
-        vm.keySearch = '';
-        vm.homepage = [];
-        vm.slides = [];
-        vm.currIndex = 0;
-        vm.myInterval = 5000;
-        vm.noWrapSlides = false;
-        vm.active = 0;
-        vm.email = 1;
-
-        delete $localStorage.products;
-        delete $localStorage.scrollPos;
-        delete $localStorage.offsetProductList;
-        delete $localStorage.subMenu;
-
-        $localStorage.isPrevious = false;
-        $localStorage.scrollPos = [];
-        $localStorage.products = [];
-        $localStorage.offsetProductList = [];
-        $localStorage.sort = '';
-        $localStorage.sortType = '';
-        $localStorage.previousCategory = '';
-        $localStorage.previousSubCat = [];
-        $localStorage.filterOffsetTop = 0;
 
         getCategories();
         getHomePage();
@@ -53,7 +28,6 @@
         }
 
         vm.addEmail = function(data) {
-            console.log(1);
             return homeService.addEmail(data).then(function(response) {
                 vm.emailData = response.data;
                 return vm.emailData;
@@ -67,41 +41,20 @@
         function getHomePage(){
             return homeService.getHomePage().then(function(response) {
                 vm.homeData = response.data;
+                // for ( var index = 0; index < vm.homeData.length; index++ ) {
+                //     vm.homeData[index].push({detail_new:{}});
+                //     var tmp = vm.homeData[index].detail;
+                //     for ( var i = 0; i < tmp.length; i++ ) {
+                //         vm.homeData[index]['detail_new'][tmp[i].sort_weigh] = tmp;
+                //     }
+                // }
                 return vm.homeData;
             });
         }
 
-        vm.slickConfig = {
-            autoplay: true,
-            infinite: true,
-            autoplaySpeed: 1000,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            method: {}
+        vm.openCategory = function(catId){
+            $state.go('products',{categoryId: catId});
         };
-    }
 
-    function initBanner(){
-        return {
-            scope: false, //don't need a new scope
-            restrict: 'A', //Attribute type
-            link: function (scope, elements, attr){
-                if (scope.$last) {
-                    var swiper = new Swiper('.swiper-container', {
-                        pagination: '.swiper-pagination',
-                        paginationClickable: true,
-                        spaceBetween: 0,
-                        centeredSlides: true,
-                        autoplay: 2500,
-                        autoplayDisableOnInteraction: false,
-                        loop: false,
-                        loopedSlides: 0,
-                        loopAdditionalSlides: 0,
-                        preventClicksPropagation: false,
-                        preventClicks:false
-                    });
-                }
-            }
-        };
     }
 })();
