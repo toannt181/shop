@@ -4,9 +4,9 @@
     angular
         .module('gApp.cart')
         .controller('CartController', CartController);
-        CartController.$inject = ['cartService', 'addressService', '$state', '$scope', '$localStorage'];
+        CartController.$inject = ['cartService', 'addressService', '$state', '$scope', '$rootScope','$localStorage'];
 
-    function CartController(cartService, addressService, $state, $scope, $localStorage) {
+    function CartController(cartService, addressService, $state, $scope, $rootScope, $localStorage) {
         var vm = this;
         vm.id = 0;
         vm.cart = [];
