@@ -73,7 +73,7 @@
                     <div class="product pl2" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] == 2 ">
                         <div class="bgfbf9f9">
                             <div class="img">
-                                <img src="{{detail['image']}}"/>
+                                <img href="{{detail['link']}}" src="{{detail['image']}}"/>
                             </div>
                             <div class="position">{{detail['location']}}</div>
                             <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="left w50">
                                     <div class="img">
-                                        <img src="{{detail['image']}}"/>
+                                        <img href="{{detail['link']}}" src="{{detail['image']}}"/>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
