@@ -118,6 +118,19 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'cart_right@productsDetail': cart_right
             }
         })
+        .state('productSearches', {
+            url: '/search?categoryId&name&brandId&offset&limit&ratePrice',
+            views: {
+                content: {
+                    controller: 'ProductSearchesController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/products/search.html'
+                },
+                'footer': footer,
+                'header': header,
+                'cart_right':cart_right
+            }
+        })
         .state('products', {
             url: '/products?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {
