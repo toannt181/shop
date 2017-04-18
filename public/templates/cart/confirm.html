@@ -1,0 +1,174 @@
+<section class="bgf6f6f6">
+	<div class="wrapper">
+		<div class="container cart">
+			<div class="cart-title pt10">
+				<div class="fw left pt10">Giỏ hàng của tôi</div>
+				<div class="right text-right">
+					<div class="step step3 right">Hoàn thành</div>
+					<div class="step step2 right">Thanh toán</div>
+					<div class="step step1 right active">Xác nhận đơn hàng</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="address bgffffff">
+				<div class="left">
+					<div class="pb10">ĐỊA CHỈ GIAO HÀNG</div>
+					<div ng-if="ctrl.defaultAddress">
+						<div class="">Họ tên: <span>{{ctrl.defaultAddress.name}}</span></div>
+						<div class="">Địa chỉ: <span>{{ctrl.defaultAddress.address}}, {{ctrl.defaultAddress.district}}, {{ctrl.defaultAddress.province}}</span></div>
+						<div class="">Điện thoại: <span>{{ctrl.defaultAddress.phone}}</span></div>
+					</div>
+				</div>
+				<div class="right text-right">
+					<a id="open-form-add-address">Thêm địa chỉ mới</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="add-address" style="display:none">
+				<div class="left w50">&nbsp</div>
+				<div class="right w50">
+					<div class="left">THÊM ĐỊA CHỈ MỚI</div>
+					<div class="right"><img id="close-form-add-address" src="/assets/images/icon_close_address.png"/></div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="left w50">
+					<form class="form-address mr10">
+						<div class="">Họ tên: <input type="text" ng-model="ctrl.name" /></div>
+						<div class="">Điện thoại: <input type="text" ng-model="ctrl.phone" /></div>
+						<div class="">Địa chỉ: <textarea rows="5" ng-model="ctrl.address"></textarea></div>
+						<div class="">Quận huyện: 
+							<select name="singleSelect" ng-model="ctrl.provinceId" ng-change="ctrl.chooseDistrict()">
+								<option ng-repeat="province in ctrl.provinces" value="{{province.province_id}}">{{province.province}}</option>
+							</select>
+						</div>
+						<div class="">Tỉnh thành phố: 
+							<select name="singleSelect" ng-model="ctrl.districtId">
+								<option value="" selected>Quận/Huyện</option>
+								<option ng-repeat="district in ctrl.districts" value="{{district.district_id}}">{{district.district}}</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="left w50">
+					<div class="address-exist ml10">
+						<div>Địa chỉ đã có:</div>
+						<div ng-if="ctrl.defaultAddress" class="address-select">{{ctrl.defaultAddress.address}}, {{ctrl.defaultAddress.district}}, {{ctrl.defaultAddress.province}}</div>
+						<div class="address-list">
+							<div ng-repeat="address in ctrl.addresses" ng-click="ctrl.setDefault(address.id)" ng-class="{true:'active', false:''}[ctrl.defaultAddress.id == address.id]">
+								{{ address.address }}, {{ address.district }}, {{ address.province }}
+							</div>
+						</div>
+						<div ng-click="ctrl.addAddress()">Thêm địa chỉ</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="product mt10 bgffffff">
+				<div class="pb10">ĐƠN HÀNG</div>
+				<div class="fw pl10 pr10">
+					<div class="pl10 pr10 pb10">
+						<div class="left w10">Sản phẩm</div>
+						<div class="left w60"> &nbsp </div>
+						<div class="left w10 text-center">Giá</div>
+						<div class="left w10 text-center">Số lượng</div>
+						<div class="left w10 text-center">Tổng giá</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="border-detail">
+					<div class="product-detail" ng-repeat="cartDetail in ctrl.cart" ng-if="cartDetail.quantity > 0">
+						<div class="left img w10"><img ng-click="ctrl.openDetail(cartDetail.id)" ng-src="{{cartDetail.image}}"></div>
+						<div class="left name w60"><div class="pl10"><a href="javascript:;" ng-click="ctrl.openDetail(cartDetail.id)">{{cartDetail.name}}</a></div></div>
+						<div class="left price w10" ng-if="cartDetail.product_quantity > 0"><span>{{cartDetail.price | currency: "": 0 }}</span> <span></span></div>
+						<div class="left price w10 text-center">
+							{{cartDetail.quantity}}
+						</div>
+						<div class="left total w10 text-right">{{cartDetail.price*cartDetail.quantity | currency: "": 0 }}</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="confirm-order">
+					<div class="left w50">
+						<div>Chú thích đơn hàng</div>
+						<textarea rows="10" ng-model="ctrl.note"></textarea>
+					</div>
+					<div class="right w50">
+						<div class="pl10 text-right">
+							<div class="pt5">
+								<span>Giá tạm tính (3 sản phẩm): </span>
+								<span><b>24.000.000 VND</b></span>
+							</div>
+							<div class="pt5">
+								<span>Được giảm: </span>
+								<span><b>{{ctrl.voucherAmount | currency: "": 0: "." }}</b></span>
+							</div>
+							<div class="pt5">
+								<span>Phí ship: </span>
+								<span><b>0 VND</b></span>
+							</div>
+							<div class="pt5">
+								<span>Giá tổng: </span>
+								<span class="total"><b>{{ctrl.total | currency: "": 0: "." }}</b></span>
+							</div>
+							<div class="btn-confirm-pay">
+								<span ng-click="ctrl.createOrder(1)">Thanh toán</span>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</section>	
+<div id="confirm-delete" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="contmid">Quý khách có chắc chắn xóa sản phẩm này không?</div>
+
+            <div class="modal-footer">
+                <button type="button" class="btleft bt" data-dismiss="modal">Huỷ</button>
+                <button type="button" class="btright bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupAlert" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="contmid" style="text-align: center">
+                {{ctrl.popMessage}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btcenter bt" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('.address-list div').click(function(){
+			$('.address-list div').removeClass();
+			$(this).addClass('active');
+		});
+		$('#close-form-add-address').click(function(){
+			$('.add-address').hide();
+		});
+		$('#open-form-add-address').click(function(){
+			$('.add-address').show();
+		});
+	});
+</script>
