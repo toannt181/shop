@@ -3,53 +3,6 @@
 		<div class="container cart">
 			<div class="cart-title pt10">
 				<div class="fw left pt10">Giỏ hàng của tôi</div>
-				<div class="right text-right">
-					<div class="step step3 right active">Hoàn thành</div>
-					<div class="step step2 right">Thanh toán</div>
-					<div class="step step1 right">Xác nhận đơn hàng</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<div class="address bgffffff">
-				<div class="left">
-					<div class="pb10">ĐỊA CHỈ GIAO HÀNG</div>
-					<div class="">Họ tên: <span>Đàm Văn</span></div>
-					<div class="">Địa chỉ: <span>444 Hoàng Hoa Thán</span></div>
-					<div class="">Điện thoại: <span>04879892178</span></div>
-				</div>
-				<div class="right text-right">
-					<a id="open-form-add-address">Thêm địa chỉ mới</a>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			
-			<div class="add-address">
-				<div class="left w50">&nbsp</div>
-				<div class="right w50">
-					<div class="left">THÊM ĐỊA CHỈ MỚI</div>
-					<div class="right"><img id="close-form-add-address" src="/assets/images/icon_close_address.png"/></div>
-				</div>
-				<div class="clearfix"></div>
-				<div class="left w50">
-					<form class="form-address mr10">
-						<div class="">Họ tên: <input type="text" /></div>
-						<div class="">Điện thoại: <input type="text" /></div>
-						<div class="">Địa chỉ: <textarea rows="5"></textarea></div>
-						<div class="">Quận huyện: <select></select></div>
-						<div class="">Tỉnh thành phố: <select></select></div>
-					</form>
-				</div>
-				<div class="left w50">
-					<div class="address-exist ml10">
-						<div>Địa chỉ đã có:</div>
-						<div class="address-select">Tầng 7 Số 444 Hoàng Hoa Thám</div>
-						<div class="address-list">
-							<div>Tầng 7 Số 444 Hoàng Hoa Thám</div>
-							<div>Tầng 11 Số 444 Hoàng Hoa Thám</div>
-							<div>Tòa Machinco Số 444 Hoàng Hoa Thám</div>
-						</div>
-					</div>
-				</div>
 				<div class="clearfix"></div>
 			</div>
 			
@@ -68,9 +21,9 @@
 				<div class="clearfix"></div>
 				<div class="border-detail">
 					<div class="product-detail" ng-repeat="cartDetail in ctrl.cart" ng-if="cartDetail.quantity > 0">
-						<div class="left img w10"><img ng-src="{{cartDetail.image}}"></div>
-						<div class="left name w60"><div class="pl10"> {{cartDetail.name}}</div></div>
-						<div class="left price w10" ng-if="cartDetail.product_quantity > 0"><span>{{cartDetail.price | currency: "": 0 }}</span><span>đ</span></div>
+						<div class="left img w10"><img ng-click="ctrl.openDetail(cartDetail.id)" ng-src="{{cartDetail.image}}" /></div>
+						<div class="left name w60"><div class="pl10"><a href="javascript:;" ng-click="ctrl.openDetail(cartDetail.id)">{{cartDetail.name}}</div></a></div>
+						<div class="left price w10" ng-if="cartDetail.product_quantity > 0"><span>{{cartDetail.price | currency: "": 0 }}</span> <span></span></div>
 						<div class="left quantity w10 text-center">
 							<div class="form">
 								<span class="subtraction" ng-click="ctrl.removeCart(cartDetail.id)">-</span>
@@ -94,42 +47,26 @@
                                        ng-blur="ctrl.updateVoucher()" enter-click="ctrl.updateVoucher()"
                                        aria-describedby="basic-addon1"/>
                                 <span class="coupon-status-ok" ng-if="ctrl.voucherAmount > 0" >
-                                    <a ng-click="ctrl.removeVoucher()"><img src="assets/images/coupon_status_wrong.png"></a>
+                                    <a ng-click="ctrl.removeVoucher()"><img src="/assets/images/coupon_status_wrong.png"></a>
                                 </span>
 							<button>Nhập</button>
 						</form>
 						<div class="pr10 pt5 right">MÃ GIẢM GIÁ TỪ VNSHOP</div>
 						<div class="coupon-status-wrong" ng-if="ctrl.voucherMessage">
-                        {{ctrl.voucherMessage}}
-                    </div>
+							{{ctrl.voucherMessage}}
+						</div>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="confirm-order">
-					<div class="left w50">
-						<div>Chú thích đơn hàng</div>
-						<textarea rows="10"></textarea>
-					</div>
-					<div class="left w50">
+					<div class="right w50">
 						<div class="pl10 text-right">
 							<div class="pt5">
-								<span>Giá tạm tính (3 sản phẩm): </span>
-								<span><b>24.000.000 VND</b></span>
-							</div>
-							<div class="pt5">
-								<span>Được giảm: </span>
-								<span><b>-{{ctrl.voucherAmount| currency: "": 0: "." }}</b></span>
-							</div>
-							<div class="pt5">
-								<span>Phí ship: </span>
-								<span><b>4.000.000 VND</b></span>
-							</div>
-							<div class="pt5">
 								<span>Giá tổng: </span>
-								<span class="total"><b>{{ctrl.total| currency: "": 0: "." }}</b></span>
+								<span class="total"><b>{{ctrl.total | currency: "": 0: "." }}</b></span>
 							</div>
 							<div class="btn-confirm-pay">
-								<span ng-click="ctrl.goToConfirm(1)">Xác nhận thanh toán</span>
+								<span ng-click="ctrl.goToConfirm()">Đặt hàng</span>
 							</div>
 						</div>
 					</div>
