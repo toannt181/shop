@@ -11,7 +11,7 @@
         var vm = this;
 		
 		vm.subMenu = [];
-        vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : '');
+        vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
 		
 		getSubMenu();
         function getSubMenu() {
@@ -20,8 +20,8 @@
                 $localStorage.subMenu = vm.subMenu;
 				if(vm.categoryId) {
 					vm.subMenu = [];
-					for(var i = 0; i < vm.subMenu.length; i++){
-						var tmpSub = vm.subMenu[i];
+					for(var i = 0; i < $localStorage.subMenu.length; i++){
+						var tmpSub = $localStorage.subMenu[i];
 						if(vm.categoryId == tmpSub.id) {
 							vm.subMenu = tmpSub.children;
 							break;
