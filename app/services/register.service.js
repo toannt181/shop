@@ -3,39 +3,23 @@
 
     angular
         .module('gApp.services')
-        .factory('homeService', homeService);
+        .factory('registerService', registerService);
 
-    homeService.$inject = ['$http', 'env'];
+    registerService.$inject = ['$http', 'env'];
 
-    function homeService($http, env) {
+    function registerService($http, env) {
         return {
-            getHomePage:getHomePage,
-            addEmail:addEmail
+            addAccount:addAccount
         };
 
-        function getHomePage(){
-            return $http.get(env.API_URL + '/v2/homepagesweb')
-                .then(getListCompleted)
-                .catch(getListFailed);
-
-            function getListCompleted(response) {
-                return response.data;
-            }
-
-            function getListFailed() {
-                console.log(response.data);
-            }
-        }
-
-
-        function addEmail(data) {
-            return $http.post(env.API_URL + '/v2/follow', {
+        function addAccount(email, password) {
+            return $http.post(env.API_URL + '/v2/register', {
                     data: {
-                        email: data,
+                        email: email,
+                        pass: password
                     },
                 })
                 .then(getSupplierCompleted);
-
             function getSupplierCompleted(response) {
                 return response.data;
             }

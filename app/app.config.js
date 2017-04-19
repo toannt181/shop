@@ -184,7 +184,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
             url: '/register',
             views: {
                 content: {
-                    controller: 'LoginController',
+                    controller: 'RegisterController',
                     controllerAs: 'ctrl',
                     templateUrl: '/templates/login/register.html'
                 },
