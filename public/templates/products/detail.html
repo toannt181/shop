@@ -8,65 +8,72 @@
 			</div>
 			<div class="product-detail pb10 clearfix">
 				<div class="left w80">
-					<div class="mt10 pr10">
-						<div class="left w40">
-							<div class="text-center pb10">
-								<img id="img_detail_show" class="w100" src="{{ ctrl.product.image }}" />
-							</div>
-							<div class="slider-images">
-								<ul class="list-images">
-									<li ng-repeat="slideImage in ctrl.product.images"><a href="javascript:;"><img src="{{ slideImage.path }}" /></a></li>
-								</ul>
-								<div class="bt-control">
-									<a href="javascript:;" class="slider-arrow s-left">&nbsp;</a>
-									<a href="javascript:;" class="slider-arrow s-right">&nbsp;</a>
-								</div>
-							</div>
+					<div ng-if="!ctrl.product.id">
+						<div class="mt10 pr10">
+							Sản phẩm không tồn tại
 						</div>
-						<div class="left w60">
-							<div class="pl10">
-								<div class="fw pb10">{{ ctrl.product.name }}</div>
-								<div class="price">
-									<div class="pt10"><span>{{ ctrl.price | number }}</span> (Chú thích giá)</div>
-									<div class="" ng-if="ctrl.discountPercent > 0">{{ ctrl.compareAtPrice | number }}<span class="sale_off"> (-{{ctrl.discountPercent}}%)</span></div>
-								</div>
-								
-								<div is-open="ctrl.accordionStatus1" class="option" ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option1')">
-									<div class="left w30"> {{ctrl.product.options.option1 | uppercase}}</div>
-									<div class="left w70">
-										<span ng-repeat="variant in ctrl.product.variants | unique:'option1'">{{variant.option1}}</span>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								
-								<div is-open="ctrl.accordionStatus2" class="option" ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option2')">
-									<div class="left w30"> {{ctrl.product.options.option2 | uppercase}}</div>
-									<div class="left w70">
-										<span ng-repeat="variant in ctrl.product.variants | filter: { option1: ctrl.option1Selected } | unique:'option2'">{{variant.option2}}</span>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								
-								<div class="option quantity">
-									<div class="left w30">Số lượng</div>
-									<div class="left w70">
-										<span>1</span>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="add-to-cart" ng-disabled="ctrl.isAddingCart" ng-click="ctrl.addProductToCart(ctrl.product.id)">
-									<div class="left img"><img src="/assets/images/icon_cart_white.png"></div>
-									<div class="left text">Cho vào giỏ hàng</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-						<div class="clearfix"></div>
 					</div>
-					<div class="mt10 p10 bgffffff">
-						<div class="mt10">THÔNG TIN SẢN PHẨM</div>
-						<div>
-							{{ctrl.product.description}}
+					<div ng-if="ctrl.product.id">
+						<div class="mt10 pr10">
+							<div class="left w40">
+								<div class="text-center pb10">
+									<img id="img_detail_show" class="w100" src="{{ ctrl.product.image }}" />
+								</div>
+								<div class="slider-images">
+									<ul class="list-images">
+										<li ng-repeat="slideImage in ctrl.product.images"><a href="javascript:;"><img src="{{ slideImage.path }}" /></a></li>
+									</ul>
+									<div class="bt-control">
+										<a href="javascript:;" class="slider-arrow s-left">&nbsp;</a>
+										<a href="javascript:;" class="slider-arrow s-right">&nbsp;</a>
+									</div>
+								</div>
+							</div>
+							<div class="left w60">
+								<div class="pl10">
+									<div class="fw pb10">{{ ctrl.product.name }}</div>
+									<div class="price">
+										<div class="pt10"><span>{{ ctrl.price | number }}</span> (Chú thích giá)</div>
+										<div class="" ng-if="ctrl.discountPercent > 0">{{ ctrl.compareAtPrice | number }}<span class="sale_off"> (-{{ctrl.discountPercent}}%)</span></div>
+									</div>
+									
+									<div is-open="ctrl.accordionStatus1" class="option" ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option1')">
+										<div class="left w30"> {{ctrl.product.options.option1 | uppercase}}</div>
+										<div class="left w70">
+											<span ng-repeat="variant in ctrl.product.variants | unique:'option1'">{{variant.option1}}</span>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									
+									<div is-open="ctrl.accordionStatus2" class="option" ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option2')">
+										<div class="left w30"> {{ctrl.product.options.option2 | uppercase}}</div>
+										<div class="left w70">
+											<span ng-repeat="variant in ctrl.product.variants | filter: { option1: ctrl.option1Selected } | unique:'option2'">{{variant.option2}}</span>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									
+									<div class="option quantity">
+										<div class="left w30">Số lượng</div>
+										<div class="left w70">
+											<span>1</span>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="add-to-cart" ng-disabled="ctrl.isAddingCart" ng-click="ctrl.addProductToCart(ctrl.product.id)">
+										<div class="left img"><img src="/assets/images/icon_cart_white.png"></div>
+										<div class="left text">Cho vào giỏ hàng</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="mt10 p10 bgffffff">
+							<div class="mt10">THÔNG TIN SẢN PHẨM</div>
+							<div>
+								{{ctrl.product.description}}
+							</div>
 						</div>
 					</div>
 				</div>
