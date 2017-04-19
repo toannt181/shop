@@ -128,7 +128,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 },
                 'footer': footer,
                 'header': header,
-                'cart_right':cart_right
+                'cart_right@productSearches':cart_right
             }
         })
         .state('products', {

@@ -4,15 +4,16 @@
     angular
         .module('gApp.productSearches')
         .controller('ProductSearchesController', ProductSearchesController);
-        ProductSearchesController.$inject = ['$state', '$location', '$localStorage', '$scope', 'productService', 'cartService', 'categoryService'];
+        ProductSearchesController.$inject = ['$state', '$location', '$localStorage', '$scope', 'productService', 'cartService', 'categoryService', 'homeService'];
 
-    function ProductSearchesController($state, $location, $localStorage, $scope, productService, cartService, categoryService) {
+    function ProductSearchesController($state, $location, $localStorage, $scope, productService, cartService, categoryService, homeService) {
         var vm = this;
 
         vm.paging = [];
         vm.brands = [];
         vm.subMenu = [];
         vm.products = [];
+        vm.homeData = [];
         vm.hasData = true;
         vm.isSearch = false;
 		vm.isAddingCart = false;
@@ -37,7 +38,6 @@
 			vm.subMenu = $localStorage.subMenu;
 		}
 		
-        getBrands();
         function getBrands() {
             return categoryService.getBrands().then(function(response) {
                 vm.brands = response.data;
@@ -75,18 +75,38 @@
                 vm.hasData = vm.products.length === 0 ? false : true;
                 return vm.products;
             });
-            productService.countProduct(params).then(function(response) {
-                vm.total = Math.ceil(response.data / vm.limit);
-				if(vm.total > 1) {
-					vm.pageCurrent = vm.offset/vm.limit + 1;
-					for (var i = 1; i <= vm.total; i++) {
-						if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.total < 5 || (vm.pageCurrent > vm.total - 5 && i > vm.total - 5)
-						)
-							vm.paging.push(i);
+			
+			if(vm.products.length > 0) {
+				getBrands();
+				productService.countProduct(params).then(function(response) {
+					vm.total = Math.ceil(response.data / vm.limit);
+					if(vm.total > 1) {
+						vm.pageCurrent = vm.offset/vm.limit + 1;
+						for (var i = 1; i <= vm.total; i++) {
+							if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.total < 5 || (vm.pageCurrent > vm.total - 5 && i > vm.total - 5)
+							)
+								vm.paging.push(i);
+						}
 					}
-				}
-            });
+				});
+			} else {
+				getHomePage();
+			}
         }
+
+		function getHomePage() {
+			return homeService.getHomePage().then(function(response) {
+				$.each(response.data, function (index, value) {
+					var details = {};
+					$.each(value.details, function (i, val) {
+						details[val.sort_weigh] = val;
+					}); 
+					value.newDetails = details;
+					vm.homeData[value.type] = value;
+				});
+				return vm.homeData;
+			});
+		}
 
         vm.addProductToCart = function (product_id, variantId) {
             vm.isAddingCart = true;
