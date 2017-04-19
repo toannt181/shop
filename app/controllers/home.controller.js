@@ -5,28 +5,26 @@
         .module('gApp.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['categoryService', 'homeService', '$state'];
+    HomeController.$inject = ['categoryService', 'homeService', '$localStorage', '$scope', '$state'];
 
-    function HomeController(categoryService, homeService, $state) {
+    function HomeController(categoryService, homeService, $localStorage, $scope, $state) {
         var vm = this;
 
         vm.categories = [];
         vm.homeData = [];
-
-        getCategories();
+        vm.productHome = '';
+        vm.catId = '';
+		
         getHomePage();
         
-
-        function getCategories() {
-            var param = {
-                parent_id : 0
-            };
-            return categoryService.getList(param).then(function(response) {
+        if (typeof $localStorage.subMenu == 'undefined') {
+			return categoryService.getAllCategories().then(function (response) {
                 vm.categories = response.data;
-                return vm.categories;
             });
-        }
-
+        } else {
+			vm.categories = $localStorage.subMenu;
+		}
+		
         vm.addEmail = function(data) {
             return homeService.addEmail(data).then(function(response) {
                 vm.emailData = response.data;
@@ -41,13 +39,6 @@
         function getHomePage(){
             return homeService.getHomePage().then(function(response) {
                 vm.homeData = response.data;
-                // for ( var index = 0; index < vm.homeData.length; index++ ) {
-                //     vm.homeData[index].push({detail_new:{}});
-                //     var tmp = vm.homeData[index].detail;
-                //     for ( var i = 0; i < tmp.length; i++ ) {
-                //         vm.homeData[index]['detail_new'][tmp[i].sort_weigh] = tmp;
-                //     }
-                // }
                 return vm.homeData;
             });
         }
@@ -55,6 +46,10 @@
         vm.openCategory = function(catId){
             $state.go('products',{categoryId: catId});
         };
-
+		
+		$scope.showDeail = function(productHome, catId){
+			vm.productHome = productHome;
+			vm.catId = catId;
+		};
     }
 })();
