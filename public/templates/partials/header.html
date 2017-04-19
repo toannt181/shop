@@ -7,19 +7,19 @@
 <section class="wrapper">
     <div class="container">
 		<div class="search pb10 clearfix">
-			<div class="left w21" ng-click="headerCtrl.openHome()">
-				<img src="/assets/images/logo.png" />
+			<div class="left w21">
+				<a href="javascript:;" ng-click="headerCtrl.openHome()"><img src="/assets/images/logo.png" /></a>
 			</div>
 			<div class="right w24 cart">
-				<a href="javascripts:;" ng-click="headerCtrl.openCart()">
+				<a href="javascript:;" ng-click="headerCtrl.openCart()">
 					<img src="/assets/images/icon_cart.png"/>
 					<span>Giỏ hàng</span>
 				</a>
-				<a href="javascripts:;" ng-click="headerCtrl.openLogin()">
+				<a href="javascript:;" ng-click="headerCtrl.openLogin()">
 					<img src="/assets/images/icon_user.png"/>
 					<span>Đăng nhập</span>
 				</a> 
-				<span>| <a href="javascripts:;" ng-click="headerCtrl.openRegister()">Đăng ký</a></span>
+				<span>| <a href="javascript:;" ng-click="headerCtrl.openRegister()">Đăng ký</a></span>
 			</div>
 			<div class="left w55">
 				<form class="from-search">
@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<div class="cat-more">
-			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascripts:;" ng-click="headerCtrl.openCategory(menu.id)">{{menu.name}}</a>
+			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascript:;" ng-click="headerCtrl.openCategory(menu.id)">{{menu.name}}</a>
 		</div>
 		<div class="clearfix"></div>
 	</div>
