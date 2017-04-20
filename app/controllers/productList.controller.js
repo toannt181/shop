@@ -21,6 +21,7 @@
         vm.isSearch = false;
 		vm.isAddingCart = false;
         vm.totalPage = 0;
+        vm.totalRecord = 0;
         vm.totalAmount = 0;
         vm.totalFee = 0;
         vm.pageCurrent = 0;
@@ -112,6 +113,7 @@
                 return vm.products;
             });
             productService.countProduct(params).then(function(response) {
+                vm.totalRecord = response.data ;
                 vm.totalPage = Math.ceil(response.data / vm.limit);
 				if(vm.totalPage > 1) {
 					vm.pageCurrent = vm.offset/vm.limit + 1;
@@ -141,7 +143,7 @@
         vm.addProductToCart = function (product_id, variantId) {
             vm.isAddingCart = true;
             var item = {product_id: product_id, product_variant_id : variantId, quantity: 1};
-			$('#popupInfo .content').html('Đang xử lý...');
+			vm.msgPopup = 'Đang xử lý...';
 			$('#popupInfo').modal({
 				escapeClose: false,
 				clickClose: false,
@@ -150,13 +152,13 @@
             return cartService.addProduct(item).then(function (response) {
                 getCart();
                 if (response === true) {
-                    $('#popupInfo .content').html('Đã thêm vào giỏ hàng thành công');
+                    vm.msgPopup = 'Đã thêm vào giỏ hàng thành công';
                     vm.isAddingCart = false;
                 } else {
                     if (response.error.code === 10) {
-                        $('#popupInfo .content').html('Sản phẩm đã bị hủy hoặc không đủ hàng');
+                        vm.msgPopup = 'Sản phẩm đã bị hủy hoặc không đủ hàng';
                     } else {
-                        $('#popupInfo .content').html('Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau');
+                        vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
                     }
                     vm.isAddingCart = false;
                 }
@@ -164,7 +166,7 @@
 					$("#popupInfo a.close").click();
 				}, 1500);
             }, function (response) {
-                $('#popupInfo .content').html('Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau');
+                vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
 				setTimeout(function () {
 					$("#popupInfo a.close").click();
 				}, 1500);
@@ -319,12 +321,20 @@
             $state.go('products',{offset: offset});
         };
 
-        vm.openBrand = function(brandId){
-            $state.go('products',{brandId: brandId, offset:0});
+        vm.openBrand = function(brandId, type){
+			if(typeof type !== 'undefined' && type == '1') {
+				$state.go('products', {brandId: ''});
+			} else {
+				$state.go('products', {brandId: brandId, offset:0});
+			}
         };
 		
-		vm.openRatePrice = function(ratePrice) {
-			$state.go('products', {ratePrice: ratePrice, offset:0});
+		vm.openRatePrice = function(ratePrice, type) {
+			if(typeof type !== 'undefined' && type == '1') {
+				$state.go('products', {ratePrice: ''});
+			} else {
+				$state.go('products', {ratePrice: ratePrice, offset:0});
+			}
 		};
 		
 		$scope.sort = function() {

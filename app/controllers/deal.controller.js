@@ -122,6 +122,7 @@
                 return vm.products;
             });
             productService.countProduct(params).then(function(response) {
+                vm.totalRecord = response.data ;
                 vm.totalPage = Math.ceil(response.data / vm.limit);
 				if(vm.totalPage > 1) {
 					vm.pageCurrent = vm.offset/vm.limit + 1;
@@ -198,12 +199,20 @@
             $state.go('deals',{offset: offset});
         };
 
-        vm.openBrand = function(brandId){
-            $state.go('deals',{brandId: brandId, offset:0});
+        vm.openBrand = function(brandId, type){
+			if(typeof type !== 'undefined' && type == '1') {
+				$state.go('deals', {brandId: ''});
+			} else {
+				$state.go('deals', {brandId: brandId, offset:0});
+			}
         };
 		
-		vm.openRatePrice = function(ratePrice) {
-			$state.go('deals', {ratePrice: ratePrice, offset:0});
+		vm.openRatePrice = function(ratePrice, type) {
+			if(typeof type !== 'undefined' && type == '1') {
+				$state.go('deals', {ratePrice: ''});
+			} else {
+				$state.go('deals', {ratePrice: ratePrice, offset:0});
+			}
 		};
 		
 		$scope.sort = function() {
