@@ -17,8 +17,7 @@
         vm.hasData = true;
         vm.isSearch = false;
 		vm.isAddingCart = false;
-        vm.totalPage = 0;
-        vm.totalRecord = 0;
+        vm.total = 0;
         vm.pageCurrent = 0;
 
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : '');
@@ -73,27 +72,26 @@
             }
             productService.getList(params, vm.offset, vm.limit).then(function(response) {
                 vm.products = response.data;
-				vm.hasData = vm.products.length === 0 ? false : true;
-				if(vm.products.length > 0) {
-					getBrands();
-					productService.countProduct(params).then(function(response) {
-						vm.totalRecord = response.data ;
-						vm.totalPage = Math.ceil(response.data / vm.limit);
-						if(vm.totalPage > 1) {
-							vm.pageCurrent = vm.offset/vm.limit + 1;
-							for (var i = 1; i <= vm.totalPage; i++) {
-								if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.totalPage < 5 || (vm.pageCurrent > vm.totalPage - 5 && i > vm.totalPage - 5)
-								)
-									vm.paging.push(i);
-							}
-						}
-					});
-				} else {
-					getHomePage();
-				}
-				
+                vm.hasData = vm.products.length === 0 ? false : true;
                 return vm.products;
             });
+			
+			if(vm.products.length > 0) {
+				getBrands();
+				productService.countProduct(params).then(function(response) {
+					vm.total = Math.ceil(response.data / vm.limit);
+					if(vm.total > 1) {
+						vm.pageCurrent = vm.offset/vm.limit + 1;
+						for (var i = 1; i <= vm.total; i++) {
+							if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.total < 5 || (vm.pageCurrent > vm.total - 5 && i > vm.total - 5)
+							)
+								vm.paging.push(i);
+						}
+					}
+				});
+			} else {
+				getHomePage();
+			}
         }
 
 		function getHomePage() {
@@ -114,21 +112,22 @@
             vm.isAddingCart = true;
             var item = {product_id: product_id, product_variant_id : variantId, quantity: 1};
 			
-			vm.msgPopup = 'Đang xử lý...';
+			$('#popupInfo .content').html('Đang xử lý...');
 			$('#popupInfo').modal({
 				escapeClose: false,
 				clickClose: false,
 				showClose: false
 			});
             return cartService.addProduct(item).then(function (response) {
+                getCart();
                 if (response === true) {
-                    vm.msgPopup = 'Đã thêm vào giỏ hàng thành công';
+                    $('#popupInfo .content').html('Đã thêm vào giỏ hàng thành công abc');
                     vm.isAddingCart = false;
                 } else {
                     if (response.error.code === 10) {
-                        vm.msgPopup = 'Sản phẩm đã bị hủy hoặc không đủ hàng';
+                        $('#popupInfo .content').html('Sản phẩm đã bị hủy hoặc không đủ hàng');
                     } else {
-                        vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
+                        $('#popupInfo .content').html('Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau');
                     }
                     vm.isAddingCart = false;
                 }
@@ -136,7 +135,7 @@
 					$("#popupInfo a.close").click();
 				}, 1500);
             }, function (response) {
-                vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
+                $('#popupInfo .content').html('Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau');
 				setTimeout(function () {
 					$("#popupInfo a.close").click();
 				}, 1500);
@@ -157,25 +156,17 @@
             $state.go('productSearches',{offset: offset});
         };
 
-        vm.openBrand = function(brandId, type){
-			if(typeof type !== 'undefined' && type == '1') {
-				$state.go('productSearches', {brandId: ''});
-			} else {
-				$state.go('productSearches', {brandId: brandId, offset:0});
-			}
+        vm.openBrand = function(brandId){
+            $state.go('productSearches',{brandId: brandId, offset:0});
         };
-		
-		vm.openRatePrice = function(ratePrice, type) {
-			if(typeof type !== 'undefined' && type == '1') {
-				$state.go('productSearches', {ratePrice: ''});
-			} else {
-				$state.go('productSearches', {ratePrice: ratePrice, offset:0});
-			}
-		};
 
         vm.openCategory = function(categoryId){
             $state.go('productSearches',{categoryId: categoryId, offset:0});
         };
+		
+		vm.openRatePrice = function(ratePrice) {
+			$state.go('productSearches', {ratePrice: ratePrice, offset:0});
+		};
 		
 		$scope.limit = function() {
 			$state.go('productSearches', {limit: vm.limit});
