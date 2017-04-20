@@ -53,8 +53,20 @@
 			</div>
 		</div>
 		<div class="cat-more">
-			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascript:;" ng-click="headerCtrl.openCategory(menu.id)">{{menu.name}}</a>
+			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascript:;" ng-click="headerCtrl.gotoCatPage(menu.id, 2)">{{menu.name}}</a>
 		</div>
 		<div class="clearfix"></div>
 	</div>
 </section>
+<div id="popupProvince" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content location">
+		<a class="close" rel="modal:close"> &nbsp </a>
+		<div class="clearfix"></div>
+		<div class="text-center title">Bạn muốn sử dụng dịch vụ ở đâu?</div>
+		<form class="from-position">
+			<input type="text" ng-model="headerCtrl.provinceId" placeholder="Tỉnh / thành phố" />
+			<button ng-click="headerCtrl.openDeal()">TIẾP TỤC</button>
+		</form>
+	</div>
+</div>
