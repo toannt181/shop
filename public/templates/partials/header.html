@@ -29,7 +29,7 @@
                        type="search" autofocus="autofocus" placeholder="Tìm kiếm"/>
 					<button ng-click="headerCtrl.search()">Tìm kiếm</button>
 				</form>
-				<div ng-class="{ true: 'active', false: ''}[headerCtrl.searched]" class="search-quick">
+				<div ng-class="{ true: 'active', false: ''}[headerCtrl.searchResult.products.data.length > 0]" class="search-quick">
 					<ul>
 						<li ng-repeat="product in headerCtrl.searchResult.products.data|limitTo:4">
 							<a href="javascript:;" ng-click="headerCtrl.openDetail(product.id)">{{product.name}}</a>
@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<div class="cat-more">
-			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascript:;" ng-click="headerCtrl.gotoCatPage(menu.id, 2)">{{menu.name}}</a>
+			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascript:;" ng-click="headerCtrl.gotoCatPage(menu.id, 1)">{{menu.name}}</a>
 		</div>
 		<div class="clearfix"></div>
 	</div>

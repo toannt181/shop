@@ -13,7 +13,6 @@
 		vm.subMenu = [];
 		vm.searchResult = [];
 		vm.provinceId = $localStorage.provinceId;
-		vm.searched = false;
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
 		
 		getSubMenu();
@@ -59,12 +58,10 @@
         vm.getSearchResult = function () {
             if (vm.keySearch === '') {
                 vm.searchResult = [];
-                vm.searched = false;
                 return false;
             }
             return categoryService.getSearchResult(vm.keySearch).then(function (response) {
                 vm.searchResult = response.data;
-                vm.searched = true;
                 var keepGoing = 0;
                 vm.searchResultCatId = '';
                 angular.forEach(vm.searchResult.categories.data, function (value) {
