@@ -118,6 +118,7 @@
                 return vm.products;
             });
             productService.countProduct(params).then(function(response) {
+                vm.totalRecord = response.data ;
                 vm.totalPage = Math.ceil(response.data / vm.limit);
 				if(vm.totalPage > 1) {
 					vm.pageCurrent = vm.offset/vm.limit + 1;
@@ -194,12 +195,20 @@
             $state.go('foods',{offset: offset});
         };
 
-        vm.openBrand = function(brandId){
-            $state.go('foods',{brandId: brandId, offset:0});
+        vm.openBrand = function(brandId, type){
+			if(typeof type !== 'undefined' && type == '1') {
+				$state.go('foods', {brandId: ''});
+			} else {
+				$state.go('foods', {brandId: brandId, offset:0});
+			}
         };
 		
-		vm.openRatePrice = function(ratePrice) {
-			$state.go('foods', {ratePrice: ratePrice, offset:0});
+		vm.openRatePrice = function(ratePrice, type) {
+			if(typeof type !== 'undefined' && type == '1') {
+				$state.go('foods', {ratePrice: ''});
+			} else {
+				$state.go('foods', {ratePrice: ratePrice, offset:0});
+			}
 		};
 		
 		$scope.sort = function() {

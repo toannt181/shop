@@ -317,11 +317,13 @@ section{overflow:hidden}
 
 /* The Modal (background) */
 .modal {display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.4);}
+.modal .title{text-transform: uppercase;padding: 10px 0px;border-bottom: 1px solid #ebebeb;}
 .modal .close-modal  {display:none}
 .modal .modal-content {background-color: #fefefe;margin: 5% auto;padding: 10px;width: 60%;}
+.modal .modal-content .content{padding: 20px 10px;}
 .modal .modal-content.location{color: #fff;background: url(../images/bg_location.png) bottom center no-repeat;min-height: 450px;}
 .modal .modal-content.location .close {float: right;background: url(../images/icon_close.png) center no-repeat;width: 40px;height: 39px;cursor: pointer;}
-.modal .modal-content.location .title {font-size: 16px;text-transform:uppercase}
+.modal .modal-content.location .title {font-size: 16px;text-transform:uppercase;padding: 0px;border-bottom: none;}
 .modal .modal-content.location .from-position{padding-left:20%;padding-top:20px;width:60%}
 .modal .modal-content.location .from-position input{border:2px #898989 solid;border-right:none;height:20px;padding:10px 0px;width:80%}
 .modal .modal-content.location .from-position button{width:20%;height:44px;margin:0px;background-color:#f80b43;color:#fff;margin-left:-10px;border:2px #898989 solid;border-left:none;}
@@ -330,7 +332,9 @@ section{overflow:hidden}
 .search-quick{position: absolute;background-color: rgba(17, 37, 48, 0.85);padding: 10px;width: 570px;display:none}
 .search-quick ul li{padding: 10px 30px;float:left;min-width:100px;}
 .search-quick ul li a{color:#fff}
-
+.cart_right .payment{cursor:pointer;border:1px #ff0000 solid;padding:10px;text-align:center;color:#ff0000;text-transform:uppercase;}
+.cart_right .remove{cursor:pointer}
+.block_menu img{margin-top:-5px;}
 @media screen and (max-width:1400px) {
 	.wrapper {width:100%}
 }
