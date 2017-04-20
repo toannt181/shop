@@ -145,24 +145,24 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
             }
         })
         .state('deals', {
-            url: '/deal?categoryId',
+            url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {
                 content: {
                     controller: 'DealController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/product/deal.html'
+                    templateUrl: '/templates/products/deal.html'
                 },
                 'footer': footer,
                 'header': header
             }
         })
         .state('foods', {
-            url: '/food?categoryId',
+            url: '/foods?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {
                 content: {
                     controller: 'FoodController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/product/food.html'
+                    templateUrl: '/templates/products/food.html'
                 },
                 'footer': footer,
                 'header': header
@@ -184,7 +184,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
             url: '/register',
             views: {
                 content: {
-                    controller: 'LoginController',
+                    controller: 'RegisterController',
                     controllerAs: 'ctrl',
                     templateUrl: '/templates/login/register.html'
                 },

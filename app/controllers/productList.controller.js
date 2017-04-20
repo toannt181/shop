@@ -20,7 +20,7 @@
         vm.hasData = true;
         vm.isSearch = false;
 		vm.isAddingCart = false;
-        vm.total = 0;
+        vm.totalPage = 0;
         vm.totalAmount = 0;
         vm.totalFee = 0;
         vm.pageCurrent = 0;
@@ -32,8 +32,6 @@
         vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : 12);
         vm.offset = (typeof $location.search().offset !== 'undefined' ?  $location.search().offset : 0);
         vm.ratePrice = (typeof $location.search().ratePrice !== 'undefined' ?  $location.search().ratePrice : '');
-		
-        getBrands(vm.categoryId);
 
         function getBrands(catId) {
             return categoryService.getBrands(catId).then(function(response) {
@@ -44,11 +42,24 @@
 		 
 		if(vm.categoryId !== ''){
             getCategoryById(vm.categoryId);
-        }
+        } else {
+			$state.go('home');
+		}
 
         function getCategoryById(catId) {
             return categoryService.getById(catId).then(function(response) {
                 vm.category = response.data;
+				
+				if(vm.category.type != '0') {
+					if(vm.category.type == '2') {
+						$state.go('foods', {categoryId: vm.categoryId});
+					} else if(vm.category.type == '1') {
+						$state.go('deals', {categoryId: vm.categoryId});
+					}
+				}
+				getProductsList();
+				getBrands(vm.categoryId);
+				
 				var parentId = parseInt(vm.category.parent_id);
 				var count = 0;
 				vm.gettingParent = false;
@@ -71,7 +82,6 @@
 			});
 		}
 		
-        getProductsList();
         function getProductsList() {
             var params = [
                 {name: 'category_id', value: vm.categoryId},
@@ -102,11 +112,11 @@
                 return vm.products;
             });
             productService.countProduct(params).then(function(response) {
-                vm.total = Math.ceil(response.data / vm.limit);
-				if(vm.total > 1) {
+                vm.totalPage = Math.ceil(response.data / vm.limit);
+				if(vm.totalPage > 1) {
 					vm.pageCurrent = vm.offset/vm.limit + 1;
-					for (var i = 1; i <= vm.total; i++) {
-						if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.total < 5 || (vm.pageCurrent > vm.total - 5 && i > vm.total - 5)
+					for (var i = 1; i <= vm.totalPage; i++) {
+						if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.totalPage < 5 || (vm.pageCurrent > vm.totalPage - 5 && i > vm.totalPage - 5)
 						)
 							vm.paging.push(i);
 					}
@@ -177,7 +187,6 @@
                         if (response.data.error) {
                             cartService.getCart(vm.voucherCode).then(function (response) {
                                 vm.cart = response.data;
-                                vm.total = Math.floor(response.total_amount) - Math.floor(response.voucher_amount);
                                 vm.voucherAmount = Math.floor(response.voucher_amount);
                                 vm.isUserVerified = response.user_is_verify;
                             });
@@ -189,7 +198,6 @@
                             $('#popupAlert').modal('show');
                         } else {
                             vm.voucherAmount = Math.floor(response.data.voucher_amount);
-                            vm.total = Math.floor(response.data.total_amount) - Math.floor(response.data.voucher_amount);
                             vm.isEditMode = false;
                             if (vm.totalItem === 0) {
                                 vm.totalItem = -1;
@@ -208,7 +216,6 @@
             for (var i = 0; i < vm.carts.length; i++) {
                 if (vm.carts[i].id == cartid && vm.carts[i].quantity > 1) {
                     vm.carts[i].quantity = vm.carts[i].quantity - 1;
-                    vm.total = vm.total - vm.carts[i].price;
                     vm.totalItem = vm.totalItem - 1;
                     $localStorage.totalItem = vm.totalItem;
 

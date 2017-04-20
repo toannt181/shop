@@ -6,7 +6,7 @@ body, dd, div, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, html, img, inpu
 embed, img, object {border: 0;max-width: 100%;vertical-align: middle;height: auto}
 html {background-color: #ffffff}
 body {position: relative;font-size: 15px;font-family: Roboto, Arial, Helvetica, sans-serif!important;font-style: normal;font-weight: 400;line-height: 22px;margin: 0!important}
-a {outline: 0;text-decoration: none;}
+a {outline: 0;text-decoration: none;cursor:pointer}
 a:hover {color: #ec2c39}
 section{overflow:hidden}
 .clearfix:after {visibility: hidden;display: block;font-size: 0;content: " ";clear: both;height: 0}
@@ -181,11 +181,11 @@ section{overflow:hidden}
 .cat .category .product{float:left;width:33.3333333%;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed #e1e1e1}
 .cat .category .product .product-content {padding-left:3px;position: relative;}
 .cat .category .product .title{padding:20px 0px 25px 0px;min-height:45px;}
-.cat .category .product .price{text-align:right;}
+.cat .category .product .price{text-align:right;height:45px;}
 .cat .category .product .price .discount{color:#ff082b;font-size:15px;font-weight:700}
 .cat .category .product .price span{font-weight:100;font-size:13px;text-decoration:line-through;}
 .cat .category .product .price p{padding-bottom:0px;}
-.cat .category .product .buy{padding-top:15px;width:90%;padding-left:5%}
+.cat .category .product .buy{padding-top:15px;width:90%;padding-left:5%;cursor:pointer}
 .cat .category .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;}
 .cat .category .product .buy div:hover{color:#fff;background-color:#ec2c39;}
 .cat .category .product .img img{width:100%;}
@@ -193,14 +193,14 @@ section{overflow:hidden}
 .cat .category-search .product{float:left;width:25%;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed #e1e1e1}
 .cat .category-search .product .product-content {padding-left:3px;position: relative;}
 .cat .category-search .product .title{padding:20px 0px 25px 0px;min-height:45px;}
-.cat .category-search .product .price{text-align:right;}
+.cat .category-search .product .price{text-align:right;height:45px;}
 .cat .category-search .product .price .discount{color:#ff082b;font-size:15px;font-weight:700}
 .cat .category-search .product .price span{font-weight:100;font-size:13px;text-decoration:line-through;}
 .cat .category-search .product .price p{padding-bottom:0px;}
-.cat .category-search .product .buy{padding-top:15px;width:90%;padding-left:5%}
+.cat .category-search .product .buy{padding-top:15px;width:90%;padding-left:5%;cursor:pointer}
 .cat .category-search .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;}
 .cat .category-search .product .buy div:hover{color:#fff;background-color:#ec2c39;}
-.cat .category-search .product .img{border:2px solid transparent;}
+.cat .category-search .product .img{border:2px solid transparent;overflow: hidden;height: 250px;overflow: hidden;height: 250px;}
 .cat .category-search .product .img:hover{border:2px solid #af3443;}
 .cat .category-search .product .img img{width:100%;}
 .cat .category-search .block-order-product {padding: 70px 0px;line-height: 50px;}
@@ -213,15 +213,16 @@ section{overflow:hidden}
 .cat .category-deal .product .due div{font-weight:700}
 .cat .category-deal .product .position,
 .cat .category-deal .product .due,
-.cat .category-deal .product .price{text-align:right;padding:0px 15px 5px 15px}
+.cat .category-deal .product .price{text-align:right;padding:0px 15px 5px 15px;height:45px}
 .cat .category-deal .product .price .discount{color:#ff082b;font-size:15px;font-weight:700}
 .cat .category-deal .product .price span{font-weight:100;font-size:13px;text-decoration:line-through;}
 .cat .category-deal .product .price p{padding-bottom:0px;}
-.cat .category-deal .product .buy{padding:0px 15px 5px 15px}
-.cat .category-deal .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;}
+.cat .category-deal .product .buy{padding:0px 15px 5px 15px;cursor:pointer}
+.cat .category-deal .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;cursor:pointer}
 .cat .category-deal .product:hover .buy div{color:#fff;background-color:#ec2c39;}
 .cat .category-deal .product .img img{width:100%;}
 .cat .category-deal .block-position{height:50px;line-height:50px;margin-bottom:20px;background-color:#464646;color:#fff;text-transform:uppercase}
+.cat .category-deal .block-position a{color:#fff;display:inline-block}
 .cat .category-deal .block-position .active{background-color:#ec2c39;position:relative;}
 
 .cat .category-deal .block-position .active:after {content:'';position: absolute;top: 100%;left: 50%;margin-left: -10px;width: 0;height: 0;border-top: solid 10px #ec2c39;border-left: solid 10px transparent;border-right: solid 10px transparent;}
@@ -229,14 +230,14 @@ section{overflow:hidden}
 .cat .category-food .product{float:left;width:25%;padding-top:10px;padding-bottom:10px;border-bottom:1px dashed #e1e1e1}
 .cat .category-food .product .product-content {padding-left:3px;position: relative;}
 .cat .category-food .product .title{padding:20px 0px 25px 0px;min-height:45px;}
-.cat .category-food .product .price{text-align:right;}
+.cat .category-food .product .price{text-align:right;height:45px;}
 .cat .category-food .product .price .discount{color:#ff082b;font-size:15px;font-weight:700}
 .cat .category-food .product .price span{font-weight:100;font-size:13px;text-decoration:line-through;}
 .cat .category-food .product .price p{padding-bottom:0px;}
-.cat .category-food .product .buy{padding-top:15px;width:90%;padding-left:5%}
+.cat .category-food .product .buy{padding-top:15px;width:90%;padding-left:5%;cursor:pointer}
 .cat .category-food .product .buy div{font-weight:100;color:#818181;background-color:#ebebeb;padding: 5px 10px;text-align: center;}
 .cat .category-food .product:hover .buy div{color:#fff;background-color:#ec2c39;}
-.cat .category-food .product .img{border:2px solid #fff}
+.cat .category-food .product .img{border:2px solid #fff;overflow: hidden;height: 250px;}
 .cat .category-food .product:hover .img{border:2px solid #ec2c39}
 .cat .category-food .product .img img{width:100%;}
 
@@ -307,7 +308,7 @@ section{overflow:hidden}
 .paging ul{float:right;}
 .paging li{margin:0px 5px;float:left;height:50px;width:50px;text-align:center;background-color:#e7e7e7}
 .paging li:hover,.paging li.active{background-color:#ec2c39}
-.paging li a{color:#fff;display:inline-block}
+.paging li a{color:#fff;display:inline-block;cursor:pointer}
 
 .progress[data-percent] {position: relative;}
 .progress {border-radius: 0;height: 18px;box-shadow: none;background: #dadada;}

@@ -12,6 +12,7 @@
 		
 		vm.subMenu = [];
 		vm.searchResult = [];
+		vm.provinceId = $localStorage.provinceId;
 		vm.searched = false;
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
 		
@@ -36,14 +37,19 @@
 		
         vm.gotoCatPage = function (catId, typeId) {
             if (typeof typeId !== 'undefined' && typeId != '0') {
-				if (typeof $localStorage.provinceId === 'undefined') {
-					$state.go("provinces", {categoryId: catId, typeId: typeId});
-				} else {
-					if(typeId == 1) {
-						$state.go("deals", {categoryId: catId});
+				if (typeId == 1) {
+					vm.categoryId = catId;
+					if(typeof $localStorage.provinceId === 'undefined') {
+						$('#popupProvince').modal({
+							escapeClose: false,
+							clickClose: false,
+							showClose: false
+						});
 					} else {
-						$state.go("suppliers", {categoryId: catId});
+						$state.go("deals", {categoryId: catId});
 					}
+				} else {
+					$state.go("foods", {categoryId: catId});
                 }
             } else {
                 $state.go("products", {categoryId: catId});
@@ -90,10 +96,6 @@
             $state.go('productsDetail',{productId: productId});
         };
 
-        vm.openCategory = function(catId){
-            $state.go('products',{categoryId: catId});
-        };
-
         vm.search = function(){
             $state.go('productSearches',{name: vm.keySearch});
         };
@@ -104,6 +106,11 @@
 
         vm.toggleSearch = function () {
             vm.isShowSearch = !vm.isShowSearch;
+        };
+
+        vm.openDeal = function () {
+			$localStorage.provinceId = vm.provinceId;
+			$state.go("deals", {categoryId: vm.categoryId});
         };
 
     }
