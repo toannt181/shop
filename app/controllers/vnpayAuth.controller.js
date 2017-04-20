@@ -22,12 +22,12 @@
 
         function authLoginCompleted(response) {
             if (response.data.error) {
-                $window.location.href = '/vnpayshop/backapp';
+                window.location.href = '/vnpayshop/backapp';
             }
             
             $localStorage.token = response.data.token;
             if(typeof $stateParams.backurl !== 'undefined' && $stateParams.backurl !== ''){
-                $window.location.href = window.atob($stateParams.backurl);
+                window.location.href = window.atob($stateParams.backurl);
             }else{
                 $state.go('home', {});
             }

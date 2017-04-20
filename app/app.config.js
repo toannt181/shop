@@ -209,7 +209,17 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
             }
         });
 
-    $authProvider.loginUrl = env.API_URL + '/v1/auth/vnpay/login';
+    $authProvider.facebook({
+        clientId: "366421220424953", // Test Client ID
+        url: env.API_URL +'/v2/auth/facebook'
+    });
+
+    $authProvider.google({
+        clientId: "904538658845-9vnuv4194l0egib181h2r5s8ltji7a19.apps.googleusercontent.com",
+        url: env.API_URL +'/v2/auth/google'
+    });
+
+    $authProvider.loginUrl = env.API_URL + '/v2/auth/vnpay/login';
 
     // $httpProvider.interceptors.push('APIInterceptor');
 }
