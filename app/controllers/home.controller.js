@@ -17,23 +17,27 @@
 		
         getHomePage();
         
+        
+        
         if (typeof $localStorage.subMenu == 'undefined') {
-			return categoryService.getAllCategories().then(function (response) {
-                vm.categories = response.data;
-            });
+            getSubMenu();
         } else {
 			vm.categories = $localStorage.subMenu;
 		}
+
+        function getSubMenu() {
+            return categoryService.getAllCategories().then(function (response) {
+                vm.categories = response.data;
+				$localStorage.subMenu = vm.categories;
+                return;
+            });
+        }
 		
         vm.addEmail = function(data) {
             return homeService.addEmail(data).then(function(response) {
                 vm.emailData = response.data;
                 return vm.emailData;
             });
-        };
-
-        vm.search = function(){
-            $state.go('productsList',{name:vm.keySearch});
         };
 
         function getHomePage(){
@@ -47,9 +51,8 @@
             $state.go('products',{categoryId: catId});
         };
 		
-		$scope.showDeail = function(productHome, catId){
-			vm.productHome = productHome;
-			vm.catId = catId;
+		$scope.showDeail = function(productId){
+			vm.productHome = productId;
 		};
     }
 })();
