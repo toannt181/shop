@@ -63,10 +63,9 @@
             }
         };
 
-        vm.openHome = function(){
+        vm.openHome = function () {
             $state.go('home');
         };
-
     }
 
 })();
