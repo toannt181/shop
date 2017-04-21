@@ -57,6 +57,10 @@
                 }
             }
 
+            vm.openHome = function(){
+                $state.go('home');
+            };
+
             function loginFailed() {
                 console.log("Failed !");
                 return false;
