@@ -17,9 +17,9 @@ angular
         'gApp.core',
         'gApp.config',
         'gApp.services',
-
-        /* Feature areas */
         'gApp.shared',
+		
+        /* Feature areas */
         'gApp.vnpayAuth',
         'gApp.home',
         'gApp.category',
@@ -30,10 +30,6 @@ angular
         'gApp.cart',
         'gApp.done',
         'gApp.order',
-        'gApp.collection',
-        'gApp.notifications',
-        'gApp.article',
-
         'gApp.login',
         'gApp.register',
         'gApp.product',
@@ -91,15 +87,6 @@ angular
 
 angular
     .module('gApp.order', []);
-
-angular
-    .module('gApp.collection', []);
-
-angular
-    .module('gApp.notifications', []);
-
-angular
-    .module('gApp.article', []);
 
 angular
     .module('gApp.login', []);

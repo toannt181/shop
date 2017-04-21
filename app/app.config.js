@@ -1,39 +1,6 @@
 angular
     .module('gApp')
-    .factory('APIInterceptor', APIInterceptor)
     .config(config);
-
-APIInterceptor.$inject = ['$q', '$injector', '$window'];
-
-function APIInterceptor($q, $injector, $window) {
-    return {
-        'request': function (config) {
-            config.headers = config.headers || {};
-
-            var localStorageService = $injector.get('$localStorage');
-
-            if (localStorageService.token) {
-                config.headers.Authorization = 'Bearer ' + localStorageService.token;
-            }
-           
-            return config;
-        },
-        'responseError': function (response) {
-            var stateService = $injector.get('$state');
-
-            if (response.status === 400 || response.status === 401 || response.status === 403) {
-                // stateService.go('401', {});
-                $window.location.href = '/vnpayshop/backapp';
-            }
-
-            if (response.status === 404) {
-                stateService.go('404', {});
-            }
-
-            return $q.reject(response);
-        }
-    };
-}
 
 config.$inject = ['$httpProvider', '$stateProvider', '$urlRouterProvider', '$authProvider', 'env'];
 
@@ -57,7 +24,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
     var cart_right = {
         templateUrl: '/templates/partials/cart-right.html'
     };
-
+	
     // use a state provider for routing
     $stateProvider
         .state('auth', {
@@ -220,6 +187,4 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
     });
 
     $authProvider.loginUrl = env.API_URL + '/v2/auth/vnpay/login';
-
-    // $httpProvider.interceptors.push('APIInterceptor');
 }
