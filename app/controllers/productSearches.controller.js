@@ -39,8 +39,8 @@
 			vm.subMenu = $localStorage.subMenu;
 		}
 		
-        function getBrands() {
-            return categoryService.getBrands().then(function(response) {
+        function getAllBrands() {
+            return categoryService.getAllBrands().then(function(response) {
                 vm.brands = response.data;
                 return vm.brands;
             });
@@ -75,7 +75,7 @@
                 vm.products = response.data;
 				vm.hasData = vm.products.length === 0 ? false : true;
 				if(vm.products.length > 0) {
-					getBrands();
+					getAllBrands();
 					productService.countProduct(params).then(function(response) {
 						vm.totalRecord = response.data ;
 						vm.totalPage = Math.ceil(response.data / vm.limit);
