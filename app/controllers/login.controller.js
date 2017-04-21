@@ -63,6 +63,10 @@
             }
         };
 
+        vm.openHome = function(){
+            $state.go('home');
+        };
+
     }
 
 })();
