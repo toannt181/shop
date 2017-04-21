@@ -19,7 +19,7 @@
             offset = typeof offset !== 'undefined' ? offset : 0;
             limit = typeof limit !== 'undefined' ? limit : 15;
             return $http
-                .get(env.API_URL + '/v1/products?category_id=' + categoryId + '&offset=' + offset + '&limit=' + limit)
+                .get(env.API_URL + '/v2/products?category_id=' + categoryId + '&offset=' + offset + '&limit=' + limit)
                 .then(getListByCategoryIdCompleted)
                 .catch(getListByCategoryIdFailed);
 
@@ -34,7 +34,7 @@
 
         function findById(productId) {
             return $http
-                .get(env.API_URL + '/v1/products/' + productId)
+                .get(env.API_URL + '/v2/products/' + productId)
                 .then(findByIdCompleted)
                 .catch(findByIdFailed);
 
@@ -55,7 +55,7 @@
                 }
             }
             return $http
-                .get(env.API_URL + '/v1/products/count?' + query)
+                .get(env.API_URL + '/v2/products/count?' + query)
                 .then(getListCompleted, getListFailed);
 
             function getListCompleted(response) {
@@ -77,7 +77,7 @@
                 }
             }
             return $http
-                .get(env.API_URL + '/v1/products?offset=' + offset + '&limit=' + limit + query)
+                .get(env.API_URL + '/v2/products?offset=' + offset + '&limit=' + limit + query)
                 .then(getListCompleted, getListFailed);
 
             function getListCompleted(response) {
