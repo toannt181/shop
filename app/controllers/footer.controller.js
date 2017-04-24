@@ -19,8 +19,10 @@
         }
         vm.addEmail = function(data) {
             return homeService.addEmail(data).then(function(response) {
-                vm.emailData = response.data;
-                return vm.emailData;
+                    vm.emailData = response.data;
+                    vm.msgPopup = 'Đăng ký email thành công';
+                    $('#footerPopup').modal('show');
+                    return vm.emailData;
             });
         };
 

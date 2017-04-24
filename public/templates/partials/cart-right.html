@@ -1,5 +1,5 @@
 <div class="left w20">
-	<div class="bgebebeb ml10 mt10 p10">
+	<div class="cart_right bgebebeb ml10 mt10 p10">
 		<div class="text-center mb10">
 			Chúc mừng bạn đã được <span>FREE<span> ship
 		</div>
@@ -11,36 +11,44 @@
 			GIỎ HÀNG CỦA BẠN
 		</div>
 		<div class="cart">
-			<div class="product-content" ng-repeat="cart in ctrl.carts track by $index">
+			<div class="product-content" ng-repeat="cart in ctrl.cart track by $index">
+				<div class="product-cart-quantity">
+					<a ng-click="ctrl.addProduct(cart.id)" class="cart-quantity-up"><div class="fa fa-angle-up fa-2x"></div></a>
+					<div class="cart-quantity-number text-gray-6">{{cart.quantity}}</div>
+					<a ng-click="ctrl.removeCart(cart.id)" class="cart-quantity-down"><div class="fa fa-angle-down fa-2x"></div></a>
+				</div>
+				<a ng-click="ctrl.openDetail(cart.product_id)" class="cart-image">
+					<div class="img-holder">
+						<div class="img-helper">
+							<img src="{{cart.image}}">
+						</div>
+					</div>
+				</a>
+				<div class="product-price">
+					<div class="effective-wrapper">
+						<div id="effective-price-7120050818f14ccbbe7e17f2e67fd596" class="price-effective h3 strong inline-block text-discounted">{{cart.price*cart.quantity | number}} đ</div>
+				<!-- 		<span class="price-difference"></span> -->
+					</div>
+				</div>
+				<a ng-click="ctrl.removeItemCart(cart.id)" data-toggle="modal" data-target="#confirm-delete" class="product-remove"><i class="fa fa-times fa-2x"></i></a>
+			</div>
+			<div class="product-content">
 				<div class="left" style="width:20%">
 					<div class="pt10 img text-center">
-						{{cart.quantity}}
+						<img src="/assets/images/icon_cart.png" />
 					</div>
 				</div>
-<!-- 				<div class="right">
-					<div class="product-name pb10">
-						<a ng-click="ctrl.openDetail(cart.product_id)">{{cart.name}}</a>
-					</div>
-				</div> -->
-<!-- 				<div class="clearfix"></div> -->
-				<div>
-					<div class="left" >
-						<div class="img">
-							<a ng-click="ctrl.openDetail(cart.product_id)"><img src="{{cart.image}}" /></a>
-						</div>
-					</div>
-					<div class="left">
-						<div class="price">
-							<p class="mt10 discount"><br ng-if="cart.compare_at_price >= cart.price" />{{cart.compare_at_price | number}}đ</p>
-							<span ng-if="cart.compare_at_price < cart.price">{{cart.price | number}}đ</span>
+				<div class="right">
+					<div class="product-name pb10 pt10 fw">
+						<div class="pt10">
+							Tổng tiền: {{ctrl.total| currency: "": 0: "." }}đ
 						</div>
 					</div>
 				</div>
-				<div><button ng-click="ctrl.removeCart(cart.id)">X</button></div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
-		<div>Tổng tiền: {{ctrl.totalAmount | currency: "": 0}}</div>
+		<div class="payment" ng-click="ctrl.openCartComfirm()">Thanh toán ngay</div>
 	</div>
 </div>
 <!-- Popup thông báo -->
@@ -56,6 +64,38 @@
             <div class="modal-footer">
                 <button type="button" class="btleft bt" data-dismiss="modal">Huỷ</button>
                 <button type="button" class="btright bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupAlert" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="contmid" style="text-align: center">
+                {{ctrl.popMessage}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btcenter bt" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="confirm-delete" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="contmid">Quý khách có chắc chắn xóa sản phẩm này không?</div>
+
+            <div class="modal-footer">
+            	<button type="button" class="btleft bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
+                <button type="button" class="btright bt" data-dismiss="modal">Huỷ</button>
             </div>
         </div>
     </div>

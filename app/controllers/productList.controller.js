@@ -9,11 +9,12 @@
     function ProductController($state, $location, $localStorage, $scope, productService, categoryService, cartService) {
         var vm = this;
 
+        vm.id = 0;
         vm.paging = [];
         vm.brands = [];
         vm.category = [];
         vm.parents = [];
-        vm.carts = [];
+        vm.cart = [];
         vm.products = [];
         vm.subMenu = [];
         vm.busy = false;
@@ -22,7 +23,7 @@
 		vm.isAddingCart = false;
         vm.totalPage = 0;
         vm.totalRecord = 0;
-        vm.totalAmount = 0;
+        vm.total = 0;
         vm.totalFee = 0;
         vm.pageCurrent = 0;
 
@@ -132,8 +133,8 @@
                 vm.totalItem = Math.floor(response.data) === 0 ? -1 : Math.floor(response.data);
                 if (vm.totalItem > 0) {
                     cartService.getCart(vm.voucherCode).then(function (response) {
-                        vm.carts = response.data;
-                        vm.totalAmount = response.total_amount;
+                        vm.cart = response.data;
+                        vm.total = Math.floor(response.total_amount) - Math.floor(response.voucher_amount);
                         vm.totalFee = response.total_fee;
                     });
                 }
@@ -144,16 +145,12 @@
             vm.isAddingCart = true;
             var item = {product_id: product_id, product_variant_id : variantId, quantity: 1};
 			vm.msgPopup = 'Đang xử lý...';
-			$('#popupInfo').modal({
-				escapeClose: false,
-				clickClose: false,
-				showClose: false
-			});
             return cartService.addProduct(item).then(function (response) {
                 getCart();
                 if (response === true) {
                     vm.msgPopup = 'Đã thêm vào giỏ hàng thành công';
                     vm.isAddingCart = false;
+                    $('#popupProductList').modal('show');
                 } else {
                     if (response.error.code === 10) {
                         vm.msgPopup = 'Sản phẩm đã bị hủy hoặc không đủ hàng';
@@ -161,15 +158,11 @@
                         vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
                     }
                     vm.isAddingCart = false;
+                    $('#popupProductList').modal('show');
                 }
-				setTimeout(function () {
-					$("#popupInfo a.close").click();
-				}, 1500);
             }, function (response) {
                 vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
-				setTimeout(function () {
-					$("#popupInfo a.close").click();
-				}, 1500);
+                $('#popupProductList').modal('show');
                 vm.isAddingCart = false;
             });
         };
@@ -189,6 +182,7 @@
                         if (response.data.error) {
                             cartService.getCart(vm.voucherCode).then(function (response) {
                                 vm.cart = response.data;
+                                vm.total = Math.floor(response.total_amount) - Math.floor(response.voucher_amount);
                                 vm.voucherAmount = Math.floor(response.voucher_amount);
                                 vm.isUserVerified = response.user_is_verify;
                             });
@@ -200,6 +194,7 @@
                             $('#popupAlert').modal('show');
                         } else {
                             vm.voucherAmount = Math.floor(response.data.voucher_amount);
+                            vm.total = Math.floor(response.data.total_amount) - Math.floor(response.data.voucher_amount);
                             vm.isEditMode = false;
                             if (vm.totalItem === 0) {
                                 vm.totalItem = -1;
@@ -214,48 +209,48 @@
 
         };
 
-        vm.removeProduct = function (cartid) {
-            for (var i = 0; i < vm.carts.length; i++) {
-                if (vm.carts[i].id == cartid && vm.carts[i].quantity > 1) {
-                    vm.carts[i].quantity = vm.carts[i].quantity - 1;
+        vm.addProduct = function (cartid) {
+            for (var i = 0; i < vm.cart.length; i++) {
+                if (vm.cart[i].id == cartid && vm.cart[i].quantity < 99) {
+                    vm.cart[i].quantity = vm.cart[i].quantity + 1;
+                    vm.total = vm.total + vm.cart[i].price;
+                    vm.totalItem = vm.totalItem + 1;
+                    $localStorage.totalItem = vm.totalItem;
+                    var item = {
+                        product_id: vm.cart[i].product_id,
+                        product_variant_id: (vm.cart[i].product_variant_id!==null ? vm.cart[i].product_variant_id : 0),
+                        quantity: 1
+                    };
+                    return cartService.addProduct(item);
+                }
+            }
+            getCart();
+        };
+
+        vm.removeCart = function (cartid) {
+            for (var i = 0; i < vm.cart.length; i++) {
+                if (vm.cart[i].id == cartid && vm.cart[i].quantity > 1) {
+                    vm.cart[i].quantity = vm.cart[i].quantity - 1;
+                    vm.total = vm.total - vm.cart[i].price;
                     vm.totalItem = vm.totalItem - 1;
                     $localStorage.totalItem = vm.totalItem;
 
                     var item = {
-                        product_id: vm.carts[i].product_id,
-                        product_variant_id: (vm.carts[i].product_variant_id!==null ? vm.carts[i].product_variant_id : 0),
+                        product_id: vm.cart[i].product_id,
+                        product_variant_id: (vm.cart[i].product_variant_id!==null ? vm.cart[i].product_variant_id : 0),
                         quantity: -1
                     };
-
                     return cartService.addProduct(item);
-
                 }
-            }
-        };
-
-        vm.removeCart = function (id) {
-            vm.id = id;
-            var whatIndex = null;
-            angular.forEach(vm.carts, function (cb, index) {
-                if (cb.id === vm.id) {
-                    whatIndex = index;
-                }
-            });
-            console.log(whatIndex);
-            if (vm.carts[whatIndex].id == vm.id) {
-                $localStorage.totalItem = $localStorage.totalItem - vm.carts[whatIndex].quantity;
-                vm.carts.splice(whatIndex, 1);
             }
             getCart();
-            vm.updateCart();
+        };
 
-            if(vm.carts.length === 0){
-                vm.totalItem = -1;
-            }
+        vm.removeItemCart = function (id) {
+            vm.id = id;
         };
 
         vm.submitRemove = function () {
-
             var whatIndex = null;
             angular.forEach(vm.cart, function (cb, index) {
                 if (cb.id === vm.id) {
@@ -266,11 +261,9 @@
                 $localStorage.totalItem = $localStorage.totalItem - vm.cart[whatIndex].quantity;
                 vm.cart.splice(whatIndex, 1);
             }
-
             vm.updateCart();
-            angular.element(document.getElementById('footer')).scope().footerCtrl.countCartItems = $localStorage.totalItem;
+            getCart();
             $('#confirm-delete').modal('hide');
-
             if(vm.cart.length === 0){
                 vm.totalItem = -1;
             }
@@ -329,6 +322,10 @@
 			}
         };
 		
+        vm.openCartComfirm = function(){
+            $state.go('cartConfirm');
+        };
+
 		vm.openRatePrice = function(ratePrice, type) {
 			if(typeof type !== 'undefined' && type == '1') {
 				$state.go('products', {ratePrice: ''});

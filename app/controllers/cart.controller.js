@@ -116,10 +116,7 @@
                         product_variant_id: (vm.cart[i].product_variant_id!==null ? vm.cart[i].product_variant_id : 0),
                         quantity: -1
                     };
-
-                    // angular.element(document.getElementById('footer')).scope().footerCtrl.countCartItems = $localStorage.totalItem;
                     return cartService.addProduct(item);
-
                 }
             }
         };
@@ -139,11 +136,8 @@
                 $localStorage.totalItem = $localStorage.totalItem - vm.cart[whatIndex].quantity;
                 vm.cart.splice(whatIndex, 1);
             }
-
             vm.updateCart();
-            // angular.element(document.getElementById('footer')).scope().footerCtrl.countCartItems = $localStorage.totalItem;
             $('#confirm-delete').modal('hide');
-
             if(vm.cart.length === 0){
                 vm.totalItem = -1;
             }
