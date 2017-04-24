@@ -1,3 +1,4 @@
+<body ng-app="myApp">
 <div class="login">
 	<div class="text-center">
 		<a href="scripts:;" ng-click="ctrl.openHome()">
@@ -6,19 +7,58 @@
 	</div>
 	<div class="wrapper">
 		<div class="wrap-login">
-			<form class="from-register">
-				<label>E-mail</label>
-				<input type="text" ng-model="ctrl.email" required/>
-				<label>Mật khẩu</label>
-				<input type="password" ng-model="ctrl.password" required/>
+			<form class="from-register" name="myForm">
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="email">E-mail</label>
+						<div class="col-md-7">
+							<input type="email" ng-model="ctrl.email" id="email" placeholder="Vui lòng nhập Email" required
+								   ng-minlength="3" style="padding-left: 5px"/>
+							<div class="has-error" ng-show="myForm.$dirty">
+								<span ng-show="myForm.email.$error.required">This is a required field</span>
+								<span ng-show="myForm.email.$error.minlength">Minimum length required is 3</span>
+								<span ng-show="myForm.email.$invalid">This field is invalid </span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="password">Mật khẩu</label>
+						<div class="col-md-7">
+							<input type="password" ng-model="ctrl.password" id="password" placeholder="Vui lòng nhập mật khẩu"
+								   required ng-minlength="1" style="padding-left: 5px"/>
+							<div class="has-error" ng-show="myForm.$dirty">
+								<span ng-show="myForm.password.$error.required">This is a required field</span>
+								<span ng-show="myForm.password.$error.minlength">Minimum length required is 1</span>
+								<span ng-show="myForm.password.$invalid">This field is invalid </span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div style="color: red">{{ctrl.message}}</div>
 				<p class="text-right"><a href="">Quên mật khẩu?</a></p>
-				<button ng-click="ctrl.login()">ĐĂNG NHẬP</button>
+				<!--<button id="login" ng-click="ctrl.login()" ng-disabled="myForm.$invalid">ĐĂNG NHẬP</button>-->
+				<input id="login" ng-click="ctrl.login()" type="submit" ng-disabled="myForm.$invalid" class="btn btn-primary btn-sm btn-submit" value="ĐĂNG NHẬP">
 				<p class="login-more">Đăng nhập với  &nbsp &nbsp
 					<span style="cursor: pointer" ng-click="ctrl.authenticate('facebook')"><img src="/assets/images/icon_login_facebook.png" /></span> &nbsp &nbsp
 					<span style="cursor: pointer" ng-click="ctrl.authenticate('google')"><img src="/assets/images/icon_login_google.png" /></span>
 					 &nbsp &nbsp / Hoặc với tài khoản Mobile Banking của bạn
 				</p>
 			</form>
+
+			<style>
+				.login input[type=submit]{
+					text-align: center; height: 40px; cursor: pointer; background: #f80b43; color: #FFF
+				}
+				.login input[type=submit][disabled=disabled]
+				{
+					background: darkgray;
+				}
+			</style>
 		</div>
 	</div>
 </div>
+</body>
