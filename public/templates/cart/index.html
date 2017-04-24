@@ -30,7 +30,9 @@
 								<span class="text">{{cartDetail.quantity}}</span>
 								<span class="addition" ng-click="ctrl.addCart(cartDetail.id)">+</span>
 							</div>
-							<div class="remove-cart text-center" ng-click="ctrl.removeItemCart(cartDetail.id);" data-toggle="modal" data-target="#confirm-delete">Xóa sản phẩm</div>
+							<div class="remove-cart text-center">
+								<a ng-click="ctrl.removeItemCart(cartDetail.id);" data-toggle="modal" data-target="#confirm-delete">Xóa sản phẩm</a>
+							</div>
 						</div>
 						<div class="left total w10 text-right">{{cartDetail.price*cartDetail.quantity | currency: "": 0 }}</div>
 						<div class="clearfix"></div>
@@ -87,8 +89,8 @@
             <div class="contmid">Quý khách có chắc chắn xóa sản phẩm này không?</div>
 
             <div class="modal-footer">
-                <button type="button" class="btleft bt" data-dismiss="modal">Huỷ</button>
-                <button type="button" class="btright bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
+            	<button type="button" class="btleft bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
+                <button type="button" class="btright bt" data-dismiss="modal">Huỷ</button>
             </div>
         </div>
     </div>
