@@ -11,6 +11,7 @@
 
         vm.email = "";
         vm.password = "";
+        vm.message = "";
 
         function getProfile() {
             return profileService.getProfile().then(function (response) {
@@ -44,22 +45,16 @@
                 .catch(loginFailed);
 
             function loginCompleted(response) {
-                if (typeof response.data === 'undefined' || response.data.error) {
-                    console.log("Failed !");
-                    return false;
-                }
-                $localStorage.token = response.data.token;
-
-                if (typeof $stateParams.backurl !== 'undefined' && $stateParams.backurl !== '') {
-                    window.location.href = window.atob($stateParams.backurl);
-                } else {
+                if (typeof response.data != 'undefined' && response.data.token) {
+                    $localStorage.token = response.data.token;
                     getProfile();
+                } else {
+                    vm.message = response.data.error;
                 }
             }
 
             function loginFailed() {
-                console.log("Failed !");
-                return false;
+                vm.message = 'Lỗi kết nối với server, vui lòng thử lại.';
             }
         };
 

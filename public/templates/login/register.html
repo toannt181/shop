@@ -71,8 +71,6 @@
                 <input id="register" ng-click="ctrl.addAccount()" type="submit" ng-disabled="myForm.$invalid" class="btn btn-primary btn-sm btn-submit" value="ĐĂNG KÝ">
                 <!--<input type="submit"  value="ĐĂNG KÝ" ng-disabled="myForm.$invalid">-->
 
-                <div id="example1"></div>
-                <p style="color:red;">{{ captcha_status }}</p>
 
             </form>
 
@@ -109,21 +107,12 @@
                     background: url("/assets/images/blue.png") -39px 0 no-repeat;
                 }
 
-
             </style>
         </div>
     </div>
 </div>
 
 <script>
-    $(document).ready(function () {
-//        $('.wrap-register input').iCheck({
-//            checkboxClass: 'icheckbox_square',
-//            radioClass: 'iradio_square',
-//            increaseArea: '20%'
-//        });
-    });
-
     $(document).ready(function () {
         $("#passwrong").hide();
         $("#checkboxwrong").hide();
@@ -135,7 +124,6 @@
                 $("#passwrong").hide();
             }
 
-
             if(document.getElementById("checkbox").checked == false){
                 $("#checkboxwrong").show();
             }else{
@@ -145,8 +133,5 @@
         });
     });
 
-
 </script>
-
-
 </body>
