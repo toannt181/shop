@@ -22,6 +22,8 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
     };
 
     var cart_right = {
+        controller: 'CartController',
+        controllerAs: 'cartCtrl',
         templateUrl: '/templates/partials/cart-right.html'
     };
 	

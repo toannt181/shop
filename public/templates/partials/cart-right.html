@@ -11,13 +11,13 @@
 			GIỎ HÀNG CỦA BẠN
 		</div>
 		<div class="cart">
-			<div class="product-content" ng-repeat="cart in ctrl.cart track by $index">
+			<div class="product-content" ng-repeat="cart in cartCtrl.localCart track by $index">
 				<div class="product-cart-quantity">
-					<a ng-click="ctrl.addProduct(cart.id)" class="cart-quantity-up"><div class="fa fa-angle-up fa-2x"></div></a>
+					<a ng-click="cartCtrl.addProduct(cart.product_id)" class="cart-quantity-up"><div class="fa fa-angle-up fa-2x"></div></a>
 					<div class="cart-quantity-number text-gray-6">{{cart.quantity}}</div>
-					<a ng-click="ctrl.removeCart(cart.id)" class="cart-quantity-down"><div class="fa fa-angle-down fa-2x"></div></a>
+					<a ng-click="cartCtrl.removeProduct(cart.product_id)" class="cart-quantity-down"><div class="fa fa-angle-down fa-2x"></div></a>
 				</div>
-				<a ng-click="ctrl.openDetail(cart.product_id)" class="cart-image">
+				<a ng-click="cartCtrl.openDetail(cart.product_id)" class="cart-image">
 					<div class="img-holder">
 						<div class="img-helper">
 							<img src="{{cart.image}}">
@@ -30,7 +30,7 @@
 				<!-- 		<span class="price-difference"></span> -->
 					</div>
 				</div>
-				<a ng-click="ctrl.removeItemCart(cart.id)" data-toggle="modal" data-target="#confirm-delete" class="product-remove"><i class="fa fa-times fa-2x"></i></a>
+				<a ng-click="cartCtrl.removeItemCart(cart.product_id)" class="product-remove"><i class="fa fa-times fa-2x"></i></a>
 			</div>
 			<div class="product-content">
 				<div class="left" style="width:20%">
@@ -41,14 +41,14 @@
 				<div class="right">
 					<div class="product-name pb10 pt10 fw">
 						<div class="pt10">
-							Tổng tiền: {{ctrl.total| currency: "": 0: "." }}đ
+							Tổng tiền: {{cartCtrl.total| currency: "": 0: "." }}đ
 						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
-		<div class="payment" ng-click="ctrl.openCartComfirm()">Thanh toán ngay</div>
+		<div class="payment" ng-click="cartCtrl.openCartComfirm()">Thanh toán ngay</div>
 	</div>
 </div>
 <!-- Popup thông báo -->
@@ -63,7 +63,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btleft bt" data-dismiss="modal">Huỷ</button>
-                <button type="button" class="btright bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
+                <button type="button" class="btright bt" ng-click="cartCtrl.submitRemove()">Đồng ý</button>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
                 <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
             </div>
             <div class="contmid" style="text-align: center">
-                {{ctrl.popMessage}}
+                {{cartCtrl.popMessage}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btcenter bt" data-dismiss="modal">Đóng</button>
@@ -94,7 +94,7 @@
             <div class="contmid">Quý khách có chắc chắn xóa sản phẩm này không?</div>
 
             <div class="modal-footer">
-            	<button type="button" class="btleft bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
+            	<button type="button" class="btleft bt" ng-click="cartCtrl.submitRemove()">Đồng ý</button>
                 <button type="button" class="btright bt" data-dismiss="modal">Huỷ</button>
             </div>
         </div>
@@ -108,7 +108,7 @@
                 <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
             </div>
             <div class="contmid" style="text-align: center">
-                {{ctrl.popMessage}}
+                {{cartCtrl.popMessage}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btcenter bt" data-dismiss="modal">Đóng</button>
