@@ -61,7 +61,7 @@
 			</div>
 		</div>
 		<div class="cat-more">
-			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascript:;" ng-click="headerCtrl.gotoCatPage(menu.id, 1)">{{menu.name}}</a>
+			<a ng-repeat="menu in headerCtrl.subMenu track by $index" ng-if="$index < 5" href="javascript:;" ng-click="headerCtrl.gotoCatPage(menu.id, menu.type)">{{menu.name}}</a>
 		</div>
 		<div class="clearfix"></div>
 	</div>

@@ -9,9 +9,11 @@
                     </div>
                     <nav class="wsmenu slideLeft" id="nav">
                         <ul id="menu" class="menu-primary">
-                            <li ng-repeat="category in ctrl.categories" data-id="{{ category.id }}" ng-mouseover="showDeail(category.product_home, category.id)">
-                                <a href="javascript:;" ng-click="ctrl.openCategory(category.id)">
-                                    <img ng-src="{{ category.icon_web }}"/>
+                            <li ng-repeat="category in ctrl.categories" 
+								ng-mouseover="showDeal(category.product_home, category.id, category.type)" 
+								ng-class="ctrl.catId == category.id ? 'active' : ''" >
+                                <a href="javascript:;" ng-click="ctrl.openCategory(category.id, category.type)">
+                                    <img ng-src="{{ ctrl.catId == category.id ? category.icon_web_hover : category.icon_web }}"/>
                                     {{ category.name }}
                                 </a>
                             </li>
@@ -20,197 +22,206 @@
                 </div>
             </div>
             <div class="left w55" id="menu-detail">
-                <div ng-repeat="category in ctrl.categories track by $index" ng-if="$index==0" ng-init="ctrl.productHome = category.product_home; ctrl.catId = category.id">
-                    <a href="javascript:;" ng-click="ctrl.openCategory(ctrl.catId)"><img src="{{ctrl.productHome}}"/></a>
+                <div ng-init="category = ctrl.categories[0]" ng-init="ctrl.productHome = category.product_home; ctrl.catId = category.id; ctrl.type = category.type">
+                    <a href="javascript:;" ng-click="ctrl.openCategory(ctrl.catId, ctrl.type)"><img src="{{ctrl.productHome}}"/></a>
                 </div>
             </div>
-            <div class="left w24" ng-repeat="banner in ctrl.homeData"
-                 ng-if="banner.type == 1 && banner.sort_weigh == 1">
-                <div class="pb10"  ng-repeat="image in banner.details">
-                    <a href="{{image['link']}}"><img src="{{image['image']}}"/></a>
+            <div class="left w24">
+				<!-- right Banner -->
+                <div class="pb10" ng-repeat="image in ctrl.homeNewData[12].newDetails">
+                    <a href="{{image.link}}"><img src="{{image.image}}"/></a>
                 </div>
             </div>
         </div>
-        <div class="product-ad pb10 clearfix" ng-repeat="banner in ctrl.homeData"
-             ng-if="banner.type == 1 && banner.sort_weigh == 2">
-            <div ng-repeat="image in banner.details" class="left w50">
+        <div class="product-ad pb10 clearfix">
+			<!-- Banner -->
+            <div ng-repeat="image in ctrl.homeNewData[1].newDetails" class="left w50">
                 <div class="pr5 pb10">
-                    <a href="{{image['link']}}"><img src="{{image['image']}}"/></a>
+                    <a href="{{image.link}}"><img src="{{image.image}}"/></a>
                 </div>
             </div>
         </div>
-        <div ng-repeat="product in ctrl.homeData" ng-if="product.type == 3 ">
-            <div class="product-deal pb10 clearfix">
-                <div class="cat">
-                    <div href="javascript:;" class="red">
-                        <div class="title-cat left">
-                            <img src="{{product.icon_web}}"/>
-                            <a href="javascript:;"><span ng-click="ctrl.openCategory(product.category_id)">{{product.category}}</span></a>
-                        </div>
-                        <div class="arrow left"></div>
-                    </div>
-                </div>
-                <div class="cat-more">
-                    <a ng-repeat="category in product.categories_child" ng-if="$index <= 4" href="javascript:;" ng-click="ctrl.openCategory(category['id'])">{{category['name']}}</a>
-                </div>
-                <div class="clearfix"></div>
-                <div class="product-deal-left left w25">
-                    <div class="product bgfbf9f9" ng-repeat="detail in product.details"
-                         ng-if="detail['sort_weigh'] == 1 ">
-                        <div class="img">
-                            <a href="{{detail['link']}}">
-                                <img src="{{detail['image']}}"/>
-                            </a>
-                        </div>
-                        <div class="position">{{detail['location']}}</div>
-                        <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                        <div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
-                    </div>
-                </div>
+		
+        <div ng-repeat="product in ctrl.homeData track by $index">
+			<div ng-if="product.type == 3">
+				<div class="product-deal pb10 clearfix">
+					<div class="cat">
+						<div href="javascript:;" class="red">
+							<div class="title-cat left">
+								<img src="{{product.icon_web_hover}}"/>
+								<a href="javascript:;"><span ng-click="ctrl.openCategory(product.category_id)">{{product.category}}</span></a>
+							</div>
+							<div class="arrow left"></div>
+						</div>
+					</div>
+					<div class="cat-more">
+						<a ng-repeat="category in product.categories_child" ng-if="$index <= 4" href="javascript:;" ng-click="ctrl.openCategory(category['id'])">{{category['name']}}</a>
+					</div>
+					<div class="clearfix"></div>
+					<div class="product-deal-left left w25">
+						<div class="product bgfbf9f9" ng-init="detail = product.newDetails[1]">
+							<div class="img">
+								<a href="{{detail['link']}}">
+									<img src="{{detail['image']}}"/>
+								</a>
+							</div>
+							<div class="position">{{detail['location']}}</div>
+							<div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
+							<div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
+						</div>
+					</div>
+					<div class="product-deal-right right w25">
+						<div class="product pl2" ng-init="detail = product.newDetails[2]">
+							<div class="bgfbf9f9">
+								<div class="img">
+									<a href="{{detail['link']}}">
+										<img src="{{detail['image']}}"/>
+									</a>
+								</div>
+								<div class="position">{{detail['location']}}</div>
+								<div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
+								<div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="product-deal-middle left w50">
+						<div class="product left w50" ng-repeat="detail in product.details" ng-if=" detail['sort_weigh'] > 2 ">
+							<div class="product-content pl2 pb2">
+								<div class="bgfbf9f9">
+									<div class="left w50">
+										<div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
+										<div class="pl5">{{detail['location']}}</div>
+										<div class="price">Giá chỉ từ:<br/> <span>{{detail['price'] | number }} VND</span></div>
+									</div>
+									<div class="left w50" >
+										<div class="img">
+											<a href="{{detail['link']}}">
+											<img src="{{detail['image']}}"/>
+											</a>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="product.type == 2">
+				<div class="product-cat pb10 clearfix">
+					<div class="product-cat-left pb2">
+						<div class="product-left" ng-init="detail1 = product.newDetails[1]">
+							<div class="product bgfbf9f9">
+								<div class="cat">
+									<div ng-class="product.className">
+										<div class="title-cat left">
+											<a href="javascript:;">
+												<img src="{{product.icon_web_hover}}"/>
+												<span ng-click="ctrl.openCategory(product.category_id)">{{product.category}}</span>
+											</a>
+										</div>
+										<div class="arrow left"></div>
+									</div>
+								</div>
+								<div class="img">
+									<a href="{{detail1['link']}}">
+										<img src="{{detail1['image']}}"/>
+									</a>
+								</div>
+								<div class="position">{{detail1['location']}}</div>
+								<div class="title"><a href="{{detail1['link']}}">{{detail1['title']}}</a></div>
+								<div class="price">Giá chỉ từ: <span>{{detail1['price'] | number }} VND</span></div>
+							</div>
+						</div>
+						<div class="product-right" ng-init="detail2 = product.newDetails[2]">
+							<div class="product pl2">
+								<div class="bgfbf9f9">
+									<div class="img">
+										<a href="{{detail2['link']}}">
+											<img src="{{detail2['image']}}"/>
+										</a>
+									</div>
+									<div class="position">{{detail2['location']}}</div>
+									<div class="title"><a href="{{detail2['link']}}">{{detail2['title']}}</a></div>
+									<div class="price">Giá chỉ từ: <span>{{detail2['price'] | number }} VND</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="product-cat-right pb2">
+						<div class="product-top pb2">
+							<div ng-init="detail3 = product.newDetails[3]">
+								<div class="product bgfbf9f9">
+									<div class="product-content">
+										<div class="title"><a href="{{detail3['link']}}">{{detail3['title']}}</a></div>
+										<div class="position">{{detail3['location']}}</div>
+										<div class="price">Giá chỉ từ: <span>{{detail3['price'] | number }} VND</span></div>
+									</div>
+								</div>
+								<div class="product bgfbf9f9">
+									<div class="product-content">
+										<div class="img">
+											<a href="{{detail3['link']}}">
+												<img src="{{detail3['image']}}"/>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="product" ng-init="detail4 = product.newDetails[4]">
+								<div class="product-content pl2">
+									<div class="bgfbf9f9">
+										<div class="img">
+											<a href="{{detail4['link']}}">
+												<img src="{{detail4['image']}}"/>
+											</a>
+										</div>
+										<div class="title"><a href="{{detail4['link']}}">{{detail4['title']}}</a></div>
+										<div class="pl5">{{detail4['location']}}</div>
+										<div class="price">Giá chỉ từ: <span>{{detail4['price'] | number }} VND</span></div>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="product-bottom" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] > 5 ">
+							<div class="product">
+								<div class="product-content">
+									<div class="bgfbf9f9">
+										<div class="img">
+											<a href="{{detail['link']}}">
+												<img src="{{detail['image']}}"/>
+											</a>
+										</div>
+										<div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
+										<div class="pl5">{{detail['location']}}</div>
+										<div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
+									</div>
+								</div>
+							</div>
 
-                <div class="product-deal-right right w25">
-                    <div class="product pl2" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] == 2 ">
-                        <div class="bgfbf9f9">
-                            <div class="img">
-                                <a href="{{detail['link']}}">
-                                    <img src="{{detail['image']}}"/>
-                                </a>
-                            </div>
-                            <div class="position">{{detail['location']}}</div>
-                            <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                            <div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-deal-middle left w50">
-                    <div class="product left w50" ng-repeat="detail in product.details"
-                         ng-if=" detail['sort_weigh'] >= 3 ">
-                        <div class="product-content pl2">
-                            <div class="bgfbf9f9">
-                                <div class="left w50">
-                                    <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                                    <div class="pl5">{{detail['location']}}</div>
-                                    <div class="price">Giá chỉ từ:<br/> <span>{{detail['price'] | number }} VND</span></div>
-                                </div>
-                                <div class="left w50" >
-                                    <div class="img">
-                                        <a href="{{detail['link']}}">
-                                        <img src="{{detail['image']}}"/>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-repeat="product in ctrl.homeData" ng-if="product.type == 2">
-            <div class="product-cat pb10 clearfix">
-                <div class="product-cat-left pb2">
-                    <div class="product-left" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] == 1 ">
-                        <div class="product bgfbf9f9">
-                            <div class="cat">
-                                <div class="blue">
-                                    <div class="title-cat left">
-                                        <img src="{{product.icon_web}}"/>
-                                        <span ng-click="ctrl.openCategory(product.category_id)">{{product.category}}</span>
-                                    </div>
-                                    <div class="arrow left"></div>
-                                </div>
-                            </div>
-                            <div class="img">
-                                <a href="{{detail['link']}}">
-                                    <img src="{{detail['image']}}"/>
-                                </a>
-                            </div>
-                            <div class="position">{{detail['location']}}</div>
-                            <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                            <div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
-                        </div>
-                    </div>
-                    <div class="product-right" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] == 2 ">
-                        <div class="product pl2">
-                            <div class="bgfbf9f9">
-                                <div class="img">
-                                    <a href="{{detail['link']}}">
-                                        <img src="{{detail['image']}}"/>
-                                    </a>
-                                </div>
-                                <div class="position">{{detail['location']}}</div>
-                                <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                                <div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-cat-right pb2">
-                    <div class="product-top pb2">
-                        <div class="product bgfbf9f9" ng-repeat="detail in product.details"
-                             ng-if="detail['sort_weigh'] == 3 ">
-                            <div class="product-content">
-                                <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                                <div class="position">{{detail['location']}}</div>
-                                <div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
-                            </div>
-                        </div>
-                        <div class="product bgfbf9f9" ng-repeat="detail in product.details"
-                             ng-if="detail['sort_weigh'] == 3 ">
-                            <div class="product-content">
-                                <div class="img">
-                                    <a href="{{detail['link']}}">
-                                        <img src="{{detail['image']}}"/>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] == 4 ">
-                            <div class="product-content pl2">
-                                <div class="bgfbf9f9">
-                                    <div class="img">
-                                        <a href="{{detail['link']}}">
-                                            <img src="{{detail['image']}}"/>
-                                        </a>
-                                    </div>
-                                    <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                                    <div class="pl5">{{detail['location']}}</div>
-                                    <div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="product-bottom" ng-repeat="detail in product.details" ng-if="detail['sort_weigh'] > 4 ">
-                        <div class="product">
-                            <div class="product-content">
-                                <div class="bgfbf9f9">
-                                    <div class="img">
-                                        <a href="{{detail['link']}}">
-                                            <img src="{{detail['image']}}"/>
-                                        </a>
-                                    </div>
-                                    <div class="title"><a href="{{detail['link']}}">{{detail['title']}}</a></div>
-                                    <div class="pl5">{{detail['location']}}</div>
-                                    <div class="price">Giá chỉ từ: <span>{{detail['price'] | number }} VND</span></div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="more_products" ng-repeat="banner in ctrl.homeData"
-                 ng-if="banner.type == 1 && banner.category_id == product.category_id ">
-                <div class="img" ng-repeat="image in banner.details"
-                     style="background-image:url('{{image['image']}}')"></div>
-                <div class="link">
-                    <a href="{{image['link']}}">Xem thêm sản phẩm</a>
-                </div>
-            </div>
-        </div>
-
+						</div>
+					</div>
+				</div>
+				<div class="more_products" ng-init="banner = product.newDetails[5]">
+					<div class="img" style="background-image:url('{{banner.image}}')"></div>
+					<div class="link">
+						<a href="javascript:;" ng-click="ctrl.openCategory(product.category_id, product.category_type)">Xem thêm sản phẩm</a>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
+	<div id="popupHomeProvince" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content location">
+			<a class="close" rel="modal:close"> &nbsp </a>
+			<div class="clearfix"></div>
+			<div class="text-center title">Bạn muốn sử dụng dịch vụ ở đâu?</div>
+			<form class="from-position">
+				<input type="text" ng-model="ctrl.provinceId" placeholder="Tỉnh / thành phố" />
+				<button ng-click="ctrl.openHomeDeal()">TIẾP TỤC</button>
+			</form>
+		</div>
+	</div>
 </section>
