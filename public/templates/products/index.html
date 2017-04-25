@@ -99,7 +99,7 @@
 									<p class="discount"><br ng-if="cart.compare_at_price >= cart.price" />{{ product.compare_at_price | number }} đ</p>
 									<span ng-if="product.compare_at_price < product.price">{{ product.price | number }} đ</span>
 								</div>
-								<div class="buy"><div ng-click="ctrl.addProductToCart(product.id)">Thêm vào giỏ hàng</div></div>
+								<div class="buy"><div ng-click="ctrl.addProductToCart(product)">Thêm vào giỏ hàng</div></div>
 							</div>
 						</div>
 					</div>
@@ -133,22 +133,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btcenter bt" data-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="login-required" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content" style="margin-top:180px;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
-            </div>
-            <div class="contmid">Quý khách cần đăng nhập trước khi mua hàng</div>
-
-            <div class="modal-footer">
-            	<button type="button" class="btleft bt" ng-click="ctrl.submitRemove()">Đồng ý</button>
-                <button type="button" class="btright bt" data-dismiss="modal">Huỷ</button>
             </div>
         </div>
     </div>

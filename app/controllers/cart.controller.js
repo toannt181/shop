@@ -8,6 +8,7 @@
 
     function CartController(cartService, addressService, $state, $scope, $rootScope, $localStorage) {
         var vm = this;
+
         vm.id = 0;
         vm.cart = [];
         vm.addresses = [];
@@ -20,9 +21,19 @@
         vm.voucherCode = '';
         vm.voucherAmount = 0;
         vm.isUserVerified = false;
-        vm.countCartItems = $localStorage.totalItem;
+        vm.localCart = $localStorage.cart;
+        vm.total = $localStorage.total;
 
-        getCart();
+        if(vm.localCart==='undefined'){
+            vm.total = 0;
+            $localStorage.total = vm.total;
+        } else{
+            for(var i = 0; i<vm.localCart.length;i++){
+            vm.total += vm.localCart[i].price*vm.localCart[i].quantity;
+            $localStorage.total = vm.total;
+            }
+        }
+    
         function getCart() {
             cartService.countItems().then(function (response) {
                 vm.totalItem = Math.floor(response.data) === 0 ? -1 : Math.floor(response.data);
@@ -102,27 +113,33 @@
                 }
             }
         };
-		
-        vm.removeCart = function (cartid) {
-            for (var i = 0; i < vm.cart.length; i++) {
-                if (vm.cart[i].id == cartid && vm.cart[i].quantity > 1) {
-                    vm.cart[i].quantity = vm.cart[i].quantity - 1;
-                    vm.total = vm.total - vm.cart[i].price;
-                    vm.totalItem = vm.totalItem - 1;
-                    $localStorage.totalItem = vm.totalItem;
 
-                    var item = {
-                        product_id: vm.cart[i].product_id,
-                        product_variant_id: (vm.cart[i].product_variant_id!==null ? vm.cart[i].product_variant_id : 0),
-                        quantity: -1
-                    };
-                    return cartService.addProduct(item);
+        vm.addProduct = function (id) {
+            for (var i = 0; i < vm.localCart.length; i++) {
+                if (vm.localCart[i].product_id == id && vm.localCart[i].quantity < 99) {
+                    vm.localCart[i].quantity = vm.localCart[i].quantity + 1; 
+                    vm.total = vm.total + vm.localCart[i].price;
                 }
             }
         };
+		
+        vm.removeProduct = function (id) {
+            for (var i = 0; i < vm.localCart.length; i++) {
+                if (vm.localCart[i].product_id == id && vm.localCart[i].quantity > 1) {
+                    vm.localCart[i].quantity = vm.localCart[i].quantity - 1;
+                    vm.total = vm.total - vm.localCart[i].price;
+                }
+            }
+            console.log(vm.localCart);
+        };
 
         vm.removeItemCart = function (id) {
-            vm.id = id;
+            for(var i=0;i<vm.localCart.length;i++){
+                if(vm.localCart[i].product_id === id){
+                    vm.localCart.splice(i,1);
+                }
+            }
+            $localStorage.cart = vm.localCart;
         };
 
         vm.submitRemove = function () {
@@ -137,6 +154,7 @@
                 vm.cart.splice(whatIndex, 1);
             }
             vm.updateCart();
+            getCart();
             $('#confirm-delete').modal('hide');
             if(vm.cart.length === 0){
                 vm.totalItem = -1;
