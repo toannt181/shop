@@ -5,24 +5,28 @@
         .module('gApp.shared')
         .controller('FooterController', FooterController);
 
-    FooterController.$inject = ['$state','homeService', '$localStorage', '$location'];
+    FooterController.$inject = ['$state', 'homeService', '$localStorage', '$location'];
 
-    function FooterController($state, homeService ,$localStorage, $location) {
+    function FooterController($state, homeService, $localStorage, $location) {
 
         var vm = this;
 
         vm.countCartItems = $localStorage.totalItem;
         vm.countNotifications = 0;
         vm.state = '';
-        if($state.current.name !== 'productsList') {
+        if ($state.current.name !== 'productsList') {
             $(window).scrollTop(0);
         }
-        vm.addEmail = function(data) {
-            return homeService.addEmail(data).then(function(response) {
-                    vm.emailData = response.data;
+        vm.addEmail = function (data) {
+            return homeService.addEmail(data).then(function (response) {
+                vm.emailData = response.data;
+                if (vm.emailData === 'success') {
                     vm.msgPopup = 'Đăng ký email thành công';
-                    $('#footerPopup').modal('show');
-                    return vm.emailData;
+                } else {
+                    vm.msgPopup = vm.emailData;
+                }
+                $('#footerPopup').modal('show');
+                return vm.emailData;
             });
         };
 
@@ -36,13 +40,13 @@
         // socketioService.on('notifications:count-notifications-updated', updateCountNotifications);
 
         function countCartItems() {
-            return cartService.countItems().then(function(response) {
+            return cartService.countItems().then(function (response) {
                 updateCountCartItems(response.data);
             });
         }
 
         function countNotifications() {
-            return notificationService.count().then(function(response) {
+            return notificationService.count().then(function (response) {
                 updateCountNotifications(response.data);
             });
         }
@@ -89,23 +93,23 @@
             return vm.countNotifications;
         }
 
-         vm.goState = function(state){
-             if($state.current.name === 'productsList'){
-                 $localStorage.isPrevious = true;
-                 var categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : '');
-                 var keySearch = (typeof $location.search().name !== 'undefined' ?  $location.search().name : '');
-                 $localStorage.scrollPos[categoryId + '_' + keySearch] = $(window).scrollTop();
-             }
-             if(state === 'notifications'){
-                 $localStorage.notificationType = 1;
-             }
-             console.log($state.current.name);
-             console.log(state);
-             if($state.current.name !== state){
-                 $localStorage.isShowMenu = false;
-             }
-             $state.go(state);
-         };
+        vm.goState = function (state) {
+            if ($state.current.name === 'productsList') {
+                $localStorage.isPrevious = true;
+                var categoryId = (typeof $location.search().categoryId !== 'undefined' ? $location.search().categoryId : '');
+                var keySearch = (typeof $location.search().name !== 'undefined' ? $location.search().name : '');
+                $localStorage.scrollPos[categoryId + '_' + keySearch] = $(window).scrollTop();
+            }
+            if (state === 'notifications') {
+                $localStorage.notificationType = 1;
+            }
+            console.log($state.current.name);
+            console.log(state);
+            if ($state.current.name !== state) {
+                $localStorage.isShowMenu = false;
+            }
+            $state.go(state);
+        };
     }
 
 
@@ -125,6 +129,6 @@
                 $("footer").removeClass('unfixed');
                 $("#filter").removeClass('unfixed');
             }
-        });       
+        });
 
 })();
