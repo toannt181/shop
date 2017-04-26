@@ -34,9 +34,9 @@
                         email: data,
                     },
                 })
-                .then(getSupplierCompleted);
+                .then(addEmailCompleted);
 
-            function getSupplierCompleted(response) {
+            function addEmailCompleted(response) {
                 return response.data;
             }
         }
