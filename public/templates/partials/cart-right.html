@@ -11,7 +11,7 @@
 			GIỎ HÀNG CỦA BẠN
 		</div>
 		<div class="cart">
-			<div class="product-content" ng-repeat="cart in cartCtrl.localCart track by $index">
+			<div class="product-content" ng-repeat="cart in cartCtrl.localCart">
 				<div class="product-cart-quantity">
 					<a ng-click="cartCtrl.addProduct(cart.product_id)" class="cart-quantity-up"><div class="fa fa-angle-up fa-2x"></div></a>
 					<div class="cart-quantity-number text-gray-6">{{cart.quantity}}</div>
@@ -41,14 +41,14 @@
 				<div class="right">
 					<div class="product-name pb10 pt10 fw">
 						<div class="pt10">
-							Tổng tiền: {{cartCtrl.total| currency: "": 0: "." }}đ
+							Tổng tiền: {{cartCtrl.totalCart| currency: "": 0: "." }}đ
 						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
-		<div class="payment" ng-click="cartCtrl.openCartComfirm()">Thanh toán ngay</div>
+		<div class="payment" data-toggle="modal" data-target="#open-login">Thanh toán ngay</div>
 	</div>
 </div>
 <!-- Popup thông báo -->
@@ -112,6 +112,22 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btcenter bt" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="open-login" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="contmid">Bạn phải đăng nhập trước khi thanh toán</div>
+
+            <div class="modal-footer">
+                <button type="button" class="btleft bt" data-dismiss="modal">Huỷ</button>
+                <button type="button" class="btright bt" ng-click="cartCtrl.openLogin()">Đồng ý</button>
             </div>
         </div>
     </div>

@@ -33,15 +33,6 @@
         vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : 12);
         vm.offset = (typeof $location.search().offset !== 'undefined' ?  $location.search().offset : 0);
         vm.ratePrice = (typeof $location.search().ratePrice !== 'undefined' ?  $location.search().ratePrice : '');
-        vm.localCart = [];
-        vm.totalCart = 0;
-
-        if(typeof $localStorage.cart !== "undefined"){
-            vm.localCart = $localStorage.cart;
-        }
-        if(typeof $localStorage.totalCart !== 'undefined'){
-            vm.totalCart = $localStorage.totalCart;
-        }
 
         function getBrands(catId) {
             return categoryService.getBrands(catId).then(function(response) {
@@ -49,7 +40,16 @@
                 return vm.brands;
             });
         }
-		 
+
+        if(typeof $localStorage.cart === 'undefined'){
+            $localStorage.cart = [];
+            $localStorage.totalCart = 0;
+        } else if($localStorage.cart.length===0){
+            $localStorage.totalCart = 0;
+        } 
+
+        console.log($localStorage.cart);
+
 		if(vm.categoryId !== ''){
             getCategoryById(vm.categoryId);
         } else {
@@ -136,39 +136,23 @@
         }
 //Cart
         vm.addProductToCart = function (product, variantId) {
-            var item = {product_id: product.id, name: product.name, image: product.image, price: product.compare_at_price, quantity: 1};
-			
-			vm.msgPopup = 'Đang xử lý...';
-			$('#popupInfo').modal({
-				escapeClose: false,
-				clickClose: false,
-				showClose: false
-			});
-			
-            if(vm.localCart.length === 0){
-                vm.localCart.push(item);
-                $localStorage.cart = vm.localCart;
-                vm.totalCart = vm.totalCart + product.compare_at_price;
-                $localStorage.totalCart = vm.totalCart;
+            var item = {product_id: product.id, name: product.name, image: product.image, price: product.compare_at_price, quantity: 1};			
+            if($localStorage.cart.length === 0){
+                $localStorage.cart.push(item);
+                $localStorage.totalCart = $localStorage.totalCart + product.compare_at_price;
             } else {
                 var count = 0;
-                for(var i = 0; i < vm.localCart.length; i++){
-                    if(vm.localCart[i].product_id === product.id){
+                for(var i = 0; i < $localStorage.cart.length; i++){
+                    if($localStorage.cart[i].product_id === product.id){
                         count = 1;
                         vm.addProduct(product.id);
                     }
                 } 
                 if(count === 0){
-                    vm.localCart.push(item);
-                    $localStorage.cart = vm.localCart;
-                    vm.totalCart = vm.totalCart + product.compare_at_price;
-                    $localStorage.totalCart = vm.totalCart;
+                    $localStorage.cart.push(item);
+                    $localStorage.totalCart = $localStorage.totalCart + product.compare_at_price;
                 }
             }
-			vm.msgPopup = 'Đã thêm vào giỏ hàng thành công';
-			setTimeout(function () {
-				$("#popupInfo a.close").click();
-			}, 1500);
         };
 
         vm.removeCart = function (cartid) {
@@ -191,11 +175,10 @@
         };
 
         vm.addProduct = function (id) {
-            for (var i = 0; i < vm.localCart.length; i++) {
-                if (vm.localCart[i].product_id == id && vm.localCart[i].quantity < 99) {
-                    vm.localCart[i].quantity = vm.localCart[i].quantity + 1; 
-                    vm.total = vm.total + vm.localCart[i].price;
-                    $localStorage.total = vm.total;
+            for (var i = 0; i < $localStorage.cart.length; i++) {
+                if ($localStorage.cart[i].product_id == id && $localStorage.cart[i].quantity < 99) {
+                    $localStorage.cart[i].quantity = $localStorage.cart[i].quantity + 1; 
+                    $localStorage.totalCart = $localStorage.totalCart + $localStorage.cart[i].price;  
                 }
             }
         };
