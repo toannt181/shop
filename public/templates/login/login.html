@@ -8,12 +8,11 @@
 	<div class="wrapper">
 		<div class="wrap-login">
 			<form class="from-register" name="myForm">
-				
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label class="col-md-2 control-lable" for="email">E-mail</label>
 						<div class="col-md-7">
-							<input type="email" ng-model="ctrl.email" id="email" placeholder="Vui lòng nhập Email" required
+							<input type="email" ng-model="ctrl.email" id="email" required
 								   ng-minlength="3" style="padding-left: 5px"/>
 							<div class="has-error" ng-show="myForm.$dirty">
 								<span ng-show="myForm.email.$error.required">This is a required field</span>
@@ -27,7 +26,7 @@
 					<div class="form-group col-md-12">
 						<label class="col-md-2 control-lable" for="password">Mật khẩu</label>
 						<div class="col-md-7">
-							<input type="password" ng-model="ctrl.password" id="password" placeholder="Vui lòng nhập mật khẩu"
+							<input type="password" ng-model="ctrl.password" id="password"
 								   required ng-minlength="1" style="padding-left: 5px"/>
 							<div class="has-error" ng-show="myForm.$dirty">
 								<span ng-show="myForm.password.$error.required">This is a required field</span>

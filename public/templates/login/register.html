@@ -15,7 +15,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="email">E-mail</label>
                         <div class="col-md-7">
-                            <input type="email" ng-model="ctrl.email" id="email" placeholder="Vui lòng nhập Email" required
+                            <input type="email" ng-model="ctrl.email" id="email" required
                                    ng-minlength="3" style="padding-left: 5px"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.email.$error.required">This is a required field</span>
@@ -25,13 +25,13 @@
                         </div>
                     </div>
                 </div>
-
+                <div style="color: red;" ng-repeat="error in ctrl.accountData.email" >{{error}}</div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="password">Mật khẩu</label>
                         <div class="col-md-7">
-                            <input type="password" ng-model="ctrl.password" id="password" placeholder="Vui lòng nhập mật khẩu. (ít nhất 8 ký tự)"
-                                   required ng-minlength="5" style="padding-left: 5px"/>
+                            <input type="password" ng-model="ctrl.password" id="password"
+                                   required ng-minlength="8" style="padding-left: 5px"/>
                             <div class="has-error" ng-show="myForm.$dirty">
                                 <span ng-show="myForm.password.$error.required">This is a required field</span>
                                 <span ng-show="myForm.password.$error.minlength">Minimum length required is 8</span>
@@ -45,17 +45,17 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="passwordConfirm">Nhập lại mật khẩu</label>
                         <div class="col-md-7">
-                            <input type="password" ng-model="ctrl.passConfirm" id="passwordConfirm"
-                                   placeholder="Vui lòng nhập lại mật khẩu" required ng-minlength="5" style="padding-left: 5px"/>
+                            <input type="password" ng-model="ctrl.password_confirmation" id="passwordConfirm"
+                                  required ng-minlength="8" style="padding-left: 5px"/>
                             <div class="has-error" ng-show="myForm.$dirty">
-                                <span ng-show="myForm.passConfirm.$error.required">This is a required field</span>
-                                <span ng-show="myForm.passConfirm.$error.minlength">Minimum length required is 8</span>
-                                <span ng-show="myForm.passConfirm.$invalid">This field is invalid </span>
+                                <span ng-show="myForm.password_confirmation.$error.required">This is a required field</span>
+                                <span ng-show="myForm.password_confirmation.$error.minlength">Minimum length required is 8</span>
+                                <span ng-show="myForm.password_confirmation.$invalid">This field is invalid </span>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div style="color: red;" ng-repeat="error in ctrl.accountData.password" >{{error}} </div>
                 <label id="passwrong" style="color: red;">Mật khẩu không chính xác</label>
 
                 <div class="clearfix"></div>
@@ -66,6 +66,7 @@
                     <label for="test" id="dongy">Tôi đồng ý với các điều khoản và quy định của VnShop</label>
                 </label>
                 <label id="checkboxwrong" style="color: red;">Bạn chưa đồng ý với các điều khoản và quy định của VnShop </label>
+
 
                 <div class="clearfix"></div>
                 <input id="register" ng-click="ctrl.addAccount()" type="submit" ng-disabled="myForm.$invalid" class="btn btn-primary btn-sm btn-submit" value="ĐĂNG KÝ">
