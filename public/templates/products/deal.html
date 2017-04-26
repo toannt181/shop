@@ -112,7 +112,7 @@
 										<p class="discount"><br ng-if="cart.compare_at_price >= cart.price" />{{ product.compare_at_price | number }} đ</p>
 										<span ng-if="product.compare_at_price < product.price">{{ product.price | number }} đ</span>
 									</div>
-									<div class="buy"><div ng-click="ctrl.addProductToCart(product.id)">Mua ngay</div></div>
+									<div class="buy"><div ng-click="ctrl.addProductToCart(product)">Mua ngay</div></div>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -139,7 +139,7 @@
 	<!-- Modal content -->
 	<div class="modal-content">
 		<div class="clearfix"></div>
-		<div class="title">Thông báo <a class="close right" rel="modal:close">x</a></div>
+		<div class="title">Thông báo <a class="close right" rel="modal:close"><i class="fa fa-times"></i></a></div>
 		<div class="text-center content">{{ctrl.msgPopup}}</div>
 	</div>
 </div>

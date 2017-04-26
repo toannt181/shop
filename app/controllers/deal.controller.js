@@ -31,6 +31,16 @@
         vm.ratePrice = (typeof $location.search().ratePrice !== 'undefined' ?  $location.search().ratePrice : '');
         vm.provinceId = (typeof $localStorage.provinceId !== 'undefined' ?  $localStorage.provinceId : false);
 		
+        vm.localCart = [];
+        vm.totalCart = 0;
+
+        if(typeof $localStorage.cart !== "undefined"){
+            vm.localCart = $localStorage.cart;
+        }
+        if(typeof $localStorage.totalCart !== 'undefined'){
+            vm.totalCart = $localStorage.totalCart;
+        }
+		
 		if(!vm.provinceId || vm.categoryId === '') {
 			$state.go('home');
 		}
@@ -95,6 +105,7 @@
 		}
 		
         function getProductsList() {
+			vm.paging = [];
             var params = [
                 {name: 'category_id', value: vm.categoryId},
                 {name: 'province_id', value: vm.provinceId},
@@ -149,37 +160,50 @@
             });
         }
 
-        vm.addProductToCart = function (product_id, variantId) {
-            vm.isAddingCart = true;
-            var item = {product_id: product_id, product_variant_id : variantId, quantity: 1};
+        vm.addProductToCart = function (product, variantId) {
+            var item = {product_id: product.id, name: product.name, image: product.image, price: product.compare_at_price, quantity: 1};
+			
 			vm.msgPopup = 'Đang xử lý...';
 			$('#popupInfo').modal({
 				escapeClose: false,
 				clickClose: false,
 				showClose: false
 			});
-            return cartService.addProduct(item).then(function (response) {
-                if (response === true) {
-                    vm.msgPopup = 'Đã thêm vào giỏ hàng thành công';
-                    vm.isAddingCart = false;
-                } else {
-                    if (response.error.code === 10) {
-                        vm.msgPopup = 'Sản phẩm đã bị hủy hoặc không đủ hàng';
-                    } else {
-                        vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
+			
+            if(vm.localCart.length === 0){
+                vm.localCart.push(item);
+                $localStorage.cart = vm.localCart;
+                vm.totalCart = vm.totalCart + product.compare_at_price;
+                $localStorage.totalCart = vm.totalCart;
+            } else {
+                var count = 0;
+                for(var i = 0; i < vm.localCart.length; i++){
+                    if(vm.localCart[i].product_id === product.id){
+                        count = 1;
+                        vm.addProduct(product.id);
                     }
-                    vm.isAddingCart = false;
+                } 
+                if(count === 0){
+                    vm.localCart.push(item);
+                    $localStorage.cart = vm.localCart;
+                    vm.totalCart = vm.totalCart + product.compare_at_price;
+                    $localStorage.totalCart = vm.totalCart;
                 }
-				setTimeout(function () {
-					$("#popupInfo a.close").click();
-				}, 1500);
-            }, function (response) {
-                vm.msgPopup = 'Có lỗi trong quá trình ghi nhận đơn hàng, vui lòng thử lại sau';
-				setTimeout(function () {
-					$("#popupInfo a.close").click();
-				}, 1500);
-                vm.isAddingCart = false;
-            });
+            }
+			vm.msgPopup = 'Đã thêm vào giỏ hàng thành công';
+			setTimeout(function () {
+				$("#popupInfo a.close").click();
+			}, 1500);
+        };
+
+        vm.addProduct = function (id) {
+            for (var i = 0; i < vm.localCart.length; i++) {
+                if (vm.localCart[i].product_id == id && vm.localCart[i].quantity < 99) {
+                    vm.localCart[i].quantity = vm.localCart[i].quantity + 1; 
+                    vm.total = vm.total + vm.localCart[i].price;
+                    $localStorage.total = vm.total;
+                }
+            }
         };
 
         vm.openDetail = function(productId){
@@ -195,32 +219,36 @@
         };
 
         vm.openPage = function(id){
-			var offset = vm.limit * (id - 1);
-            $state.go('deals',{offset: offset});
+			vm.offset = vm.limit * (id - 1);
+			getProductsList();
         };
 
         vm.openBrand = function(brandId, type){
 			if(typeof type !== 'undefined' && type == '1') {
-				$state.go('deals', {brandId: ''});
+				vm.brandId = '';
 			} else {
-				$state.go('deals', {brandId: brandId, offset:0});
+				vm.brandId = brandId;
+				vm.offset = 0;
 			}
+			getProductsList();
         };
 		
 		vm.openRatePrice = function(ratePrice, type) {
 			if(typeof type !== 'undefined' && type == '1') {
-				$state.go('deals', {ratePrice: ''});
+				vm.ratePrice = '';
 			} else {
-				$state.go('deals', {ratePrice: ratePrice, offset:0});
+				vm.ratePrice = ratePrice;
+				vm.offset = 0;
 			}
+			getProductsList();
 		};
 		
 		$scope.sort = function() {
-			$state.go('deals', {sort: vm.sort});
+			getProductsList();
 		};
 		
 		$scope.limit = function() {
-			$state.go('deals', {limit: vm.limit});
+			getProductsList();
 		};
 
         vm.openOtherDeal = function (provinceId) {
