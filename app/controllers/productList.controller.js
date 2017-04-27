@@ -41,14 +41,12 @@
             });
         }
 
-        if(typeof $localStorage.cart === 'undefined'){
-            $localStorage.cart = [];
-            $localStorage.totalCart = 0;
-        } else if($localStorage.cart.length===0){
-            $localStorage.totalCart = 0;
-        } 
-
-        console.log($localStorage.cart);
+        if(typeof $localStorage.clientCart === 'undefined'){
+            $localStorage.clientCart = [];
+            $localStorage.totalPrice = 0;
+        } else if($localStorage.clientCart.length===0){
+            $localStorage.totalPrice = 0;
+        }
 
 		if(vm.categoryId !== ''){
             getCategoryById(vm.categoryId);
@@ -134,55 +132,39 @@
 				}
             });
         }
-//Cart
+
+        //Cart
+        
         vm.addProductToCart = function (product, variantId) {
             var item = {product_id: product.id, name: product.name, image: product.image, price: product.compare_at_price, quantity: 1};			
-            if($localStorage.cart.length === 0){
-                $localStorage.cart.push(item);
-                $localStorage.totalCart = $localStorage.totalCart + product.compare_at_price;
+            if($localStorage.clientCart.length === 0){
+                $localStorage.clientCart.push(item);
+                $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price;
             } else {
                 var count = 0;
-                for(var i = 0; i < $localStorage.cart.length; i++){
-                    if($localStorage.cart[i].product_id === product.id){
+                for(var i = 0; i < $localStorage.clientCart.length; i++){
+                    if($localStorage.clientCart[i].product_id === product.id){
                         count = 1;
                         vm.addProduct(product.id);
                     }
                 } 
                 if(count === 0){
-                    $localStorage.cart.push(item);
-                    $localStorage.totalCart = $localStorage.totalCart + product.compare_at_price;
+                    $localStorage.clientCart.push(item);
+                    $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price;
                 }
             }
-        };
-
-        vm.removeCart = function (cartid) {
-            for (var i = 0; i < vm.cart.length; i++) {
-                if (vm.cart[i].id == cartid && vm.cart[i].quantity > 1) {
-                    vm.cart[i].quantity = vm.cart[i].quantity - 1;
-                    vm.total = vm.total - vm.cart[i].price;
-                    vm.totalItem = vm.totalItem - 1;
-                    $localStorage.totalItem = vm.totalItem;
-
-                    var item = {
-                        product_id: vm.cart[i].product_id,
-                        product_variant_id: (vm.cart[i].product_variant_id!==null ? vm.cart[i].product_variant_id : 0),
-                        quantity: -1
-                    };
-                    return cartService.addProduct(item);
-                }
-            }
-            getCart();
         };
 
         vm.addProduct = function (id) {
-            for (var i = 0; i < $localStorage.cart.length; i++) {
-                if ($localStorage.cart[i].product_id == id && $localStorage.cart[i].quantity < 99) {
-                    $localStorage.cart[i].quantity = $localStorage.cart[i].quantity + 1; 
-                    $localStorage.totalCart = $localStorage.totalCart + $localStorage.cart[i].price;  
+            for (var i = 0; i < $localStorage.clientCart.length; i++) {
+                if ($localStorage.clientCart[i].product_id == id && $localStorage.clientCart[i].quantity < 99) {
+                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity + 1; 
+                    $localStorage.totalPrice = $localStorage.totalPrice + $localStorage.clientCart[i].price;  
                 }
             }
         };
-//End Cart
+
+        //End Cart
 
         if (typeof $localStorage.subMenu == 'undefined') {
             getSubMenu();
