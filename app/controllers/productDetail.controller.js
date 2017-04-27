@@ -71,30 +71,29 @@
 
         vm.addProductToCart = function (product, variantId) {
             var item = {product_id: product.id, name: product.name, image: product.image, price: product.compare_at_price, quantity: 1};            
-            if($localStorage.cart.length === 0){
-                $localStorage.cart.push(item);
-                $localStorage.totalCart = $localStorage.totalCart + product.compare_at_price;
+            if($localStorage.clientCart.length === 0){
+                $localStorage.clientCart.push(item);
+                $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price;
             } else {
                 var count = 0;
-                for(var i = 0; i < $localStorage.cart.length; i++){
-                    if($localStorage.cart[i].product_id === product.id){
+                for(var i = 0; i < $localStorage.clientCart.length; i++){
+                    if($localStorage.clientCart[i].product_id === product.id){
                         count = 1;
                         vm.addProduct(product.id);
                     }
                 } 
                 if(count === 0){
-                    $localStorage.cart.push(item);
-                    $localStorage.totalCart = $localStorage.totalCart + product.compare_at_price;
+                    $localStorage.clientCart.push(item);
+                    $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price;
                 }
             }
         };
 
         vm.addProduct = function (id) {
-            for (var i = 0; i < $localStorage.cart.length; i++) {
-                if ($localStorage.cart[i].product_id == id && $localStorage.cart[i].quantity < 99) {
-                    $localStorage.cart[i].quantity = $localStorage.cart[i].quantity + 1; 
-                    $localStorage.totalCart = $localStorage.totalCart + $localStorage.cart[i].price;
-                    console.log($localStorage.totalCart);
+            for (var i = 0; i < $localStorage.clientCart.length; i++) {
+                if ($localStorage.clientCart[i].product_id == id && $localStorage.clientCart[i].quantity < 99) {
+                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity + 1; 
+                    $localStorage.totalPrice = $localStorage.totalPrice + $localStorage.clientCart[i].price;
                 }
             }
         };

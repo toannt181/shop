@@ -11,11 +11,11 @@
 			GIỎ HÀNG CỦA BẠN
 		</div>
 		<div class="cart">
-			<div class="product-content" ng-repeat="cart in cartCtrl.localCart">
+			<div class="product-content" ng-repeat="cart in cartCtrl.clientCart">
 				<div class="product-cart-quantity">
-					<a ng-click="cartCtrl.addProduct(cart.product_id)" class="cart-quantity-up"><div class="fa fa-angle-up fa-2x"></div></a>
+					<a ng-click="cartCtrl.addProductClient(cart.product_id)" class="cart-quantity-up"><div class="fa fa-angle-up fa-2x"></div></a>
 					<div class="cart-quantity-number text-gray-6">{{cart.quantity}}</div>
-					<a ng-click="cartCtrl.removeProduct(cart.product_id)" class="cart-quantity-down"><div class="fa fa-angle-down fa-2x"></div></a>
+					<a ng-click="cartCtrl.removeProductClient(cart.product_id)" class="cart-quantity-down"><div class="fa fa-angle-down fa-2x"></div></a>
 				</div>
 				<a ng-click="cartCtrl.openDetail(cart.product_id)" class="cart-image">
 					<div class="img-holder">
@@ -30,7 +30,7 @@
 				<!-- 		<span class="price-difference"></span> -->
 					</div>
 				</div>
-				<a ng-click="cartCtrl.removeItemCart(cart.product_id)" class="product-remove"><i class="fa fa-times fa-2x"></i></a>
+				<a ng-click="cartCtrl.removeItemCartClient(cart.product_id)" class="product-remove"><i class="fa fa-times fa-2x"></i></a>
 			</div>
 			<div class="product-content">
 				<div class="left" style="width:20%">
@@ -41,7 +41,7 @@
 				<div class="right">
 					<div class="product-name pb10 pt10 fw">
 						<div class="pt10">
-							Tổng tiền: {{cartCtrl.totalCart| currency: "": 0: "." }}đ
+							Tổng tiền: {{cartCtrl.totalPrice| currency: "": 0: "." }}đ
 						</div>
 					</div>
 				</div>
