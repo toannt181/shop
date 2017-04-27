@@ -111,6 +111,10 @@
 			$state.go("deals", {categoryId: vm.categoryId});
         };
 
+        vm.openLogout = function(){
+            $localStorage.$reset();
+            $state.reload();
+        };
     }
 
 })();
