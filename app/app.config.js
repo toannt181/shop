@@ -161,6 +161,18 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 // 'header': header
             }
         })
+        .state('forgotPassword', {
+            url: '/forgotPassword',
+            views: {
+                content: {
+                    controller: 'ForgotController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/login/forgotPassword.html'
+                },
+                'footer': footer
+                // 'header': header
+            }
+        })
         .state('401', {
             url: '/401',
             views: {

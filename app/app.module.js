@@ -32,6 +32,7 @@ angular
         'gApp.order',
         'gApp.login',
         'gApp.register',
+        'gApp.forgotPassword',
         'gApp.product',
         'gApp.productSearches',
     ]);
@@ -93,7 +94,10 @@ angular
 
 angular
     .module('gApp.register', []);
-	
+
+angular
+    .module('gApp.forgotPassword', []);
+
 angular
     .module('gApp.product', []);
 	
