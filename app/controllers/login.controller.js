@@ -61,6 +61,10 @@
         vm.openHome = function () {
             $state.go('home');
         };
+
+        vm.openForgotPassword = function(){
+            $state.go('forgotPassword');
+        };
     }
 
 })();
