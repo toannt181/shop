@@ -48,7 +48,7 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
-		<div class="payment" data-toggle="modal" data-target="#open-login">Thanh toán ngay</div>
+		<div class="payment" ng-click="cartCtrl.openCart()">Thanh toán ngay</div>
 	</div>
 </div>
 <!-- Popup thông báo -->
@@ -127,7 +127,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btleft bt" data-dismiss="modal">Huỷ</button>
-                <button type="button" class="btright bt" ng-click="cartCtrl.openLogin()">Đồng ý</button>
+                <button type="button" class="btright bt" data-dismiss="modal" ng-click="cartCtrl.openLogin()">Đồng ý</button>
             </div>
         </div>
     </div>
