@@ -147,7 +147,6 @@
         function getCart() {
             cartService.countItems().then(function (response) {
                 vm.totalItem = Math.floor(response.data) === 0 ? -1 : Math.floor(response.data);
-
                 if (vm.totalItem > 0) {
                     cartService.getCart(vm.voucherCode).then(function (response) {
                         vm.cart = response.data;
