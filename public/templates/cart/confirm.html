@@ -80,7 +80,7 @@
 				<div class="clearfix"></div>
 				<div class="border-detail">
 					<div class="product-detail" ng-repeat="cartDetail in ctrl.cart" ng-if="cartDetail.quantity > 0">
-						<div class="left img w10"><img ng-click="ctrl.openDetail(cartDetail.id)" ng-src="{{cartDetail.image}}"></div>
+						<div class="left img w10"><img ng-click="ctrl.openDetail(cartDetail.product_id)" ng-src="{{cartDetail.image}}"></div>
 						<div class="left name w60"><div class="pl10"><a href="javascript:;" ng-click="ctrl.openDetail(cartDetail.id)">{{cartDetail.name}}</a></div></div>
 						<div class="left price w10" ng-if="cartDetail.product_quantity > 0"><span>{{cartDetail.price | currency: "": 0 }}</span> <span></span></div>
 						<div class="left price w10 text-center">

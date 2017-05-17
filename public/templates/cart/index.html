@@ -20,18 +20,18 @@
 				</div>
 				<div class="clearfix"></div>
 				<div class="border-detail">
-					<div class="product-detail" ng-repeat="cartDetail in ctrl.localCart" ng-if="cartDetail.quantity > 0">
-						<div class="left img w10"><img ng-click="ctrl.openDetail(cartDetail.id)" ng-src="{{cartDetail.image}}" /></div>
+					<div class="product-detail" ng-repeat="cartDetail in ctrl.clientCart" ng-if="cartDetail.quantity > 0">
+						<div class="left img w10"><img ng-click="ctrl.openDetail(cartDetail.product_id)" ng-src="{{cartDetail.image}}" /></div>
 						<div class="left name w60"><div class="pl10"><a href="javascript:;" ng-click="ctrl.openDetail(cartDetail.id)">{{cartDetail.name}}</div></a></div>
-						<div class="left price w10" ng-if="cartDetail.product_quantity > 0"><span>{{cartDetail.price | currency: "": 0 }}</span> <span></span></div>
+						<div class="left price w10"><span>{{cartDetail.price | currency: "": 0 }}</span> <span></span></div>
 						<div class="left quantity w10 text-center">
 							<div class="form">
-								<span class="subtraction" ng-click="ctrl.removeCart(cartDetail.id)">-</span>
+								<span class="subtraction" ng-click="ctrl.removeProductClient(cartDetail.product_id)">-</span>
 								<span class="text">{{cartDetail.quantity}}</span>
-								<span class="addition" ng-click="ctrl.addCart(cartDetail.id)">+</span>
+								<span class="addition" ng-click="ctrl.addProductClient(cartDetail.product_id)">+</span>
 							</div>
 							<div class="remove-cart text-center">
-								<a ng-click="ctrl.removeItemCart(cartDetail.id);" data-toggle="modal" data-target="#confirm-delete">Xóa sản phẩm</a>
+								<a ng-click="ctrl.removeItemCartClient(cartDetail.product_id)">Xóa sản phẩm</a>
 							</div>
 						</div>
 						<div class="left total w10 text-right">{{cartDetail.price*cartDetail.quantity | currency: "": 0 }}</div>
@@ -41,7 +41,17 @@
 				<div class="clearfix"></div>
 				<div class="coupons">
 					<div class="left w50"><span>Xóa giỏ hàng</span></div>
-					<div class="left w50">
+					<div class="left w50" ng-if="ctrl.token === 0">
+						<form class="from-coupons right">
+							<input type="text" placeholder="Nhập mã giảm giá" />
+                                <span class="coupon-status-ok" ng-if="ctrl.voucherAmount > 0" >
+                                    <a ng-click="ctrl.removeVoucher()"><img src="/assets/images/coupon_status_wrong.png"></a>
+                                </span>
+							<button data-toggle="modal" data-target="#open-login">Nhập</button>
+						</form>
+						<div class="pr10 pt5 right">MÃ GIẢM GIÁ TỪ VNSHOP</div>
+					</div>
+					<div class="left w50" ng-if="ctrl.token === 1">
 						<form class="from-coupons right">
 							<input ng-disabled="ctrl.voucherAmount > 0 || ctrl.isEditMode" type="text"
                                        placeholder="Nhập mã giảm giá"
@@ -65,10 +75,11 @@
 						<div class="pl10 text-right">
 							<div class="pt5">
 								<span>Giá tổng: </span>
-								<span class="total"><b>{{ctrl.total | currency: "": 0: "." }}</b></span>
+								<span class="total"><b>{{ctrl.totalPrice | currency: "": 0: "." }}</b></span>
 							</div>
 							<div class="btn-confirm-pay">
-								<span ng-click="ctrl.goToConfirm()">Đặt hàng</span>
+								<span ng-click="ctrl.goToConfirm()" ng-if="ctrl.token === 1">Đặt hàng</span>
+								<span data-toggle="modal" data-target="#open-login" ng-if="ctrl.token === 0">Đặt hàng</span>
 							</div>
 						</div>
 					</div>
@@ -107,6 +118,22 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btcenter bt" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="open-login" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:180px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+            </div>
+            <div class="contmid">Đăng nhập để tiếp tục</div>
+
+            <div class="modal-footer">
+                <button type="button" class="btleft bt" data-dismiss="modal">Huỷ</button>
+                <button type="button" class="btright bt" ng-click="ctrl.openLogin()">Đồng ý</button>
             </div>
         </div>
     </div>
