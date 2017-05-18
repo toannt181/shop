@@ -15,7 +15,7 @@
 		vm.provinceId = $localStorage.provinceId;
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
         vm.profileData = $localStorage.profileData;
-		
+        
 		getSubMenu();
         function getSubMenu() {
             return categoryService.getAllCategories().then(function (response) {
