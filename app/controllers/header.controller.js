@@ -15,6 +15,11 @@
 		vm.provinceId = $localStorage.provinceId;
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
         vm.profileData = $localStorage.profileData;
+        vm.token = $localStorage.token;
+        if(!vm.profileData || !$localStorage.token){
+            $localStorage.$reset();
+            // $state.reload();
+        }
         
 		getSubMenu();
         function getSubMenu() {
@@ -114,6 +119,7 @@
         vm.openLogout = function(){
             $localStorage.$reset();
             $state.reload();
+            $state.go('home');
         };
     }
 

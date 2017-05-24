@@ -15,14 +15,14 @@
 					<img src="/assets/images/icon_cart.png"/>
 					<span>Giỏ hàng</span>
 				</a>
-				<span ng-if="!headerCtrl.profileData.email || !headerCtrl.token">
+				<span ng-if="!headerCtrl.profileData || !headerCtrl.token">
 					<a href="javascripts:;" ng-click="headerCtrl.openLogin()">
 						<img src="/assets/images/icon_user.png"/>
 						<span>Đăng nhập</span>
 					</a>
 					<span>| <a href="javascripts:;" ng-click="headerCtrl.openRegister()">Đăng ký</a></span>
 				</span>
-				<span ng-if="headerCtrl.profileData.email && headerCtrl.token">
+				<span ng-if="headerCtrl.profileData  && headerCtrl.token">
 					<a href="javascripts:;" >
 						<img src="/assets/images/icon_user.png"/>
 						{{headerCtrl.profileData.username}}
