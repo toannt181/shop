@@ -1,0 +1,480 @@
+@font-face {
+  font-family: 'saletool';
+  src:  url('fonts/saletool.eot?kw2foc');
+  src:  url('fonts/saletool.eot?kw2foc#iefix') format('embedded-opentype'),
+    url('fonts/saletool.ttf?kw2foc') format('truetype'),
+    url('fonts/saletool.woff?kw2foc') format('woff'),
+    url('fonts/saletool.svg?kw2foc#saletool') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="sat-"], [class*=" sat-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'saletool' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sat-danhmucsp:before {
+  content: "\e966";
+  font-size: 38px;
+  color: #217691;
+  vertical-align: middle;
+}
+.sat-ic_check:before {
+  content: "\e963";
+  color: #c2c2c2;
+}
+.sat-ic_check2:before {
+  content: "\e964";
+  color: #fe641a;
+}
+.sat-sapxep:before {
+  content: "\e965";
+  color: #959595;
+}
+.sat-Boloc:before {
+  content: "\e96c";
+  color: #959595;
+}
+.sat-Dang-giao-hang-2:before {
+  content: "\e96d";
+  color: #fe641a;
+}
+.sat-Dang-giao-hang-22:before {
+  content: "\e96e";
+  color: #c2c2c2;
+}
+.sat-Dang-xu-ly-2:before {
+  content: "\e96f";
+  color: #fe641a;
+}
+.sat-Dang-xu-ly-22:before {
+  content: "\e970";
+  color: #c2c2c2;
+}
+.sat-FB-icon:before {
+  content: "\e971";
+  color: #4cb748;
+}
+.sat-Mail-icon:before {
+  content: "\e972";
+  color: #4cb748;
+}
+.sat-info-icon:before {
+  content: "\e962";
+  color: #fe641a;
+}
+.sat-Back-icon:before {
+  content: "\e958";
+  color: #e1e2e4;;
+}
+.sat-dropdown:before {
+  content: "\e959";
+}
+.sat-Filter-button:before {
+  content: "\e95a";
+  color: #fff;
+}
+.sat-Hamburger-button:before {
+  content: "\e95b";
+  color: #fff;
+}
+.sat-ic_close:before {
+  content: "\e95c";
+  color: #25a7ab;
+}
+.sat-L-com:before {
+  content: "\e95d";
+  color: #2b829a;
+}
+.sat-M-com:before {
+  content: "\e95e";
+  color: #2b829a;
+}
+.sat-S-com:before {
+  content: "\e95f";
+  color: #2b829a;
+}
+.sat-tick:before {
+  content: "\e960";
+  color: #15a8a7;
+}
+.sat-untick:before {
+  content: "\e961";
+  color: #979797;
+}
+.sat-BAG:before {
+  content: "\e900";
+  color: #217691;
+}
+.sat-BAT:before {
+  content: "\e901";
+  color: #217691;
+}
+.sat-CA:before {
+  content: "\e902";
+  color: #217691;
+}
+.sat-CAM:before {
+  content: "\e903";
+  color: #217691;
+}
+.sat-CHI:before {
+  content: "\e904";
+  color: #217691;
+}
+.sat-CHR:before {
+  content: "\e905";
+  color: #217691;
+}
+.sat-CMK:before {
+  content: "\e906";
+  color: #217691;
+}
+.sat-CPU:before {
+  content: "\e907";
+  color: #217691;
+}
+.sat-CRC:before {
+  content: "\e908";
+  color: #217691;
+}
+.sat-DTP:before {
+  content: "\e909";
+  color: #217691;
+}
+.sat-DVD .path1:before {
+  content: "\e90a";
+  color: rgb(244, 244, 244);
+}
+.sat-DVD .path2:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(244, 244, 244);
+}
+.sat-DVD .path3:before {
+  content: "\e90c";
+  margin-left: -1em;
+  color: rgb(244, 244, 244);
+}
+.sat-DVD .path4:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(244, 244, 244);
+}
+.sat-DVD .path5:before {
+  content: "\e90e";
+  margin-left: -1em;
+  color: rgb(33, 118, 145);
+}
+.sat-DVD .path6:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(33, 118, 145);
+}
+.sat-DVD .path7:before {
+  content: "\e910";
+  margin-left: -1em;
+  color: rgb(33, 118, 145);
+}
+.sat-DVD .path8:before {
+  content: "\e911";
+  margin-left: -1em;
+  color: rgb(33, 118, 145);
+}
+.sat-DVD .path9:before {
+  content: "\e912";
+  margin-left: -1em;
+  color: rgb(33, 118, 145);
+}
+.sat-EC:before {
+  content: "\e913";
+  color: #217691;
+}
+.sat-EP:before {
+  content: "\e914";
+  color: #217691;
+}
+.sat-GPD:before {
+  content: "\e915";
+  color: #217691;
+}
+.sat-HDD:before {
+  content: "\e916";
+  color: #217691;
+}
+.sat-HLD:before {
+  content: "\e917";
+  color: #217691;
+}
+.sat-HS:before {
+  content: "\e918";
+  color: #217691;
+}
+.sat-HSF:before {
+  content: "\e919";
+  color: #217691;
+}
+.sat-KB:before {
+  content: "\e91a";
+  color: #217691;
+}
+.sat-KC:before {
+  content: "\e91b";
+  color: #217691;
+}
+.sat-LBR:before {
+  content: "\e91c";
+  color: #217691;
+}
+.sat-LTP:before {
+  content: "\e91d";
+  color: #217691;
+}
+.sat-MB:before {
+  content: "\e91e";
+  color: #217691;
+}
+.sat-MDM:before {
+  content: "\e91f";
+  color: #217691;
+}
+.sat-ME:before {
+  content: "\e920";
+  color: #217691;
+}
+.sat-MO:before {
+  content: "\e921";
+  color: #217691;
+}
+.sat-MOB:before {
+  content: "\e922";
+  color: #217691;
+}
+.sat-MPD:before {
+  content: "\e923";
+  color: #217691;
+}
+.sat-MS:before {
+  content: "\e924";
+  color: #217691;
+}
+.sat-NIC:before {
+  content: "\e925";
+  color: #217691;
+}
+.sat-OTH:before {
+  content: "\e926";
+  color: #217691;
+}
+.sat-PSU:before {
+  content: "\e927";
+  color: #217691;
+}
+.sat-PTR:before {
+  content: "\e928";
+  color: #217691;
+}
+.sat-RAM:before {
+  content: "\e929";
+  color: #217691;
+}
+.sat-REC:before {
+  content: "\e92a";
+  color: #217691;
+}
+.sat-RJ:before {
+  content: "\e92b";
+  color: #217691;
+}
+.sat-RK:before {
+  content: "\e92c";
+  color: #217691;
+}
+.sat-SK:before {
+  content: "\e92d";
+  color: #217691;
+}
+.sat-SSD:before {
+  content: "\e92e";
+  color: #217691;
+}
+.sat-SV:before {
+  content: "\e92f";
+  color: #217691;
+}
+.sat-SW:before {
+  content: "\e930";
+  color: #217691;
+}
+.sat-TAB:before {
+  content: "\e931";
+  color: #217691;
+}
+.sat-TV:before {
+  content: "\e932";
+  color: #217691;
+}
+.sat-UPS:before {
+  content: "\e933";
+  color: #217691;
+}
+.sat-USB:before {
+  content: "\e934";
+  color: #217691;
+}
+.sat-VGA:before {
+  content: "\e935";
+  color: #217691;
+}
+.sat-WCM .path1:before {
+  content: "\e936";
+  color: rgb(33, 118, 145);
+}
+.sat-WCM .path2:before {
+  content: "\e937";
+  margin-left: -1em;
+  color: rgb(33, 118, 145);
+}
+.sat-WCM .path3:before {
+  content: "\e938";
+  margin-left: -1em;
+  color: rgb(244, 244, 244);
+}
+.sat-WCM .path4:before {
+  content: "\e939";
+  margin-left: -1em;
+  color: rgb(244, 244, 244);
+}
+.sat-WCM .path5:before {
+  content: "\e93a";
+  margin-left: -1em;
+  color: rgb(244, 244, 244);
+}
+.sat-WCM .path6:before {
+  content: "\e93b";
+  margin-left: -1em;
+  color: rgb(244, 244, 244);
+}
+.sat-WF:before {
+  content: "\e93c";
+  color: #217691;
+}
+.sat-BAN-LE-HOVER:before {
+  content: "\e93d";
+  color: #009e9e;
+}
+.sat-BAN-LE:before {
+  content: "\e93e";
+  color: #e2e3e2;
+}
+.sat-GIO-HANG-HOVER:before {
+  content: "\e93f";
+  color: #009e9e;
+}
+.sat-GIO-HANG:before {
+  content: "\e940";
+  color: #dfdfdf;
+}
+.sat-MAY-DAN-HOVER:before {
+  content: "\e941";
+  color: #009e9e;
+}
+.sat-MAY-DAN:before {
+  content: "\e942";
+  color: #e3e3e3;
+}
+.sat-PHIEU-ICON-HOVER:before {
+  content: "\e943";
+  color: #009e9e;
+}
+.sat-PHIEU:before {
+  content: "\e944";
+  color: #e3e3e3;
+}
+.sat-SO-LUONG:before {
+  content: "\e945";
+  color: #fe641a;
+}
+.sat-TRANG-CHU-HOVER:before {
+  content: "\e946";
+  color: #009e9e;
+}
+.sat-TRANG-CHU:before {
+  content: "\e947";
+  color: #e2e2e2;
+}
+.sat-ARROW-DROPDOWN:before {
+  content: "\e948";
+  color: #c8c8c8;
+}
+.sat-ARROW:before {
+  content: "\e949";
+  color: #c8c8c8;
+}
+.sat-BAO-HANH:before {
+  content: "\e94a";
+  color: #dcdcdc;
+}
+.sat-DOI-TRA:before {
+  content: "\e94b";
+  color: #dcdcdc;
+}
+.sat-GIO-HANG-ICON-TOP:before {
+  content: "\e94c";
+  color: #fff;
+}
+.sat-HO-TRO:before {
+  content: "\e94d";
+  color: #dcdcdc;
+}
+.sat-SLIDE-BUTTON-2:before {
+  content: "\e94e";
+  color: #d8d8d8;
+}
+.sat-SLIDE-BUTTON:before {
+  content: "\e94f";
+  color: #828282;
+}
+.sat-SO-LUONG-TOP:before {
+  content: "\e950";
+  color: #fe641a;
+}
+.sat-THONG-TIN-HANG-SAN-XUAT:before {
+  content: "\e951";
+  color: #dcdcdc;
+}
+.sat-Danh-muc-san-pham:before {
+  content: "\e952";
+  color: #29829a;
+}
+.sat-Danh-sach-khuyen-mai:before {
+  content: "\e953";
+  color: #2b829a;
+}
+.sat-May-dan:before {
+  content: "\e954";
+  color: #29829a;
+}
+.sat-Search:before {
+  content: "\e955";
+  color: #e1e2e4;
+}
+.sat-So-sanh:before {
+  content: "\e956";
+  color: #2b829a;
+}
+.sat-Xu-li-phieu:before {
+  content: "\e957";
+  color: #2b829a;
+}
