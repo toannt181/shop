@@ -21,14 +21,13 @@
 <header class="fixed-top border-bottom-1 bg-white">
     <div class="container">
         <div class="row py16 align-items-center">
-            <div class="col-1">
+            <div class="col-1 col-md-1">
                 <div class="nav-icon"><span class="icon-menu"></span></div>
             </div>
-            <div class="col-2">
+            <div class="col-3 col-md-2">
                 <img class="logo w-75" src="img/logo_vnshop.png" alt="logo">
             </div>
-            <div class="col-5 border-right-1">
-
+            <div class="col-6 col-md-5 border-right-1">
                 <div class="field">
                     <label for="field-search">
                         <span class="placeholder content">Tìm kiếm</span>
@@ -38,15 +37,19 @@
                         <span class="icon-Search"></span>
                     </div>
                 </div>
+            </div>
+            <div class="col-1 col-md-2 d-flex align-items-center">
+                <div class="nav-icon">
+                    <span class="icon-cart"></span>
+                </div>
+                <p class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng của tôi</p>
+            </div>
 
-            </div>
-            <div class="col-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-cart"></span><span class="content">&nbsp;&nbsp;Giỏ hàng của tôi</span>
+            <div class="col-1 col-md-2 d-flex align-items-center">
+                <div class="nav-icon d-flex align-items-center">
+                    <span class="icon-user"></span>
                 </div>
-            </div>
-            <div class="col-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-user"></span><span class="content">&nbsp;&nbsp;Đào Thái Hà</span>
-                </div>
+                <p class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</p>
             </div>
         </div>
     </div>
@@ -64,75 +67,80 @@
 
         <div class="row mt16 content">
             <div class="col-5 text-grey">
-                <div class="row content text-grey py8 text-uppercase">
-                    <div class="col-6 text-grey-more">Thông tin giao hàng</div>
-                    <div class="col-6 text-right"><a class="text-blue" href=""><span class=""></span></a>&nbsp;&nbsp;Thêm
+                <div class="row py8">
+                    <div class="col-6">
+                        <p class="content-bold">
+                            Thông tin giao hàng
+                        </p>
+                    </div>
+                    <div class="col-6 text-right"><a class="content text-blue" href=""><span class=""></span></a>&nbsp;&nbsp;Thêm
                         địa chỉ mới
                     </div>
                 </div>
 
                 <div class="row mt16">
                     <div class="col-12">
-                        <div>Họ tên: Nguyễn Hải Đăng</div>
-                        <div>Địa chỉ: Tầng 7 Tòa nhà Machinco, số 444 Hoàng Hoa Thám, P.Thụy Khuê, Q.Tây Hồ, TP. Hà
+                        <p class="content">Họ tên: Nguyễn Hải Đăng</p>
+                        <p class="content">Địa chỉ: Tầng 7 Tòa nhà Machinco, số 444 Hoàng Hoa Thám, P.Thụy Khuê, Q.Tây
+                            Hồ, TP. Hà
                             Nội
-                        </div>
-                        <div>Điện thoại: 0966 531 XXX</div>
+                        </p>
+                        <p class="content">Điện thoại: 0966 531 XXX</p>
                     </div>
                 </div>
 
                 <div class="row mt32">
                     <div class="col-12">
-                        <textarea class="input-control" placeholder="Chú thích đơn hàng" type="text"
+                        <textarea class="content input-control" placeholder="Chú thích đơn hàng" type="text"
                                   rows="5"></textarea>
                     </div>
                 </div>
 
                 <div class="row mt16 text-grey content border-top-1">
                     <div class="col-12">
-                        <div class="text-uppercase py16 text-center">Thêm địa chỉ mới</div>
+                        <p class="content-bold text-uppercase py16 text-center">Thêm địa chỉ mới</p>
                     </div>
 
                     <div class="col-12">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-3">
-                                <div>Họ tên</div>
+                                <p class="content">Họ tên</p>
                             </div>
                             <div class="col-9">
-                                <input class="input-control" type="text">
+                                <input class="content input-control" type="text">
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mt8">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-3">
-                                <div>Điện thoại</div>
+                                <p class="content">Điện thoại</p>
                             </div>
                             <div class="col-9">
-                                <input class="input-control" type="number">
+                                <input class="content input-control" type="number">
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mt8">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-3">
-                                <div>Địa chỉ</div>
+                                <p  class="content">Địa chỉ</p>
                             </div>
                             <div class="col-9">
-                                <input class="input-control" type="text">
+                                <input class="content input-control" type="text">
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mt8">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-3">
-                                <div>Quận huyện</div>
+                                <p  class="content">Quận huyện</p>
                             </div>
                             <div class="col-9">
-                                <select class="form-control">
+                                <select class="content form-control">
                                     <option>Tây Hồ</option>
                                 </select>
                             </div>
@@ -140,12 +148,12 @@
                     </div>
 
                     <div class="col-12 mt8">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-3">
-                                <div>Thành phố</div>
+                                <p class="content">Thành phố</p>
                             </div>
                             <div class="col-9">
-                                <select class="form-control">
+                                <select class="content form-control">
                                     <option>Tây Hồ</option>
                                 </select>
                             </div>
@@ -153,12 +161,12 @@
                     </div>
 
                     <div class="col-12 mt8">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-3">
-                                <div>Địa chỉ đã có</div>
+                                <p class="content">Địa chỉ đã có</p>
                             </div>
                             <div class="col-9">
-                                <input class="input-control" type="text"
+                                <input class="content input-control" type="text"
                                        value="Tầng 7 Số 444 Hoàng Hoa Thám, Ba Đình, Hà Nội">
                             </div>
                         </div>
@@ -168,109 +176,102 @@
                         <div class="row">
                             <div class="col-9 offset-3">
                                 <div class="border-box-p8">
-                                    <div class="ml16">Tầng 11 Số 444 Hoàng Hoa Thám, Q.Tây Hồ, TP. Hà Nội</div>
-                                    <div class="ml16 mt8">Tầng 7 Số 444 Hoàng Hoa Thám, Ba Đình, Hà Nội</div>
-                                    <div class="ml16 mt8">Toà nhà Maxinco, số 444 Hoàng Hoa Thám, Tây Hồ, Hà Nội</div>
+                                    <p class="ml16 content">Tầng 11 Số 444 Hoàng Hoa Thám, Q.Tây Hồ, TP. Hà Nội</p>
+                                    <p class="ml16 content">Tầng 7 Số 444 Hoàng Hoa Thám, Ba Đình, Hà Nội</p>
+                                    <p class="ml16 content">Toà nhà Maxinco, số 444 Hoàng Hoa Thám, Tây Hồ, Hà Nội</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 mt32">
-                        <button class="button-normal-grey bg-blue w-100" type="button">Cập nhật thông tin</button>
+                        <button class="button-normal-grey content bg-blue w-100" type="button">Cập nhật thông tin</button>
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-6 offset-1 border-left-1">
+            <div class="col-1 border-right-1">
+
+            </div>
+
+            <div class="col-5 offset-1">
 
                 <div class="d-flex border-bottom-1 py8">
                     <div class="flex-base-6">
-                        <div>Sản phẩm</div>
+                        <p class="content-bold">Sản phẩm</p>
                     </div>
                     <div class="flex-base-3 text-center">
-                        <div>Số lượng</div>
+                        <p class="content-bold">Số lượng</p>
                     </div>
                     <div class="flex-base-3 text-right">
-                        <div>Tổng giá</div>
+                        <p class="content-bold">Tổng giá</p>
                     </div>
                 </div>
 
 
                 <section class="cart-checkout-group">
-                    <div class="cart-checkout-item border-bottom-1 py16 content text-grey">
+                    <div class="cart-checkout-item border-bottom-1 py16">
                         <div class="flex-base-6 text-uppercase ">
-                            <div class="">Happy farm</div>
-                            <div class="font-size-14 mt16">Rau củ tổng hợp</div>
+                            <p class="content">Happy farm</p>
+                            <div class="font-size-12 mt16">Rau củ tổng hợp</div>
                         </div>
                         <div class="flex-base-3 text-center">
-                            <div>1</div>
+                            <p class="content">1</p>
                         </div>
                         <div class="flex-base-3 text-right">
-                            <div>180.000VND</div>
+                            <p class="content">180.000VND</p>
                         </div>
                     </div>
-                    <div class="cart-checkout-item border-bottom-1 py16 content text-grey">
+                    <div class="cart-checkout-item border-bottom-1 py16">
                         <div class="flex-base-6 text-uppercase ">
-                            <div class="">Happy farm</div>
-                            <div class="font-size-14 mt16">Rau củ tổng hợp</div>
+                            <p class="content">Happy farm</p>
+                            <div class="font-size-12 mt16">Rau củ tổng hợp</div>
                         </div>
                         <div class="flex-base-3 text-center">
-                            <div>1</div>
+                            <p class="content">1</p>
                         </div>
                         <div class="flex-base-3 text-right">
-                            <div>180.000VND</div>
+                            <p class="content">180.000VND</p>
                         </div>
                     </div>
-                    <div class="cart-checkout-item border-bottom-1 py16 content text-grey">
+                    <div class="cart-checkout-item border-bottom-1 py16">
                         <div class="flex-base-6 text-uppercase ">
-                            <div class="">Happy farm</div>
-                            <div class="font-size-14 mt16">Rau củ tổng hợp</div>
+                            <p class="content">Happy farm</p>
+                            <div class="font-size-12 mt16">Rau củ tổng hợp</div>
                         </div>
                         <div class="flex-base-3 text-center">
-                            <div>1</div>
+                            <p class="content">1</p>
                         </div>
                         <div class="flex-base-3 text-right">
-                            <div>180.000VND</div>
+                            <p class="content">180.000VND</p>
                         </div>
                     </div>
-                    <div class="cart-checkout-item border-bottom-1 py16 content text-grey">
-                        <div class="flex-base-6 text-uppercase ">
-                            <div class="">Happy farm</div>
-                            <div class="font-size-14 mt16">Rau củ tổng hợp</div>
-                        </div>
-                        <div class="flex-base-3 text-center">
-                            <div>1</div>
-                        </div>
-                        <div class="flex-base-3 text-right">
-                            <div>180.000VND</div>
-                        </div>
-                    </div>
+
                 </section>
 
 
                 <div class="row content text-grey mt32">
                     <div class="col-8 offset-4">
                         <div class="d-flex justify-content-between">
-                            <div class="">Giá tạm tính</div>
-                            <div class="">1.300.000 VND</div>
+                            <p class="content">Giá tạm tính</p>
+                            <p class="content">1.300.000 VND</p>
                         </div>
                         <div class="d-flex justify-content-between mt8">
-                            <div class="">Vận chuyển</div>
-                            <div class="">1.300.000 VND</div>
+                            <p class="content">Vận chuyển</p>
+                            <p class="content">1.300.000 VND</p>
                         </div>
                         <div class="d-flex justify-content-between mt8">
-                            <div class="">Giảm giá</div>
-                            <div class="text-red">0</div>
+                            <p class="content">Giảm giá</p>
+                            <p class="content text-red">0</p>
                         </div>
 
-                        <div class="d-flex justify-content-between mt32 border-top-1 py8">
-                            <div class="text-uppercase">Tổng giá</div>
-                            <div class="">0</div>
+                        <div class="d-flex justify-content-between mt16 border-top-1 py16">
+                            <p class="content text-uppercase">Tổng giá</p>
+                            <p class="content">0</p>
                         </div>
 
-                        <button class="button-normal-grey bg-blue w-100 mt32" type="button">Xác nhận thanh toán</button>
+                        <button class="button-normal-grey content bg-blue w-100 mt32" type="button">Xác nhận thanh toán</button>
                     </div>
 
                 </div>
@@ -287,53 +288,46 @@
 <footer class="border-top-1">
     <div class="container py16">
         <div class="row py16 d-flex align-items-center">
-            <div class="col-3">
+            <div class="col-md-3">
                 <img class="logo w-50" src="img/logo_vnshop.png" alt="logo">
             </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Liên lạc
-                </div>
+            <div class="col-md-3">
+                <p class="content-bold text-uppercase">Liên lạc</p>
             </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Vnshop
-                </div>
+            <div class="col-md-3">
+                <p class="content-bold text-uppercase">Vnshop</p>
             </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Chăm sóc khách hàng
-                </div>
+            <div class="col-md-3">
+                <p class="content-bold text-uppercase">Chăm sóc khách hàng</p>
             </div>
         </div>
 
         <div class="row py16">
-            <div class="col-3">
-                <div class="content-footer">Công ty TNHH Vnshop</div>
-                <div class="content-footer mt8">Tầng 7 Hoàng Hòa Thám</div>
-                <div class="content-footer mt8">Thụy Khê Hà Nội</div>
+            <div class="col-md-3">
+                <p class="content text-uppercase">Công ty TNHH Vnshop</p>
+                <p class="content text-uppercase">Tầng 7 Hoàng Hòa Thám</p>
+                <p class="content text-uppercase">Thụy Khê Hà Nội</p>
             </div>
-            <div class="col-3">
-                <div class="content-footer"><img src="img/icon-call.png" alt="">&nbsp;&nbsp;1900 1542</div>
-                <div class="content-footer text-uppercase mt8"><img src="img/icon-mail.png" alt="">&nbsp;&nbsp;suport@vn.com
-                </div>
+            <div class="col-md-3">
+                <p class="content text-uppercase"><img src="img/icon-call.png" alt="">&nbsp;&nbsp;1900 1542</p>
+                <p class="content text-uppercase"><img src="img/icon-mail.png" alt="">&nbsp;&nbsp;suport@vn.com</p>
             </div>
-            <div class="col-3 text-uppercase">
-                <div class="content-footer">Giới thiệu</div>
-                <div class="content-footer mt8">Tuyển dụng</div>
-                <div class="content-footer mt8">Đối tác</div>
+            <div class="col-md-3">
+                <p class="content text-uppercase">Giới thiệu</p>
+                <p class="content text-uppercase">Tuyển dụng</p>
+                <p class="content text-uppercase">Đối tác</p>
             </div>
-            <div class="col-3 text-uppercase">
-                <div class="content-footer">Hỏi đáp</div>
-                <div class="content-footer mt8">Chính sách đổi trả</div>
-                <div class="content-footer mt8">Điều khoản quy định</div>
-                <div class="content-footer mt8">Giao hàng</div>
-                <div class="content-footer mt8">Thuế</div>
+            <div class="col-md-3 text-uppercase">
+                <p class="content text-uppercase">Hỏi đáp</p>
+                <p class="content text-uppercase"> sách đổi trả</p>
+                <p class="content text-uppercase">Điều khoản quy định</p>
+                <p class="content text-uppercase">Giao hàng</p>
+                <p class="content text-uppercase">Thuế</p>
             </div>
         </div>
-
     </div>
 </footer>
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/tether.js"></script>
