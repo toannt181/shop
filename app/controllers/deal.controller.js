@@ -23,7 +23,7 @@
         vm.msgPopup = '';
 
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : '');
-        vm.brandId = (typeof $location.search().brandId !== 'undefined' ?  $location.search().brandId : '');
+        vm.brandId = (typeof $location.search().brandId !== 'undefined' ?  JSON.parse("[" + $location.search().brandId + "]") : []);
         vm.keySearch = (typeof $location.search().name !== 'undefined' ?  $location.search().name : '');
         vm.sort = (typeof $location.search().sort !== 'undefined' ?  $location.search().sort : '');
         vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : 12);
@@ -109,7 +109,7 @@
             var params = [
                 {name: 'category_id', value: vm.categoryId},
                 {name: 'province_id', value: vm.provinceId},
-                {name: 'brand_id', value: vm.brandId},
+                {name: 'brand_id', value: vm.brandId.toString()},
                 {name: 'rate_price', value: vm.ratePrice},
                 {name: 'query', value: vm.keySearch}
             ];
@@ -135,7 +135,7 @@
             productService.countProduct(params).then(function(response) {
                 vm.totalRecord = response.data ;
                 vm.totalPage = Math.ceil(response.data / vm.limit);
-				if(vm.totalPage > 1) {
+				if(vm.totalPage > 0) {
 					vm.pageCurrent = vm.offset/vm.limit + 1;
 					for (var i = 1; i <= vm.totalPage; i++) {
 						if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.totalPage < 5 || (vm.pageCurrent > vm.totalPage - 5 && i > vm.totalPage - 5)
@@ -144,6 +144,7 @@
 					}
 				}
             });
+			$state.go('deals', {brandId: vm.brandId.toString(), sort: vm.sort, offset: vm.offset, limit: vm.limit, ratePrice: vm.ratePrice}, {notify: false});
         }
 
         function getSubMenu() {
@@ -225,9 +226,9 @@
 
         vm.openBrand = function(brandId, type){
 			if(typeof type !== 'undefined' && type == '1') {
-				vm.brandId = '';
+				vm.brandId.splice(vm.brandId.indexOf(brandId), 1);
 			} else {
-				vm.brandId = brandId;
+				vm.brandId[vm.brandId.length] = brandId;
 				vm.offset = 0;
 			}
 			getProductsList();

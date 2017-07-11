@@ -43,10 +43,10 @@
 							<div class="pb10 fw">THƯƠNG HIỆU</div>
 							<div class="pb10">
 								<div ng-repeat="brand in ctrl.brands track by $index">
-									<div ng-if="brand.id == ctrl.brandId" ng-click="ctrl.openBrand(brand.id, 1)">
+									<div ng-if="ctrl.brandId.indexOf(brand.id) > -1" ng-click="ctrl.openBrand(brand.id, 1)">
 										<input type="checkbox" checked value="{{brand.id}}" /><span>{{ brand.name | limitTo: 20 }}{{brand.name.length > 20 ? '...' : ''}}</span>
 									</div>
-									<div ng-if="brand.id != ctrl.brandId" ng-click="ctrl.openBrand(brand.id)">
+									<div ng-if="ctrl.brandId.indexOf(brand.id) <= -1" ng-click="ctrl.openBrand(brand.id)">
 										<input type="checkbox" value="{{brand.id}}" /><span>{{ brand.name | limitTo: 20 }}{{brand.name.length > 20 ? '...' : ''}}</span>
 									</div>
 								</div>
@@ -119,13 +119,13 @@
 						</div>
 					</div>
 					<div class="clearfix"></div>
-					<div class="paging" ng-if="ctrl.paging.length && ctrl.hasData">
-						<ul>
+					<div class="paging" ng-if="ctrl.hasData">
+						<ul ng-if="ctrl.paging.length > 1">
 							<li ng-if="ctrl.pageCurrent > 5" ng-click="ctrl.openPage(1)" ><a>&lsaquo;</a></li>
 							<li ng-repeat="(key, value) in ctrl.paging" ng-click="ctrl.openPage(value)" ng-class="{true: 'active', false: ''}[ctrl.pageCurrent == value]"><a>{{value}}</a></li>
 							<li ng-if="ctrl.pageCurrent < +ctrl.totalPage - 4" ng-click="ctrl.openPage(ctrl.totalPage)" ><a>&rsaquo;</a></li>
 						</ul>
-						<div class="right">TỪ {{+ctrl.offset + 1}} ĐẾN {{+ctrl.offset + +ctrl.limit}} CỦA {{+ctrl.totalRecord}} SẢN PHẨM <span ng-if="ctrl.hasData">|<span> </div>
+						<div class="right">TỪ {{+ctrl.offset + 1}} ĐẾN {{ ctrl.pageCurrent == ctrl.totalPage ? +ctrl.totalRecord : +ctrl.offset + +ctrl.limit}} CỦA {{+ctrl.totalRecord}} SẢN PHẨM <span ng-if="ctrl.paging.length > 1">|<span> </div>
 					</div>
 					&nbsp
 					<div class="clearfix"></div>
