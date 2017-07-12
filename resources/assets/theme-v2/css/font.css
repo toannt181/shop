@@ -1,0 +1,27 @@
+/* font converted using font-converter.net. thank you! */
+@font-face {
+  font-family: "SFUHelvetica";
+  src: url(".../fonts/v2/v2/SFUHelveticaBold.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/v2/SFUHelveticaBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("../fonts/v2/SFUHelveticaBold.otf") format("opentype"), /* Open Type Font */
+  url("../fonts/v2/SFUHelveticaBold.svg") format("svg"), /* Legacy iOS */
+  url("../fonts/v2/SFUHelveticaBold.ttf") format("truetype"), /* Safari, Android, iOS */
+  url("../fonts/v2/SFUHelveticaBold.woff") format("woff"), /* Modern Browsers */
+  url("../fonts/v2/SFUHelveticaBold.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* font converted using font-converter.net. thank you! */
+@font-face {
+  font-family: "SFUHelvetica";
+  src: url("../fonts/v2/SFUHelveticaRegular.eot"); /* IE9 Compat Modes */
+  src: url("../fonts/v2/SFUHelveticaRegular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("../fonts/v2/SFUHelveticaRegular.otf") format("opentype"), /* Open Type Font */
+  url("../fonts/v2/SFUHelveticaRegular.svg") format("svg"), /* Legacy iOS */
+  url("../fonts/v2/SFUHelveticaRegular.ttf") format("truetype"), /* Safari, Android, iOS */
+  url("../fonts/v2/SFUHelveticaRegular.woff") format("woff"), /* Modern Browsers */
+  url("../fonts/v2/SFUHelveticaRegular.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: 400;
+  font-style: normal;
+}

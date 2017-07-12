@@ -23,20 +23,14 @@ gulp.task('connect', function () {
     });
 });
 
+var theme = 'theme-v2';
+
 var paths = {
     styles: [
-        'resources/assets/css/style.css',
-        'resources/assets/css/menu-mobile.css',
-        'resources/assets/css/font-awesome.css',
-        // 'resources/assets/css/bootstrap.css',
+        'resources/assets/' + theme + '/css/*.css'
     ],
     scripts: [
-        'resources/assets/js/jquery-1.11.0.min.js',
-        'resources/assets/js/mobile-menu.js',
-        'resources/assets/js/allscript.js',
-        'resources/assets/js/jquery.modal.js',
-        'resources/assets/js/icheck.js',
-        'resources/assets/js/bootstrap.min.js',
+        'resources/assets/' + theme + '/js/*.js'
     ],
     appScripts: [
         './app/app.module.js',
