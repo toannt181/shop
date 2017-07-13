@@ -52,18 +52,18 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'header': header
             }
         })
-        // .state('cart', {
-        //     url: '/cart',
-        //     views: {
-        //         content: {
-        //             controller: 'CartController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/cart/index.html'
-        //         },
-        //         'footer': footer,
-        //         'header': header
-        //     }
-        // })
+        .state('cart', {
+            url: '/cart',
+            views: {
+                content: {
+                    controller: 'CartController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/cart/index.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         // .state('cartConfirm', {
         //     url: '/cart/confirm/:paymentMethod',
         //     views: {
@@ -114,30 +114,30 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
         //         'header': header
         //     }
         // })
-        // .state('deals', {
-        //     url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
-        //     views: {
-        //         content: {
-        //             controller: 'DealController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/products/deal.html'
-        //         },
-        //         'footer': footer,
-        //         'header': header
-        //     }
-        // })
-        // .state('foods', {
-        //     url: '/foods?categoryId&brandId&sort&offset&limit&ratePrice',
-        //     views: {
-        //         content: {
-        //             controller: 'FoodController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/products/food.html'
-        //         },
-        //         'footer': footer,
-        //         'header': header
-        //     }
-        // })
+        .state('deals', {
+            url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
+            views: {
+                content: {
+                    controller: 'DealController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/products/evoucher-list.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('foods', {
+            url: '/foods?categoryId&brandId&sort&offset&limit&ratePrice',
+            views: {
+                content: {
+                    controller: 'FoodController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/products/freshfood-list.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         // .state('login', {
         //     url: '/login',
         //     views: {
@@ -174,22 +174,22 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
         //         // 'header': header
         //     }
         // })
-        // .state('401', {
-        //     url: '/401',
-        //     views: {
-        //         'content': {
-        //             templateUrl: '/templates/' + theme + '/errors/401.html'
-        //         }
-        //     }
-        // })
-        // .state('404', {
-        //     url: '/404',
-        //     views: {
-        //         'content': {
-        //             templateUrl: '/templates/' + theme + '/errors/404.html'
-        //         }
-        //     }
-        // })
+        .state('401', {
+            url: '/401',
+            views: {
+                'content': {
+                    templateUrl: '/templates/' + theme + '/errors/401.html'
+                }
+            }
+        })
+        .state('404', {
+            url: '/404',
+            views: {
+                'content': {
+                    templateUrl: '/templates/' + theme + '/errors/404.html'
+                }
+            }
+        })
         ;
 
     $authProvider.facebook({

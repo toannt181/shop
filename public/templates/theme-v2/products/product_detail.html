@@ -1,66 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-
-    <!-- Font -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style2.css">
-    <link rel="stylesheet" href="css/font.css">
-
-    <!--Slider css-->
-    <link type="text/css" rel="stylesheet" href="css/lightslider.css"/>
-
-    <!-- Style customize -->
-    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<header class="fixed-top border-bottom-1 bg-white">
-    <div class="container">
-        <div class="row py16 align-items-center">
-            <div class="col-1">
-                <div class="nav-icon"><span class="icon-menu"></span></div>
-            </div>
-            <div class="col-2">
-                <img class="logo w-75" src="../../../assets/images/logo_vnshop.png" alt="logo">
-            </div>
-            <div class="col-5 border-right-1">
-
-                <div class="field">
-                    <label for="field-search">
-                        <span class="placeholder content">Tìm kiếm</span>
-                    </label>
-                    <input class="input-search content" id="field-search" type="text">
-                    <div class="field-icon nav-icon">
-                        <span class="icon-Search"></span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-cart"></span><span class="content">&nbsp;&nbsp;Giỏ hàng của tôi</span>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-user"></span><span class="content">&nbsp;&nbsp;Đào Thái Hà</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
 <main>
     <div class="container py24">
         <div class="row px16">
             <ol class="breadcrumb content">
-                <li class="breadcrumb-item"><a href="#">VNSHOP</a></li>
-                <li class="breadcrumb-item"><a href="#">Thực phẩm sạch</a></li>
-                <li class="breadcrumb-item active">Nhà cung cấp</li>
+                <li class="breadcrumb-item"><a ng-click="ctrl.openHome()">VNSHOP</a></li>
+                <li class="breadcrumb-item" ng-repeat="parent in ctrl.parents track by $index"><a ng-click="ctrl.openCategory(parent.id)">{{parent.name}}</a></li>
+                <li class="breadcrumb-item active" >{{ctrl.product.category.name}}</li>
             </ol>
         </div>
 
@@ -69,17 +18,14 @@
                 <div class="row">
                     <div class="col-12 mb16">
                         <div class="font-size-18">
-                            Bộ sưu tập mỹ phẩm Babor “you’re women, you’re right”
+                            {{ctrl.product.name}}
                         </div>
                     </div>
                     <div class="col-2">
-                        <img class="w-100" src="../../../assets/images/female-2.png" alt="">
-                        <img class="w-100 mt16" src="../../../assets/images/female-2.png" alt="">
-                        <img class="w-100 mt16" src="../../../assets/images/female-2.png" alt="">
+                        <img ng-repeat="slideImage in ctrl.product.images.slice(1,ctrl.product.images.length)" class="w-100" ng-src="{{slideImage.path}}" alt="">
                     </div>
                     <div class="col-5">
-                        <img class="w-100" src="../../../assets/images/female-b-1.png" alt="">
-
+                        <img class="w-100" src="{{ctrl.product.images[0].path}}" alt="">
                     </div>
                     <div class="col-5">
                         <div class="font-size-16">Combo bộ trang điểm và phấn nền Babor
@@ -97,27 +43,32 @@
                         </div>
                         <div class="mt16 d-flex align-items-center">
                             <div>Số lượng</div>
-                            <button class="button-normal-grey-small ml16 bg-grey-light text-black">+</button>
-                            <div class="ml16 box-span">1</div>
-                            <button class="button-normal-grey-small ml16 bg-grey-light text-black">-</button>
+                            <button class="button-normal-grey-small ml16 bg-grey-light text-black" ng-click="ctrl.addQuantity()">+</button>
+                            <div class="ml16 box-span">{{ctrl.quantity}}</div>
+                            <button class="button-normal-grey-small ml16 bg-grey-light text-black" ng-click="ctrl.subQuantity()">-</button>
                         </div>
-                        <div class="mt16 d-flex align-items-center">
-                            <div>Màu sắc</div>
+                        <div ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option1')" class="mt16 d-flex align-items-center">
+                            <div>{{ctrl.product.options.option1 | uppercase}}</div>
                             <div class="ml16">
                                 <select class="form-control">
-                                    <option>Màu sắc x</option>
+                                    <option ng-repeat="variant in ctrl.product.variants | unique:'option1'">
+                                        {{variant.option1}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="py16 font-size-18">
-                            150.000 VND
+                            {{ ctrl.price | number }}
                         </div>
                         <div class="row mt16">
                             <div class="col-6">
-                                <button class="button-normal-grey-small bg-grey-light w-100">Add to cart</button>
+                                <button ng-disabled="ctrl.isAddingCart" ng-click="ctrl.addProductToCart(ctrl.product)" class="button-normal-grey-small bg-grey-light w-100">Thêm vào giỏ</button>
                             </div>
                             <div class="col-6">
-                                <button class="button-normal-grey-small w-100">Buy now</button>
+                                <button class="button-normal-grey-small w-100">Mua ngay</button>
+                            </div>
+                            <div>
+                                {{ctrl.clientCart}}
                             </div>
                         </div>
                     </div>
@@ -126,57 +77,9 @@
                 <div class="row mt32 content">
                     <div class="col-12 ">
                         <div class="text-uppercase">Thông tin sản phẩm</div>
-                        <div class="mt16">
-                            du lịch hàn quốc 4 ngày 3 đêm
-                            <br><br>
-                            Thương hiệu Mango được hai anh em Isak Andic và Nahman Andic thành lập vào năm 1984 với cửa
-                            hàng
-                            đầu
-                            tiên đặt tại Barcelona’s Paseo de Gracia, Tây Ban Nha. Năm 1992, Mango có 100 cửa hiệu tại
-                            Tây
-                            Ban
-                            Nha và khai trương 2 cửa hiệu đầu tiên tại Bồ Đào Nha. Năm 1995, thương hiệu lần đầu tiên ra
-                            mắt
-                            website online và hệ thống bán quần áo trực tuyến. Đến năm 1997, Mango có cửa hàng tại kinh
-                            đô
-                            thời
-                            trang Paris, Pháp. Hiện tại, Mango có tổng cộng 12,200 nhân viên với hơn 2000 cửa hiệu trên
-                            toàn
-                            thế
-                            giới. Chính thức du nhập vào Việt Nam năm 2004, Mango nhanh chóng mang đến làn gió mới với
-                            xu
-                            hướng
-                            thời trang năng động, hiện đại và cá tính. Đây là thương hiệu tầm trung rất được yêu thích.
-                            Ngoài
-                            quần áo, giày dép, nước hoa… Mango còn phát triển dòng sản phẩm phụ kiện thời trang như túi
-                            xách,
-                            ví, kính mát, đồng hồ…
-                        </div>
-                        <div class="text-center">
-                            <img class="py16 w-75" src="../../../assets/images/female-b-1.png" alt="">
-                        </div>
-                        <div class="mt16">
-                            Thương hiệu Mango được hai anh em Isak Andic và Nahman Andic thành lập vào năm 1984 với cửa
-                            hàng
-                            đầu
-                            tiên đặt tại Barcelona’s Paseo de Gracia, Tây Ban Nha. Năm 1992, Mango có 100 cửa hiệu tại
-                            Tây
-                            Ban
-                            Nha và khai trương 2 cửa hiệu đầu tiên tại Bồ Đào Nha. Năm 1995, thương hiệu lần đầu tiên ra
-                            mắt
-                            website online và hệ thống bán quần áo trực tuyến. Đến năm 1997, Mango có cửa hàng tại kinh
-                            đô
-                            thời
-                            trang Paris, Pháp. Hiện tại, Mango có tổng cộng 12,200 nhân viên với hơn 2000 cửa hiệu trên
-                            toàn
-                            thế
-                            giới. Chính thức du nhập vào V
-                        </div>
-
+                        <div class="mt16" style="white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap;word-wrap: break-word;" ng-bind-html="ctrl.product.description"></div>
                     </div>
                 </div>
-
-
                 <div class="row content py16 border-top-1 mt32">
                     <div class="col-12 text-center py16">
                         - Sản phẩm bạn có thể thích -
@@ -184,7 +87,7 @@
 
                     <div class="col-6 mt16 d-flex">
                         <div class="flex-grow-7">
-                            <img class="w-100" src="../../../assets/images/voucher-1.png" alt="">
+                            <img class="w-100" src="/assets/images/voucher-1.png" alt="">
                         </div>
                         <div class="flex-grow-5">
                             <div class="voucher-box h-100">
@@ -202,7 +105,7 @@
                     </div>
                     <div class="col-6 mt16 d-flex">
                         <div class="flex-grow-7">
-                            <img class="w-100" src="../../../assets/images/voucher-1.png" alt="">
+                            <img class="w-100" src="/assets/images/voucher-1.png" alt="">
                         </div>
                         <div class="flex-grow-5">
                             <div class="voucher-box h-100">
@@ -220,7 +123,7 @@
                     </div>
                     <div class="col-6 mt16 d-flex">
                         <div class="flex-grow-7">
-                            <img class="w-100" src="../../../assets/images/voucher-1.png" alt="">
+                            <img class="w-100" src="/assets/images/voucher-1.png" alt="">
                         </div>
                         <div class="flex-grow-5">
                             <div class="voucher-box h-100">
@@ -238,7 +141,7 @@
                     </div>
                     <div class="col-6 mt16 d-flex">
                         <div class="flex-grow-7">
-                            <img class="w-100" src="../../../assets/images/voucher-1.png" alt="">
+                            <img class="w-100" src="/assets/images/voucher-1.png" alt="">
                         </div>
                         <div class="flex-grow-5">
                             <div class="voucher-box h-100">
@@ -259,57 +162,6 @@
         </div>
     </div>
 </main>
-
-<footer class="border-top-1">
-    <div class="container py16">
-        <div class="row py16 d-flex align-items-center">
-            <div class="col-3">
-                <img class="logo w-50" src="../../../assets/images/logo_vnshop.png" alt="logo">
-            </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Liên lạc
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Vnshop
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Chăm sóc khách hàng
-                </div>
-            </div>
-        </div>
-
-        <div class="row py16">
-            <div class="col-3">
-                <div class="content-footer">Công ty TNHH Vnshop</div>
-                <div class="content-footer mt8">Tầng 7 Hoàng Hòa Thám</div>
-                <div class="content-footer mt8">Thụy Khê Hà Nội</div>
-            </div>
-            <div class="col-3">
-                <div class="content-footer"><img src="../../../assets/images/icon-call.png" alt="">&nbsp;&nbsp;1900 1542</div>
-                <div class="content-footer text-uppercase mt8"><img src="../../../assets/images/icon-mail.png" alt="">&nbsp;&nbsp;suport@vn.com
-                </div>
-            </div>
-            <div class="col-3 text-uppercase">
-                <div class="content-footer">Giới thiệu</div>
-                <div class="content-footer mt8">Tuyển dụng</div>
-                <div class="content-footer mt8">Đối tác</div>
-            </div>
-            <div class="col-3 text-uppercase">
-                <div class="content-footer">Hỏi đáp</div>
-                <div class="content-footer mt8">Chính sách đổi trả</div>
-                <div class="content-footer mt8">Điều khoản quy định</div>
-                <div class="content-footer mt8">Giao hàng</div>
-                <div class="content-footer mt8">Thuế</div>
-            </div>
-        </div>
-
-    </div>
-</footer>
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/tether.js"></script>

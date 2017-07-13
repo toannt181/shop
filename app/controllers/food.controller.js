@@ -23,10 +23,10 @@
         vm.msgPopup = '';
 
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : '');
-        vm.brandId = (typeof $location.search().brandId !== 'undefined' ?  $location.search().brandId : '');
+        vm.brandId = (typeof $location.search().brandId !== 'undefined' ?  JSON.parse("[" + $location.search().brandId + "]") : []);
         vm.keySearch = (typeof $location.search().name !== 'undefined' ?  $location.search().name : '');
         vm.sort = (typeof $location.search().sort !== 'undefined' ?  $location.search().sort : '');
-        vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : 12);
+        vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : '12');
         vm.offset = (typeof $location.search().offset !== 'undefined' ?  $location.search().offset : 0);
         vm.ratePrice = (typeof $location.search().ratePrice !== 'undefined' ?  $location.search().ratePrice : '');
 		
@@ -135,10 +135,11 @@
 					for (var i = 1; i <= vm.totalPage; i++) {
 						if((i < vm.pageCurrent + 3 && i > vm.pageCurrent - 3) || (vm.pageCurrent < 5 && i < 5) || vm.totalPage < 5 || (vm.pageCurrent > vm.totalPage - 5 && i > vm.totalPage - 5)
 						)
-							vm.paging.push(i);
+                        vm.paging.push(i);
 					}
 				}
             });
+			$state.go('foods', {brandId: vm.brandId.toString(), sort: vm.sort, offset: vm.offset, limit: vm.limit, ratePrice: vm.ratePrice}, {notify: false});
         }
 
         function getSubMenu() {
@@ -215,31 +216,35 @@
 
         vm.openPage = function(id){
 			var offset = vm.limit * (id - 1);
-            $state.go('foods',{offset: offset});
+			getProductsList();
         };
 
         vm.openBrand = function(brandId, type){
 			if(typeof type !== 'undefined' && type == '1') {
-				$state.go('foods', {brandId: ''});
+				vm.brandId.splice(vm.brandId.indexOf(brandId), 1);
 			} else {
-				$state.go('foods', {brandId: brandId, offset:0});
+				vm.brandId[vm.brandId.length] = brandId;
+				vm.offset = 0;
 			}
+			getProductsList();
         };
 		
 		vm.openRatePrice = function(ratePrice, type) {
 			if(typeof type !== 'undefined' && type == '1') {
-				$state.go('foods', {ratePrice: ''});
+				vm.ratePrice = '';
 			} else {
-				$state.go('foods', {ratePrice: ratePrice, offset:0});
+				vm.ratePrice = ratePrice;
+				vm.offset = 0;
 			}
+			getProductsList();
 		};
 		
 		$scope.sort = function() {
-			$state.go('foods', {sort: vm.sort});
+			getProductsList();
 		};
 		
 		$scope.limit = function() {
-			$state.go('foods', {limit: vm.limit});
+			getProductsList();
 		};
 
         vm.openOtherDeal = function (provinceId) {

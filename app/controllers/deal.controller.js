@@ -26,10 +26,10 @@
         vm.brandId = (typeof $location.search().brandId !== 'undefined' ?  JSON.parse("[" + $location.search().brandId + "]") : []);
         vm.keySearch = (typeof $location.search().name !== 'undefined' ?  $location.search().name : '');
         vm.sort = (typeof $location.search().sort !== 'undefined' ?  $location.search().sort : '');
-        vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : 12);
+        vm.limit = (typeof $location.search().limit !== 'undefined' ?  $location.search().limit : '12');
         vm.offset = (typeof $location.search().offset !== 'undefined' ?  $location.search().offset : 0);
         vm.ratePrice = (typeof $location.search().ratePrice !== 'undefined' ?  $location.search().ratePrice : '');
-        vm.provinceId = (typeof $localStorage.provinceId !== 'undefined' ?  $localStorage.provinceId : false);
+        vm.provinceId = (typeof $localStorage.provinceId !== 'undefined' ?  $localStorage.provinceId : '');
 		
         vm.localCart = [];
         vm.totalCart = 0;
@@ -41,7 +41,7 @@
             vm.totalCart = $localStorage.totalCart;
         }
 		
-		if(!vm.provinceId || vm.categoryId === '') {
+		if(vm.categoryId === '') {
 			$state.go('home');
 		}
 		 
