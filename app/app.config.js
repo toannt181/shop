@@ -76,19 +76,18 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
         //         'header': header
         //     }
         // })
-        // .state('productsDetail', {
-        //     url: '/products/:productId',
-        //     views: {
-        //         content: {
-        //             controller: 'ProductsDetailController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/products/detail.html'
-        //         },
-        //         'footer': footer,
-        //         'header': header,
-        //         'cart_right@productsDetail': cart_right
-        //     }
-        // })
+        .state('productsDetail', {
+            url: '/products/:productId',
+            views: {
+                content: {
+                    controller: 'ProductsDetailController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/products/product_detail.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         // .state('productSearches', {
         //     url: '/search?categoryId&name&brandId&offset&limit&ratePrice',
         //     views: {
