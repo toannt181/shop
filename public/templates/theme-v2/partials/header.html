@@ -5,7 +5,7 @@
                 <div class="nav-icon"><span class="icon-menu"></span></div>
             </div>
             <div class="col-3 col-md-2">
-                <img class="logo w-75" src="../../../assets/images/logo_vnshop.png" alt="logo">
+                <img ng-click="headerCtrl.openHome()" class="logo w-75" src="/assets/images/logo_vnshop.png" alt="logo">
             </div>
             <div class="col-6 col-md-5 border-right-1">
 
@@ -21,11 +21,17 @@
 
             </div>
             <div class="col-1 col-md-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-cart"></span><span class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng của tôi</span>
+                <div class="nav-icon icon-size-24 text-grey">
+                    <a ng-click="headerCtrl.openCart()">
+                        <span class="icon-cart"></span>
+                        <span class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng của tôi</span>
+                    </a>
                 </div>
             </div>
             <div class="col-1 col-md-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-user"></span><span class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</span>
+                <div class="nav-icon icon-size-24 text-grey">
+                    <span class="icon-user"></span>
+                    <span class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</span>
                 </div>
             </div>
         </div>
