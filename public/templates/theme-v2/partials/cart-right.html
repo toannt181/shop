@@ -1,0 +1,47 @@
+<aside id="side-bar">
+    <div class="d-flex">
+        <div class="side-bar-icon"><img src="/assets/images/cancel.png" alt=""></div>
+        <div class="side-bar-header bg-grey-light flex-grow">
+            <p class="content">Chúc mừng bạn đã được <span class="content-bold text-blue">FREE</span> ship!
+            </p>
+        </div>
+    </div>
+    <div class="side-bar-content">
+        <p class="content text-uppercase py16 text-center">Giỏ hàng của bạn</p>
+        <section class="sidebar-group">
+            <div class="sidebar-item border-bottom-1 py8" ng-repeat="product in cartCtrl.clientCart">
+                <div class="d-flex">
+                    <div class="flex-base-3">
+                        <img src="{{product.image}}" class="w-100" alt="">
+                    </div>
+                    <div class="px8">
+                        <p class="content">{{product.name}}</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mt8 py8">
+                    <div class="flex-base-3 d-flex flex-column align-items-center">
+                        <div><img ng-click="cartCtrl.addProductClient(product.product_id)" src="/assets/images/up-arrow.png" alt=""></div>
+                        <div>{{product.quantity}}</div>
+                        <div><img ng-click="cartCtrl.removeProductClient(product.product_id)" src="/assets/images/down-arrow.png" alt=""></div>
+                    </div>
+                    <div class="px8">
+                        <p class="content font-size-18">{{product.price*product.quantity | number}}đ</p>
+                        <p class="content text-price-discount">909.000VND (-40%)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="mt16 d-flex align-items-center">
+            <div class="flex-base-3">
+                <p class="content-bold text-grey-less text-center">Tổng cộng</p>
+            </div>
+            <div>
+                <p class="content font-size-24">{{cartCtrl.totalPrice| currency: "": 0: "." }}đ</p>
+                <p class="content text-price-discount">1909.000VND (-40%)</p>
+            </div>
+        </div>
+        <div class="mt16 text-center">
+            <button class="button-sidebar" type="button">Thanh toán ngay</button>
+        </div>
+    </div>
+</aside>

@@ -17,7 +17,7 @@
         vm.profileData = $localStorage.profileData;
         vm.token = $localStorage.token;
         if(!vm.profileData || !$localStorage.token){
-            $localStorage.$reset();
+            // $localStorage.$reset();
             // $state.reload();
         }
         
@@ -83,16 +83,8 @@
             });
         };
 		
-        vm.openLogin = function(){
-            $state.go('login');
-        };
-
-        vm.openRegister = function(){
-            $state.go('register');
-        };
-
-        vm.openCart = function(){
-            $state.go('cart');
+        vm.goState = function(state){
+            $state.go(state);
         };
 
         vm.openDetail = function(productId){
@@ -101,10 +93,6 @@
 
         vm.search = function(){
             $state.go('productSearches',{name: vm.keySearch});
-        };
-
-        vm.openHome = function(){
-            $state.go('home');
         };
 
         vm.toggleSearch = function () {

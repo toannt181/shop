@@ -1,110 +1,57 @@
 /* Config total*/
 body {
-    padding-top: 89px;
+    padding-top: 78px;
+    position: relative;
 }
 
-/* Font size, style, color */
+label {
+    margin-bottom: 0;
+}
+
+aside {
+    position: fixed;
+    width: 250px;
+    right: 0;
+    top: 78px;
+    bottom: 0;
+    background-color: white;
+    z-index: 100;
+    border-left: 1px solid whitesmoke;
+}
 
 .content,
-.content-title,
-.content-footer {
-    font-family: 'SFUHelvetica';
+.content-bold,
+.content{
+    font-family: 'SFUHelvetica', sans-serif;
+    color: #58595b;
 }
 
+p.content,
 .content {
-    font-size: 16px;
-}
-
-.content-title {
-    font-size: 16px;
-    text-transform: uppercase;
-}
-
-.content-footer {
-    font-size: 14px;
-    color: #a7a8aa;
-}
-
-.content-discount-tag {
-    position: absolute;
-    bottom: 0;
-    right: 10px;
-    font-size: 14px;
-    color: white;
-    z-index: 2;
-}
-
-.text-bold {
-    font-weight: 700;
-}
-
-.text-grey {
-    color: #939598;
-}
-
-.text-grey-more {
-    color: #58595b;
-}
-
-.text-grey-less {
-    color: #58595b;
-}
-
-.text-blue {
-    color: #7a97b8;
-}
-
-.text-red {
-    color: #e62331;
-}
-
-.bg-white {
-    background-color: white;
-}
-
-.bg-red {
-    background-color: #FE641A !important;
-}
-
-.bg-blue {
-    background-color: #7a97b8 !important;
-}
-
-.bg-grey {
-    background-color: #b7b7b7 !important;
-}
-
-.font-size-12 {
-    font-size: 12px;
-}
-
-.font-size-14 {
+    margin-bottom: 8px;
     font-size: 14px;
 }
 
-.font-size-18 {
+p.content-bold,
+.content-bold {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+h2.content {
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h3.content {
+    margin-bottom: 8px;
     font-size: 18px;
-}
-
-.font-size-24 {
-    font-size: 24px;
-}
-
-.font-size-60 {
-    font-size: 40px;
-    line-height: 60px;
-}
-
-.font-size-96 {
-    font-size: 96px;
-}
-
-.icon-size-24 span:before {
-    font-size: 24px;
+    font-weight: bold;
 }
 
 /* Style global */
-
 .breadcrumb {
     background: transparent;
     margin: 0;
@@ -138,7 +85,7 @@ body {
 }
 
 .cat-box-small {
-    width: 20%;
+    flex: 0 0 20%;
     padding: 8px;
 }
 
@@ -146,18 +93,8 @@ body {
 
 }
 
-.product-name {
-    font-size: 14px;
-}
-
-.product-price {
-    font-size: 16px;
-    color: grey;
-}
-
-.product-price-discount {
+p.text-price-discount {
     font-size: 12px;
-    line-height: 16px;
     color: lightgrey;
     text-decoration: line-through;
 }
@@ -182,9 +119,13 @@ body {
     border-left: 1px solid lightgrey;
 }
 
+.nav-icon {
+
+}
+
 .nav-icon span:before {
     color: #bcbec0;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .field-search {
@@ -230,15 +171,24 @@ body {
     position: relative;
 }
 
-.img-discount-tag {
+p.content-discount-tag {
     position: absolute;
+    top: 0;
+    right: 10px;
+    color: white;
     z-index: 1;
-    bottom: 0;
-    right: 0;
 }
 
 .button-more {
     padding: 12px 32px;
+    border: 2px solid #ebebeb;
+    color: #ebebeb;
+    background: transparent;
+    text-transform: uppercase;
+}
+
+.button-sidebar {
+    padding: 12px 8px;
     border: 2px solid #ebebeb;
     color: #ebebeb;
     background: transparent;
@@ -255,7 +205,7 @@ body {
 
 .button-normal-grey-small {
     padding: 8px 16px;
-    color: #ebebeb;
+    color: white;
     background: #a1a1a1;
     text-transform: uppercase;
     border: transparent;
@@ -276,7 +226,7 @@ body {
     width: 48%;
     border: 1px solid #ebebeb;
     border-radius: 4px;
-    box-shadow: 2px 2px #ebebeb;
+    box-shadow: 2px 2px 8px #ebebeb;
     margin-bottom: 32px;
 }
 
@@ -287,7 +237,7 @@ body {
     flex-direction: column;
     border: 1px solid #ebebeb;
     border-radius: 4px;
-    box-shadow: 2px 2px #ebebeb;
+    box-shadow: 2px 2px 4px #ebebeb;
 }
 
 .box-group .box-card:last-child {
@@ -474,6 +424,7 @@ body {
 .border-box-blue {
     border: 1px solid lightgrey;
 }
+
 .border-box-red {
     border: 1px solid lightgrey;
 }
@@ -493,6 +444,118 @@ body {
     background: lightgrey;
 }
 
+.box-span {
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+}
+
+.side-bar-icon {
+    background-color: #373737;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 40px;
+}
+
+.side-bar-header {
+    padding: 8px;
+    text-align: center;
+}
+
+.sidebar-group {
+
+
+}
+
+.sidebar-item {
+
+}
+
+.side-bar-content {
+    padding: 0 16px;
+}
+
+/* Color */
+
+.text-bold {
+    font-weight: 700;
+}
+
+.text-grey {
+    color: #939598;
+}
+
+.text-grey-more {
+    color: #58595b;
+}
+
+.text-grey-less {
+    color: #58595b;
+}
+
+.text-blue {
+    color: #7a97b8;
+}
+
+.text-red {
+    color: #e62331;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.bg-red {
+    background-color: #FE641A !important;
+}
+
+.bg-blue {
+    background-color: #7a97b8 !important;
+}
+
+.bg-grey {
+    background-color: #b7b7b7 !important;
+}
+
+.bg-grey-light {
+    background-color: #e5e5e5 !important;
+}
+
+
+
+.font-size-12 {
+    font-size: 12px !important;
+}
+
+.font-size-14 {
+    font-size: 14px !important;
+}
+
+.font-size-18 {
+    font-size: 18px !important;
+}
+
+.font-size-24 {
+    font-size: 24px !important;
+}
+
+.font-size-60 {
+    font-size: 40px;
+    line-height: 60px;
+}
+
+.font-size-96 {
+    font-size: 96px;
+}
+
+.icon-size-24 span:before {
+    font-size: 24px;
+}
+
 /* Padding, Margin style */
 .pxy8 {
     padding: 8px;
@@ -501,6 +564,11 @@ body {
 .px8 {
     padding-left: 8px;
     padding-right: 8px;
+}
+
+.px13 {
+    padding-left: 13px;
+    padding-right: 13px;
 }
 
 .px16 {
@@ -549,6 +617,10 @@ body {
     padding-bottom: 16px;
 }
 
+.pb60 {
+    padding-bottom: 60px;
+}
+
 .pxy16 {
     padding: 16px;
 }
@@ -580,8 +652,16 @@ body {
     margin-top: 16px;
 }
 
+.mt26 {
+    margin-top: 26px;
+}
+
 .mt32 {
     margin-top: 32px;
+}
+
+.mt48 {
+    margin-top: 48px;
 }
 
 .mb8 {
@@ -628,13 +708,14 @@ body {
     flex: 0 0 25%;
 }
 
+.flex-base-4 {
+    flex: 0 0 33.33%;
+}
+
 @media (max-width: 991px) {
     .m-mt16 {
         margin-top: 16px;
     }
 
-    .cat-box-small {
-        width: 48%;
-    }
 
 }

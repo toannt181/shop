@@ -23,11 +23,11 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
         templateUrl: '/templates/' + theme + '/partials/header.html'
     };
 
-    // var cart_right = {
-    //     controller: 'CartController',
-    //     controllerAs: 'cartCtrl',
-    //     templateUrl: '/templates/' + theme + '/partials/cart-right.html'
-    // };
+    var cart_right = {
+        controller: 'ProductsDetailController',
+        controllerAs: 'cartCtrl',
+        templateUrl: '/templates/' + theme + '/partials/cart-right.html'
+    };
 	
     // use a state provider for routing
     $stateProvider
@@ -85,7 +85,8 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                     templateUrl: '/templates/' + theme + '/products/product_detail.html'
                 },
                 'footer': footer,
-                'header': header
+                'header': header,
+                'cart_right': cart_right
             }
         })
         // .state('productSearches', {
@@ -101,19 +102,18 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
         //         'cart_right@productSearches':cart_right
         //     }
         // })
-        // .state('products', {
-        //     url: '/products?categoryId&brandId&sort&offset&limit&ratePrice',
-        //     views: {
-        //         content: {
-        //             controller: 'ProductController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/products/index.html',
-        //         },
-        //         'cart_right@products': cart_right,
-        //         'footer': footer,
-        //         'header': header
-        //     }
-        // })
+        .state('products', {
+            url: '/products?categoryId&brandId&sort&offset&limit&ratePrice',
+            views: {
+                content: {
+                    controller: 'ProductController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/products/index.html',
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         .state('deals', {
             url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {

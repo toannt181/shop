@@ -4,9 +4,9 @@
     angular
         .module('gApp.cart')
         .controller('CartController', CartController);
-        CartController.$inject = ['cartService', 'addressService', '$state', '$scope', '$rootScope','$localStorage'];
+        CartController.$inject = ['cartService', 'addressService', '$state', '$rootScope','$localStorage'];
 
-    function CartController(cartService, addressService, $state, $scope, $rootScope, $localStorage) {
+    function CartController(cartService, addressService, $state, $rootScope, $localStorage) {
         var vm = this;
 
         vm.id = 0;
@@ -23,41 +23,41 @@
         vm.clientCart = $localStorage.clientCart;
         vm.totalPrice = $localStorage.totalPrice;
         vm.token = (typeof $localStorage.token === 'undefined')?0:1;
-
+        console.log(vm.clientCart);
         // --Start Client Cart --
 
-        if(typeof $localStorage.clientCart === 'undefined'){
-            $localStorage.clientCart = [];
-            $localStorage.totalPrice = 0;
-            vm.totalPrice = $localStorage.totalPrice;
-        } else if($localStorage.clientCart.length===0){
-            $localStorage.totalPrice = 0;
-             vm.totalPrice = $localStorage.totalPrice;
-        } 
+        // if(typeof $localStorage.clientCart === 'undefined'){
+        //     $localStorage.clientCart = [];
+        //     $localStorage.totalPrice = 0;
+        //     vm.totalPrice = $localStorage.totalPrice;
+        // } else if($localStorage.clientCart.length===0){
+        //     $localStorage.totalPrice = 0;
+        //      vm.totalPrice = $localStorage.totalPrice;
+        // } 
 
-        $scope.$watch(function () { return $localStorage.totalPrice; },function(newVal,oldVal){
-           vm.totalPrice = newVal;
-        });
+        // $scope.$watch(function () { return $localStorage.totalPrice; },function(newVal,oldVal){
+        //    vm.totalPrice = newVal;
+        // });
 
-        vm.addProductClient = function (id) {
-            for (var i = 0; i < $localStorage.clientCart.length; i++) {
-                if ($localStorage.clientCart[i].product_id === id && $localStorage.clientCart[i].quantity < 99) {
-                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity + 1; 
-                    $localStorage.totalPrice = $localStorage.totalPrice + $localStorage.clientCart[i].price;
-                    vm.clientCart = $localStorage.clientCart;
-                }
-            }
-        };
+        // vm.addProductClient = function (id) {
+        //     for (var i = 0; i < $localStorage.clientCart.length; i++) {
+        //         if ($localStorage.clientCart[i].product_id === id && $localStorage.clientCart[i].quantity < 99) {
+        //             $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity + 1; 
+        //             $localStorage.totalPrice = $localStorage.totalPrice + $localStorage.clientCart[i].price;
+        //             vm.clientCart = $localStorage.clientCart;
+        //         }
+        //     }
+        // };
 
-        vm.removeProductClient = function (id) {
-            for (var i = 0; i < $localStorage.clientCart.length; i++) {
-                if ($localStorage.clientCart[i].product_id === id && $localStorage.clientCart[i].quantity > 1) {
-                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity - 1;
-                    $localStorage.totalPrice = $localStorage.totalPrice - $localStorage.clientCart[i].price;
-                    vm.clientCart = $localStorage.clientCart;
-                }
-            }
-        };
+        // vm.removeProductClient = function (id) {
+        //     for (var i = 0; i < $localStorage.clientCart.length; i++) {
+        //         if ($localStorage.clientCart[i].product_id === id && $localStorage.clientCart[i].quantity > 1) {
+        //             $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity - 1;
+        //             $localStorage.totalPrice = $localStorage.totalPrice - $localStorage.clientCart[i].price;
+        //             vm.clientCart = $localStorage.clientCart;
+        //         }
+        //     }
+        // };
 
         vm.removeItemCartClient = function (id) {
             for(var i=0;i<$localStorage.clientCart.length;i++){

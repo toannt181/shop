@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
 <main>
     <div class="container py24">
         <div class="row">
@@ -9,7 +6,6 @@
                 <li class="breadcrumb-item active">Giỏ hàng của tôi</li>
             </ol>
         </div>
-
         <div class="row mt16 content text-grey-more border-bottom-1 py8">
             <div class="col-6">
                 <div class="">Sản phẩm</div>
@@ -29,17 +25,17 @@
             <section class="cart-product-group content text-grey">
                 <div class="cart-product-item py16" ng-repeat="cartDetail in ctrl.clientCart" ng-if="cartDetail.quantity > 0">
                     <div class="col-2">
-                        <img class="w-100" src="../../../assets/images/cart-1.png" alt="">
+                        <img ng-click="ctrl.openDetail(cartDetail.product_id)" class="w-100" src="{{cartDetail.image}}" alt="">
                     </div>
                     <div class="col-4">
                         <div class="text-uppercase">HAPPY FARM</div>
-                        <div class="font-size-14 mt16">{{cartDetail.name}}</div>
+                        <div class="font-size-14 mt16" ng-click="ctrl.openDetail(cartDetail.product_id)">{{cartDetail.name}}</div>
                         <div class="font-size-12 mt16">Combo: 02</div>
                         <div class="font-size-12">Size: XL</div>
                     </div>
                     <div class="col-2 d-flex">
                         <div class="cart-product-amount text-center">{{cartDetail.quantity}}</div>
-                        <div class="line-height-32 font-size-14 ml8">Xóa sản phẩm</div>
+                        <div class="line-height-32 font-size-14 ml8" ng-click="ctrl.removeItemCartClient(cartDetail.product_id)">Xóa sản phẩm</div>
                     </div>
                     <div class="col-2">
                         <div class="cart-product-amount-price">{{cartDetail.price | currency: "": 0 }}</div>
@@ -72,11 +68,11 @@
             <div class="col-4 offset-2">
                 <div class="d-flex justify-content-between">
                     <div class="">Giá tạm tính</div>
-                    <div class="">1.300.000 VND</div>
+                    <div class="">{{ctrl.totalPrice | currency: "": 0: "." }}đ</div>
                 </div>
                 <div class="d-flex justify-content-between mt8">
                     <div class="">Vận chuyển</div>
-                    <div class="">1.300.000 VND</div>
+                    <div class="">0đ</div>
                 </div>
                 <div class="d-flex justify-content-between mt8">
                     <div class="">Giảm giá</div>
@@ -85,29 +81,10 @@
 
                 <div class="d-flex justify-content-between mt32 border-top-1 py8">
                     <div class="text-uppercase">Tổng giá</div>
-                    <div class="">0</div>
+                    <div class="">{{ctrl.totalPrice | currency: "": 0: "." }}</div>
                 </div>
                 <button class="button-normal-grey mt32 w-100">Thanh toán</button>
             </div>
         </div>
     </div>
 </main>
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/tether.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script>
-    (function () {
-        var fieldSearch = $('#field-search');
-        fieldSearch.focus(function () {
-            $('.field label').hide();
-        });
-        fieldSearch.blur(function () {
-            if ($(this).val() === '') {
-                $('.field label').show();
-            }
-        });
-    })();
-</script>
-</body>
-</html>

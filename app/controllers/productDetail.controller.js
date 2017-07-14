@@ -5,9 +5,9 @@
         .module('gApp.product')
         .controller('ProductsDetailController', ProductsDetailController);
 
-    ProductsDetailController.$inject = ['$state', '$stateParams', 'productService', 'categoryService', 'cartService', '$window', '$localStorage'];
+    ProductsDetailController.$inject = ['$state', '$stateParams', 'productService', '$scope', 'categoryService', 'cartService', '$window', '$localStorage'];
 
-    function ProductsDetailController($state, $stateParams, productService, categoryService, cartService, $window, $localStorage) {
+    function ProductsDetailController($state, $stateParams, productService, $scope, categoryService, cartService, $window, $localStorage) {
         var vm = this;
 
         vm.product = {};
@@ -40,11 +40,13 @@
 
         console.log($localStorage.clientCart);
 
-        if(typeof $localStorage.clientCart === 'undefined'){
+        if(typeof $localStorage.clientCart === 'undefined' || $localStorage.clientCart === 0){
             $localStorage.clientCart = [];
             $localStorage.totalPrice = 0;
+            vm.totalPrice = $localStorage.totalPrice;
         } else if($localStorage.clientCart.length===0){
             $localStorage.totalPrice = 0;
+            vm.totalPrice = $localStorage.totalPrice;
         }
 
         getProductById($stateParams.productId);
@@ -81,6 +83,54 @@
             });
         }
 
+        // --Start Client Cart --
+
+        if(typeof $localStorage.clientCart === 'undefined'){
+            $localStorage.clientCart = [];
+            $localStorage.totalPrice = 0;
+            vm.totalPrice = $localStorage.totalPrice;
+        } else if($localStorage.clientCart.length===0){
+            $localStorage.totalPrice = 0;
+             vm.totalPrice = $localStorage.totalPrice;
+        } 
+
+        $scope.$watch(function () { return $localStorage.totalPrice; },function(newVal,oldVal){
+           vm.totalPrice = newVal;
+        });
+
+        vm.addProductClient = function (id) {
+            for (var i = 0; i < $localStorage.clientCart.length; i++) {
+                if ($localStorage.clientCart[i].product_id === id && $localStorage.clientCart[i].quantity < 99) {
+                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity + 1; 
+                    $localStorage.totalPrice = $localStorage.totalPrice + $localStorage.clientCart[i].price;
+                    vm.clientCart = $localStorage.clientCart;
+                }
+            }
+        };
+
+        vm.removeProductClient = function (id) {
+            for (var i = 0; i < $localStorage.clientCart.length; i++) {
+                if ($localStorage.clientCart[i].product_id === id && $localStorage.clientCart[i].quantity > 1) {
+                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity - 1;
+                    $localStorage.totalPrice = $localStorage.totalPrice - $localStorage.clientCart[i].price;
+                    vm.clientCart = $localStorage.clientCart;
+                }
+            }
+        };
+
+        vm.removeItemCartClient = function (id) {
+            for(var i=0;i<$localStorage.clientCart.length;i++){
+                if($localStorage.clientCart[i].product_id === id){
+                    $localStorage.totalPrice = $localStorage.totalPrice - $localStorage.clientCart[i].price*$localStorage.clientCart[i].quantity;
+                    vm.clientCart.splice(i,1);
+                }
+            }
+            vm.clientCart = $localStorage.clientCart;
+            vm.totalPrice =  $localStorage.totalPrice;
+        };
+
+        // -- End Client Cart --
+
         vm.addProductToCart = function (product) {
             var item = {product_id: product.id, name: product.name, product_variant_id : (vm.variantId!==null ? vm.variantId : 0), image: product.image, price: product.compare_at_price, quantity: 1};            
             if($localStorage.clientCart.length === 0){
@@ -100,7 +150,6 @@
                 }
             }
             vm.clientCart = $localStorage.clientCart;
-            console.log(vm.variantId);
         };
 
         vm.addProduct = function (id) {
