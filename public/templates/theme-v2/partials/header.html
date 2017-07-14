@@ -8,7 +8,6 @@
                 <img ng-click="headerCtrl.openHome()" class="logo w-75" src="/assets/images/logo_vnshop.png" alt="logo">
             </div>
             <div class="col-6 col-md-5 border-right-1">
-
                 <div class="field">
                     <label for="field-search">
                         <span class="placeholder content">Tìm kiếm</span>
@@ -18,7 +17,6 @@
                         <span class="icon-Search"></span>
                     </div>
                 </div>
-
             </div>
             <div class="col-1 col-md-2">
                 <div class="nav-icon icon-size-24 text-grey">
@@ -37,3 +35,16 @@
         </div>
     </div>
 </header>
+<script>
+    (function () {
+        var fieldSearch = $('#field-search');
+        fieldSearch.focus(function () {
+            $('.field label').hide();
+        });
+        fieldSearch.blur(function () {
+            if ($(this).val() === '') {
+                $('.field label').show();
+            }
+        });
+    })();
+</script>

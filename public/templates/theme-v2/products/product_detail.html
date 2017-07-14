@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
-<body>
 <main>
     <div class="container py24">
         <div class="row px16">
@@ -12,7 +7,6 @@
                 <li class="breadcrumb-item active" >{{ctrl.product.category.name}}</li>
             </ol>
         </div>
-
         <div class="row content mt16">
             <div class="col-10">
                 <div class="row">
@@ -51,7 +45,7 @@
                             <div>{{ctrl.product.options.option1 | uppercase}}</div>
                             <div class="ml16">
                                 <select class="form-control">
-                                    <option ng-repeat="variant in ctrl.product.variants | unique:'option1'">
+                                    <option ng-repeat="variant in ctrl.product.variants | unique:'option1'" ng-click="ctrl.changeOption1(variant.option1)">
                                         {{variant.option1}}
                                     </option>
                                 </select>
@@ -73,7 +67,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row mt32 content">
                     <div class="col-12 ">
                         <div class="text-uppercase">Thông tin sản phẩm</div>
@@ -84,7 +77,6 @@
                     <div class="col-12 text-center py16">
                         - Sản phẩm bạn có thể thích -
                     </div>
-
                     <div class="col-6 mt16 d-flex">
                         <div class="flex-grow-7">
                             <img class="w-100" src="/assets/images/voucher-1.png" alt="">
@@ -162,40 +154,3 @@
         </div>
     </div>
 </main>
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/tether.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/lightslider.js"></script>
-
-<script>
-    (function () {
-
-        var fieldSearch = $('#field-search');
-        fieldSearch.focus(function () {
-            $('.field label').hide();
-        });
-
-        fieldSearch.blur(function () {
-            if ($(this).val() === '') {
-                $('.field label').show();
-            }
-        });
-
-
-        //Script slider
-        $('#top-slider').lightSlider({
-            item: 1,
-            loop: true,
-            slideMove: 1,
-            auto: true,
-            pauseOnHover: true,
-            easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-            speed: 500
-        });
-
-
-    })();
-</script>
-</body>
-</html>
