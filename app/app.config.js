@@ -138,58 +138,62 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
         //         'header': header
         //     }
         // })
-        // .state('login', {
-        //     url: '/login',
-        //     views: {
-        //         content: {
-        //             controller: 'LoginController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/login/login.html'
-        //         },
-        //         'footer': footer
-        //         // 'header': header
-        //     }
-        // })
-        // .state('register', {
-        //     url: '/register',
-        //     views: {
-        //         content: {
-        //             controller: 'RegisterController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/login/register.html'
-        //         },
-        //         'footer': footer
-        //         // 'header': header
-        //     }
-        // })
-        // .state('forgotPassword', {
-        //     url: '/forgotPassword',
-        //     views: {
-        //         content: {
-        //             controller: 'ForgotController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/login/forgotPassword.html'
-        //         },
-        //         'footer': footer
-        //         // 'header': header
-        //     }
-        // })
-        // .state('401', {
-        //     url: '/401',
-        //     views: {
-        //         'content': {
-        //             templateUrl: '/templates/' + theme + '/errors/401.html'
-        //         }
-        //     }
-        // })
-        // .state('404', {
-        //     url: '/404',
-        //     views: {
-        //         'content': {
-        //             templateUrl: '/templates/' + theme + '/errors/404.html'
-        //         }
-        //     }
-        // })
+        .state('login', {
+            url: '/login',
+            views: {
+                content: {
+                    controller: 'LoginController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/account/login.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('signin', {
+            url: '/signin',
+            views: {
+                content: {
+                    controller: 'RegisterController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/account/signin.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('forgotPassword', {
+            url: '/forgotPassword',
+            views: {
+                content: {
+                    controller: 'ForgotController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/account/forgotPassword.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('401', {
+            url: '/401',
+            views: {
+                'content': {
+                    templateUrl: '/templates/' + theme + '/errors/401.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('404', {
+            url: '/404',
+            views: {
+                'content': {
+                    templateUrl: '/templates/' + theme + '/errors/404.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         ;
 
     $authProvider.facebook({
