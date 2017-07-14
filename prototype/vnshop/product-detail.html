@@ -20,17 +20,17 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+
 <header class="fixed-top border-bottom-1 bg-white">
     <div class="container">
         <div class="row py16 align-items-center">
-            <div class="col-1">
+            <div class="col-1 col-md-1">
                 <div class="nav-icon"><span class="icon-menu"></span></div>
             </div>
-            <div class="col-2">
+            <div class="col-3 col-md-2">
                 <img class="logo w-75" src="img/logo_vnshop.png" alt="logo">
             </div>
-            <div class="col-5 border-right-1">
-
+            <div class="col-6 col-md-5 border-right-1">
                 <div class="field">
                     <label for="field-search">
                         <span class="placeholder content">Tìm kiếm</span>
@@ -40,15 +40,19 @@
                         <span class="icon-Search"></span>
                     </div>
                 </div>
+            </div>
+            <div class="col-1 col-md-2 d-flex align-items-center">
+                <div class="nav-icon">
+                    <span class="icon-cart"></span>
+                </div>
+                <p class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng của tôi</p>
+            </div>
 
-            </div>
-            <div class="col-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-cart"></span><span class="content">&nbsp;&nbsp;Giỏ hàng của tôi</span>
+            <div class="col-1 col-md-2 d-flex align-items-center">
+                <div class="nav-icon d-flex align-items-center">
+                    <span class="icon-user"></span>
                 </div>
-            </div>
-            <div class="col-2">
-                <div class="nav-icon icon-size-24 text-grey"><span class="icon-user"></span><span class="content">&nbsp;&nbsp;Đào Thái Hà</span>
-                </div>
+                <p class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</p>
             </div>
         </div>
     </div>
@@ -258,58 +262,130 @@
             </div>
         </div>
     </div>
+
 </main>
+
+<aside id="side-bar">
+    <div class="d-flex">
+        <div class="side-bar-icon"><img src="img/cancel.png" alt=""></div>
+        <div class="side-bar-header bg-grey-light flex-grow">
+            <p class="content">Chúc mừng bạn đã được <span class="content-bold text-blue">FREE</span> ship!
+            </p>
+        </div>
+    </div>
+
+    <div class="side-bar-content">
+        <p class="content text-uppercase py16 text-center">Giỏ hàng của bạn</p>
+        <section class="sidebar-group">
+            <div class="sidebar-item border-bottom-1 py8">
+                <div class="d-flex">
+                    <div class="flex-base-3">
+                        <img src="img/female-2.png" class="w-100" alt="">
+                    </div>
+                    <div class="px8">
+                        <p class="content">Red dress with decor flioral body</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mt8 py8">
+                    <div class="flex-base-3 d-flex flex-column align-items-center">
+                        <div><img src="img/up-arrow.png" alt=""></div>
+                        <div>2</div>
+                        <div><img src="img/down-arrow.png" alt=""></div>
+                    </div>
+                    <div class="px8">
+                        <p class="content font-size-18">499.000 VND</p>
+                        <p class="content text-price-discount">909.000VND (-40%)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-item border-bottom-1 py8">
+                <div class="d-flex">
+                    <div class="flex-base-3">
+                        <img src="img/female-2.png" class="w-100" alt="">
+                    </div>
+                    <div class="px8">
+                        <p class="content">Red dress with decor flioral body</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mt8 py8">
+                    <div class="flex-base-3 d-flex flex-column align-items-center">
+                        <div><img src="img/up-arrow.png" alt=""></div>
+                        <div>2</div>
+                        <div><img src="img/down-arrow.png" alt=""></div>
+                    </div>
+                    <div class="px8">
+                        <p class="content font-size-18">499.000 VND</p>
+                        <p class="content text-price-discount">909.000VND (-40%)</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="mt16 d-flex align-items-center">
+            <div class="flex-base-3">
+                <p class="content-bold text-grey-less text-center">Tổng cộng</p>
+            </div>
+            <div>
+                <p class="content font-size-24">1499.000 VND</p>
+                <p class="content text-price-discount">1909.000VND (-40%)</p>
+            </div>
+        </div>
+        <div class="mt16 text-center">
+            <button class="button-sidebar" type="button">Thanh toán ngay</button>
+        </div>
+    </div>
+</aside>
+
 
 <footer class="border-top-1">
     <div class="container py16">
-        <div class="row py16 d-flex align-items-center">
-            <div class="col-3">
-                <img class="logo w-50" src="img/logo_vnshop.png" alt="logo">
-            </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Liên lạc
+        <div class="row">
+            <div class="col-10">
+                <div class="row py16 d-flex align-items-center">
+                    <div class="col-md-3">
+                        <img class="logo w-50" src="img/logo_vnshop.png" alt="logo">
+                    </div>
+                    <div class="col-md-3">
+                        <p class="content-bold text-uppercase">Liên lạc</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="content-bold text-uppercase">Vnshop</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="content-bold text-uppercase">Chăm sóc khách hàng</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Vnshop
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="content-footer text-bold text-uppercase">
-                    Chăm sóc khách hàng
+
+                <div class="row py16">
+                    <div class="col-md-3">
+                        <p class="content text-uppercase">Công ty TNHH Vnshop</p>
+                        <p class="content text-uppercase">Tầng 7 Hoàng Hòa Thám</p>
+                        <p class="content text-uppercase">Thụy Khê Hà Nội</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="content text-uppercase"><img src="img/icon-call.png" alt="">&nbsp;&nbsp;1900 1542</p>
+                        <p class="content text-uppercase"><img src="img/icon-mail.png" alt="">&nbsp;&nbsp;suport@vn.com
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="content text-uppercase">Giới thiệu</p>
+                        <p class="content text-uppercase">Tuyển dụng</p>
+                        <p class="content text-uppercase">Đối tác</p>
+                    </div>
+                    <div class="col-md-3 text-uppercase">
+                        <p class="content text-uppercase">Hỏi đáp</p>
+                        <p class="content text-uppercase"> sách đổi trả</p>
+                        <p class="content text-uppercase">Điều khoản quy định</p>
+                        <p class="content text-uppercase">Giao hàng</p>
+                        <p class="content text-uppercase">Thuế</p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="row py16">
-            <div class="col-3">
-                <div class="content-footer">Công ty TNHH Vnshop</div>
-                <div class="content-footer mt8">Tầng 7 Hoàng Hòa Thám</div>
-                <div class="content-footer mt8">Thụy Khê Hà Nội</div>
-            </div>
-            <div class="col-3">
-                <div class="content-footer"><img src="img/icon-call.png" alt="">&nbsp;&nbsp;1900 1542</div>
-                <div class="content-footer text-uppercase mt8"><img src="img/icon-mail.png" alt="">&nbsp;&nbsp;suport@vn.com
-                </div>
-            </div>
-            <div class="col-3 text-uppercase">
-                <div class="content-footer">Giới thiệu</div>
-                <div class="content-footer mt8">Tuyển dụng</div>
-                <div class="content-footer mt8">Đối tác</div>
-            </div>
-            <div class="col-3 text-uppercase">
-                <div class="content-footer">Hỏi đáp</div>
-                <div class="content-footer mt8">Chính sách đổi trả</div>
-                <div class="content-footer mt8">Điều khoản quy định</div>
-                <div class="content-footer mt8">Giao hàng</div>
-                <div class="content-footer mt8">Thuế</div>
-            </div>
-        </div>
-
     </div>
 </footer>
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/tether.js"></script>

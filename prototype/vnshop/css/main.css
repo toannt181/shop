@@ -1,10 +1,22 @@
 /* Config total*/
 body {
-    padding-top: 89px;
+    padding-top: 78px;
+    position: relative;
 }
 
 label {
     margin-bottom: 0;
+}
+
+aside {
+    position: fixed;
+    width: 250px;
+    right: 0;
+    top: 78px;
+    bottom: 0;
+    background-color: white;
+    z-index: 100;
+    border-left: 1px solid whitesmoke;
 }
 
 .content,
@@ -169,6 +181,14 @@ p.content-discount-tag {
 
 .button-more {
     padding: 12px 32px;
+    border: 2px solid #ebebeb;
+    color: #ebebeb;
+    background: transparent;
+    text-transform: uppercase;
+}
+
+.button-sidebar {
+    padding: 12px 8px;
     border: 2px solid #ebebeb;
     color: #ebebeb;
     background: transparent;
@@ -433,6 +453,32 @@ p.content-discount-tag {
     border: 1px solid lightgrey;
 }
 
+.side-bar-icon {
+    background-color: #373737;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 40px;
+}
+
+.side-bar-header {
+    padding: 8px;
+    text-align: center;
+}
+
+.sidebar-group {
+
+
+}
+
+.sidebar-item {
+
+}
+
+.side-bar-content {
+    padding: 0 16px;
+}
+
 /* Color */
 
 .text-bold {
@@ -660,6 +706,10 @@ p.content-discount-tag {
 
 .flex-base-3 {
     flex: 0 0 25%;
+}
+
+.flex-base-4 {
+    flex: 0 0 33.33%;
 }
 
 @media (max-width: 991px) {
