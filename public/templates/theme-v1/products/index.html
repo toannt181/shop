@@ -89,7 +89,7 @@
 						<div class="product" ng-repeat="product in ctrl.products track by $index">
 							<div class="product-content">
 								<div class="img">
-									<a ng-click="ctrl.openDetail(product.id)"><img src="{{ product.image }}" /></a>
+									<a ng-click="ctrl.openDetail(product.id)"><img src="{{ product.image }}"/></a>
 								</div>
 								<div class="sale-off" ng-if="product.discount_percent > 0">
 									{{ product.discount_percent }}% <div class="fw100">&nbsp OFF</div>
