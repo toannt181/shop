@@ -83,7 +83,7 @@
                     <div class="text-uppercase">Tổng giá</div>
                     <div class="">{{ctrl.totalPrice | currency: "": 0: "." }}</div>
                 </div>
-                <button class="button-normal-grey mt32 w-100">Thanh toán</button>
+                <button class="button-normal-grey mt32 w-100" ng-click="ctrl.goState('cartConfirm')">Thanh toán</button>
             </div>
         </div>
     </div>

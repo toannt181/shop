@@ -717,5 +717,8 @@ p.content-discount-tag {
         margin-top: 16px;
     }
 
+    aside {
+        display:none;
+    }
 
 }

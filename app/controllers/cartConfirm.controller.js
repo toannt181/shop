@@ -178,6 +178,10 @@
         vm.openDetail = function(productId){
             $state.go('productsDetail',{productId: productId});
         };
+
+        vm.goState = function(state){
+            $state.go(state);
+        };
     }
     
 })();

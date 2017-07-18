@@ -267,20 +267,15 @@
             $state.go('productsDetail',{productId: productId});
         };
 
-        vm.openLogin = function(){
-            $state.go('login');
+        vm.goState = function(state){
+            $state.go(state);
         };
-
+        
         vm.goToConfirm = function (paymentMethod) {
             // updateCart();
             // console.log(vm.userCart);
             $state.go("cartConfirm");
         };
-
-        vm.openCart = function(){
-            $state.go('cart');
-        };
-
     }
     
 })();

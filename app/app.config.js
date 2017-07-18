@@ -64,18 +64,18 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'header': header
             }
         })
-        // .state('cartConfirm', {
-        //     url: '/cart/confirm/:paymentMethod',
-        //     views: {
-        //         'content': {
-        //             controller: 'CartConfirmController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/cart/confirm.html'
-        //         },
-        //         'footer': footer,
-        //         'header': header
-        //     }
-        // })
+        .state('cartConfirm', {
+            url: '/cart/confirm/:paymentMethod',
+            views: {
+                'content': {
+                    controller: 'CartConfirmController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/cart/confirm.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         .state('productsDetail', {
             url: '/products/:productId',
             views: {

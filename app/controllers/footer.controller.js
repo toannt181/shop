@@ -103,8 +103,6 @@
             if (state === 'notifications') {
                 $localStorage.notificationType = 1;
             }
-            console.log($state.current.name);
-            console.log(state);
             if ($state.current.name !== state) {
                 $localStorage.isShowMenu = false;
             }
