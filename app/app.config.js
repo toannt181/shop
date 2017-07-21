@@ -117,30 +117,6 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
             url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {
                 content: {
-                    controller: 'RegisterController',
-                    controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/account/signin.html'
-                },
-                'footer': footer,
-                'header': header
-            }
-        })
-        .state('forgotPassword', {
-            url: '/forgotPassword',
-            views: {
-                content: {
-                    controller: 'ForgotController',
-                    controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/account/forgotPassword.html'
-                },
-                'footer': footer,
-                'header': header
-            }
-        })
-        .state('deals', {
-            url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
-            views: {
-                content: {
                     controller: 'DealController',
                     controllerAs: 'ctrl',
                     templateUrl: '/templates/' + theme + '/products/deal.html'
