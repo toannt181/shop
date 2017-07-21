@@ -8,10 +8,10 @@
 
     function LoginController($state, profileService, $scope, $auth, $localStorage, $stateParams) {
         var vm = this;
-
         vm.email = "";
         vm.password = "";
         vm.message = "";
+        vm.isLoginMobile = false;
 
         function getProfile() {
             return profileService.getProfile().then(function (response) {
@@ -22,16 +22,21 @@
         }
 
         vm.authenticate = function (provider) {
-            $auth.authenticate(provider).then(authCompleted);
+            $auth.authenticate(provider).then(authCompleted)
+                .catch(loginFailed);
+
             function authCompleted(response) {
-                console.log(response.data);
-                if (typeof response.data === 'undefined' || response.data.error) {
-                    console.log("Error");
-                    return false;
+                console.log(response.data.token);
+                if (typeof response.data.token === 'undefined' || !response.data.token) {
+                    vm.message = "Lỗi đăng nhập";
+                } else {
+                    $localStorage.token = response.data.token;
+                    getProfile();
                 }
             }
-
-            $localStorage.token = response.data.token;
+            function loginFailed() {
+                vm.message = 'Lỗi kết nối với server, vui lòng thử lại.';
+            }
         };
 
         vm.login = function () {
@@ -58,12 +63,20 @@
             }
         };
 
+        vm.loginMobile = function () {
+            vm.isLoginMobile = true;
+        };
+
         vm.openHome = function () {
             $state.go('home');
         };
 
-        vm.openForgotPassword = function(){
+        vm.openForgotPassword = function () {
             $state.go('forgotPassword');
+        };
+
+        vm.openSignin = function () {
+            $state.go('signin');
         };
     }
 
