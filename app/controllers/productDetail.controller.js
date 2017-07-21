@@ -132,10 +132,11 @@
         // -- End Client Cart --
 
         vm.addProductToCart = function (product) {
-            var item = {product_id: product.id, name: product.name, product_variant_id : (vm.variantId!==null ? vm.variantId : 0), image: product.image, price: product.compare_at_price, quantity: 1};            
+            var item = {product_id: product.id, name: product.name, product_variant_id : (vm.variantId!==null ? vm.variantId : 0), image: product.image, price: product.compare_at_price, quantity: vm.quantity};   
+            $localStorage.totalItem += vm.quantity;         
             if($localStorage.clientCart.length === 0){
                 $localStorage.clientCart.push(item);
-                $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price;
+                $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price*vm.quantity;
             } else {
                 var count = 0;
                 for(var i = 0; i < $localStorage.clientCart.length; i++){
@@ -146,7 +147,7 @@
                 } 
                 if(count === 0){
                     $localStorage.clientCart.push(item);
-                    $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price;
+                    $localStorage.totalPrice = $localStorage.totalPrice + product.compare_at_price*vm.quantity;
                 }
             }
             vm.clientCart = $localStorage.clientCart;
@@ -155,8 +156,8 @@
         vm.addProduct = function (id) {
             for (var i = 0; i < $localStorage.clientCart.length; i++) {
                 if ($localStorage.clientCart[i].product_id == id && $localStorage.clientCart[i].quantity < 99) {
-                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity + 1; 
-                    $localStorage.totalPrice = $localStorage.totalPrice + $localStorage.clientCart[i].price;
+                    $localStorage.clientCart[i].quantity = $localStorage.clientCart[i].quantity + vm.quantity; 
+                    $localStorage.totalPrice = $localStorage.totalPrice + $localStorage.clientCart[i].price*vm.quantity;
                 }
             }
         };
@@ -266,8 +267,8 @@
             $state.go('products',{categoryId: catId});
         };
 
-        vm.openHome = function(){
-            $state.go('home');
+        vm.goState = function(state){
+            $state.go(state);
         };
 		
         function getCategoryById(catId) {

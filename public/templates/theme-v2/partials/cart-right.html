@@ -20,9 +20,10 @@
                 </div>
                 <div class="d-flex align-items-center mt8 py8">
                     <div class="flex-base-3 d-flex flex-column align-items-center">
-                        <div><img ng-click="cartCtrl.addProductClient(product.product_id)" src="/assets/images/up-arrow.png" alt=""></div>
+                        <div class="fa fa-angle-up fa-2x" ng-click="cartCtrl.addProductClient(product.product_id)"></div>
                         <div>{{product.quantity}}</div>
-                        <div><img ng-click="cartCtrl.removeProductClient(product.product_id)" src="/assets/images/down-arrow.png" alt=""></div>
+                        <div class="fa fa-angle-down fa-2x" ng-click="cartCtrl.removeProductClient(product.product_id)"></div>
+                        <a ng-click="cartCtrl.removeItemCartClient(product.product_id)" class="product-remove"><i class="fa fa-times fa-2x"></i></a>
                     </div>
                     <div class="px8">
                         <p class="content font-size-18">{{product.price*product.quantity | number}}đ</p>
@@ -41,7 +42,7 @@
             </div>
         </div>
         <div class="mt16 text-center">
-            <button class="button-sidebar" type="button">Thanh toán ngay</button>
+            <button class="button-sidebar" type="button" ng-click="cartCtrl.goState('cart')">Thanh toán ngay</button>
         </div>
     </div>
 </aside>

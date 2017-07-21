@@ -76,6 +76,18 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'header': header
             }
         })
+        .state('productsList', {
+            url: '/products?categoryId&name&brandId&supplierId',
+            views: {
+                'content': {
+                    controller: 'ProductsListController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/products/list.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         .state('productsDetail', {
             url: '/products/:productId',
             views: {
@@ -102,18 +114,6 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
         //         'cart_right@productSearches':cart_right
         //     }
         // })
-        .state('products', {
-            url: '/products?categoryId&brandId&sort&offset&limit&ratePrice',
-            views: {
-                content: {
-                    controller: 'ProductController',
-                    controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/products/index.html',
-                },
-                'footer': footer,
-                'header': header
-            }
-        })
         .state('deals', {
             url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {

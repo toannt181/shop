@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row py16 align-items-center">
             <div class="col-1 col-md-1">
-                <div class="nav-icon"><span class="icon-menu"></span></div>
+                <a class="nav-icon" href="#" id="hamburger-icon"><span class="icon-menu"></span></a>
             </div>
             <div class="col-3 col-md-2">
                 <img ng-click="headerCtrl.goState('home')" class="logo w-75" src="/assets/images/logo_vnshop.png" alt="logo">
@@ -35,6 +35,11 @@
         </div>
     </div>
 </header>
+<nav class="slide-left-nav">
+    <ul class="content">
+        <li ng-repeat="submenu in headerCtrl.listCategory track by $index"><a ng-click="headerCtrl.goSubCat($index, submenu)">{{submenu.name}}</a></li>
+    </ul>
+</nav>
 <script>
     (function () {
         var fieldSearch = $('#field-search');
@@ -46,5 +51,27 @@
                 $('.field label').show();
             }
         });
+        var slideNav = $('.slide-left-nav');
+        $('#hamburger-icon').click(function (e) {
+            e.preventDefault();
+            navToggle();
+         });
+        $('#nav-close').click(function (e) {
+            e.preventDefault();
+            navToggle();
+        });
+        function navToggle() {
+            if (slideNav.hasClass('show')) {
+                slideNav.removeClass('show');
+                $('.slide-left-nav').animate({
+                    left: "-=200"
+                }, 400);
+            } else {
+                slideNav.addClass('show');
+                $('.slide-left-nav').animate({
+                    left: "+=200"
+                }, 400);
+            }
+        }
     })();
 </script>

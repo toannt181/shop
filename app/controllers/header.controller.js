@@ -11,6 +11,7 @@
         var vm = this;
 		
 		vm.subMenu = [];
+        vm.listCategory = $localStorage.listCategory;
 		vm.searchResult = [];
 		vm.provinceId = $localStorage.provinceId;
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
@@ -21,21 +22,33 @@
             // $state.reload();
         }
         
-		getSubMenu();
+        getSubMenu();
+    //     function getSubMenu() {
+    //         return categoryService.getAllCategories().then(function (response) {
+    //             vm.subMenu = response.data;
+    //             $localStorage.subMenu = vm.subMenu;
+				// if(vm.categoryId) {
+				// 	vm.subMenu = [];
+				// 	for(var i = 0; i < $localStorage.subMenu.length; i++){
+				// 		var tmpSub = $localStorage.subMenu[i];
+				// 		if(vm.categoryId == tmpSub.id) {
+				// 			vm.subMenu = tmpSub.children;
+				// 			break;
+				// 		}
+				// 	}
+    //             }
+    //             return;
+    //         });
+    //     }
         function getSubMenu() {
+            var param = {
+                parent_id: 0
+            };
             return categoryService.getAllCategories().then(function (response) {
                 vm.subMenu = response.data;
+                vm.listCategory = response.data;
                 $localStorage.subMenu = vm.subMenu;
-				if(vm.categoryId) {
-					vm.subMenu = [];
-					for(var i = 0; i < $localStorage.subMenu.length; i++){
-						var tmpSub = $localStorage.subMenu[i];
-						if(vm.categoryId == tmpSub.id) {
-							vm.subMenu = tmpSub.children;
-							break;
-						}
-					}
-                }
+                $localStorage.listCategory = vm.listCategory;
                 return;
             });
         }
@@ -57,7 +70,7 @@
 					$state.go("foods", {categoryId: catId});
                 }
             } else {
-                $state.go("products", {categoryId: catId});
+                $state.go("productsList", {categoryId: catId});
             }
         };
 
@@ -81,6 +94,31 @@
                 });
                 return vm.searchResult;
             });
+        };
+
+        vm.goSubCat = function(i, cat){
+            $localStorage.listCategory = vm.listCategory;
+            if(cat.children.length===0){
+                if (typeof cat.type !== 'undefined' && cat.type != '0') {
+                    if (typeof $localStorage.provinceId === 'undefined') {
+                        $state.go("provinces", {categoryId: cat.id, typeId: cat.type, name:''});
+                    } else {
+                        if(cat.type == 1) {
+                            $state.go("productsDeal", {categoryId: cat.id, name:''});
+                        } else {
+                            $state.go("suppliersList", {categoryId: cat.id, name:''});
+                        }
+                    }
+                } else {
+                    $state.go("productsList", {categoryId: cat.id, supplierId:0, name:''});
+                }
+                $localStorage.isShowMenu = false;
+            } else {
+                $localStorage.catParent = cat;
+                vm.catParent = $localStorage.catParent;
+                $localStorage.listCategory  = vm.listCategory[i].children;
+                vm.listCategory = $localStorage.listCategory;
+            }
         };
 		
         vm.goState = function(state){

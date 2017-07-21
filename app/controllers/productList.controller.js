@@ -3,10 +3,10 @@
 
     angular
         .module('gApp.category')
-        .controller('ProductController', ProductController);
-        ProductController.$inject = ['$state', '$location', '$localStorage', '$scope', 'productService', 'categoryService', 'cartService'];
+        .controller('ProductsListController', ProductsListController);
+        ProductsListController.$inject = ['$state', '$location', '$localStorage', '$scope', 'productService', 'categoryService', 'cartService'];
 
-    function ProductController($state, $location, $localStorage, $scope, productService, categoryService, cartService) {
+    function ProductsListController($state, $location, $localStorage, $scope, productService, categoryService, cartService) {
         var vm = this;
 
         vm.id = 0;
