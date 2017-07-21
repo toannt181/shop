@@ -101,26 +101,49 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 'cart_right': cart_right
             }
         })
-        // .state('productSearches', {
-        //     url: '/search?categoryId&name&brandId&offset&limit&ratePrice',
-        //     views: {
-        //         content: {
-        //             controller: 'ProductSearchesController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/products/search.html'
-        //         },
-        //         'footer': footer,
-        //         'header': header,
-        //         'cart_right@productSearches':cart_right
-        //     }
-        // })
+        .state('productSearches', {
+            url: '/search?categoryId&name&brandId&offset&limit&ratePrice',
+            views: {
+                content: {
+                    controller: 'ProductSearchesController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/products/search.html'
+                },
+                'footer': footer,
+                'header': header,
+            }
+        })
+        .state('deals', {
+            url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
+            views: {
+                content: {
+                    controller: 'RegisterController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/account/signin.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('forgotPassword', {
+            url: '/forgotPassword',
+            views: {
+                content: {
+                    controller: 'ForgotController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/account/forgotPassword.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         .state('deals', {
             url: '/deals?categoryId&brandId&sort&offset&limit&ratePrice',
             views: {
                 content: {
                     controller: 'DealController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/products/evoucher-list.html'
+                    templateUrl: '/templates/' + theme + '/products/deal.html'
                 },
                 'footer': footer,
                 'header': header
@@ -132,54 +155,56 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 content: {
                     controller: 'FoodController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/products/freshfood-list.html'
+                    templateUrl: '/templates/' + theme + '/products/food.html'
                 },
                 'footer': footer,
                 'header': header
             }
         })
-        // .state('login', {
-        //     url: '/login',
-        //     views: {
-        //         content: {
-        //             controller: 'LoginController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/login/login.html'
-        //         },
-        //         'footer': footer
-        //         // 'header': header
-        //     }
-        // })
-        // .state('register', {
-        //     url: '/register',
-        //     views: {
-        //         content: {
-        //             controller: 'RegisterController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/login/register.html'
-        //         },
-        //         'footer': footer
-        //         // 'header': header
-        //     }
-        // })
-        // .state('forgotPassword', {
-        //     url: '/forgotPassword',
-        //     views: {
-        //         content: {
-        //             controller: 'ForgotController',
-        //             controllerAs: 'ctrl',
-        //             templateUrl: '/templates/' + theme + '/login/forgotPassword.html'
-        //         },
-        //         'footer': footer
-        //         // 'header': header
-        //     }
-        // })
+        .state('login', {
+            url: '/login',
+            views: {
+                content: {
+                    controller: 'LoginController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/login/login.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('register', {
+            url: '/register',
+            views: {
+                content: {
+                    controller: 'RegisterController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/login/register.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('forgotPassword', {
+            url: '/forgotPassword',
+            views: {
+                content: {
+                    controller: 'ForgotController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/login/forgotPassword.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
         .state('401', {
             url: '/401',
             views: {
                 'content': {
                     templateUrl: '/templates/' + theme + '/errors/401.html'
-                }
+                },
+                'footer': footer,
+                'header': header
             }
         })
         .state('404', {
@@ -187,7 +212,9 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
             views: {
                 'content': {
                     templateUrl: '/templates/' + theme + '/errors/404.html'
-                }
+                },
+                'footer': footer,
+                'header': header
             }
         })
         ;

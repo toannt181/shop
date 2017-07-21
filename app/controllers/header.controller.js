@@ -18,28 +18,11 @@
         vm.profileData = $localStorage.profileData;
         vm.token = $localStorage.token;
         if(!vm.profileData || !$localStorage.token){
-            // $localStorage.$reset();
+            $localStorage.$reset();
             // $state.reload();
         }
         
-        getSubMenu();
-    //     function getSubMenu() {
-    //         return categoryService.getAllCategories().then(function (response) {
-    //             vm.subMenu = response.data;
-    //             $localStorage.subMenu = vm.subMenu;
-				// if(vm.categoryId) {
-				// 	vm.subMenu = [];
-				// 	for(var i = 0; i < $localStorage.subMenu.length; i++){
-				// 		var tmpSub = $localStorage.subMenu[i];
-				// 		if(vm.categoryId == tmpSub.id) {
-				// 			vm.subMenu = tmpSub.children;
-				// 			break;
-				// 		}
-				// 	}
-    //             }
-    //             return;
-    //         });
-    //     }
+		getSubMenu();
         function getSubMenu() {
             var param = {
                 parent_id: 0
