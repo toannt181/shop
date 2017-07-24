@@ -35,14 +35,27 @@
                 <div class="nav-icon icon-size-24 text-grey">
                     <a ng-click="headerCtrl.goState('cart')">
                         <span class="icon-cart"></span>
-                        <span class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng của tôi</span>
+                        <span class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng</span>
                     </a>
                 </div>
             </div>
             <div class="col-1 col-md-2 personal-icon-block">
                 <div class="nav-icon icon-size-24 text-grey">
-                    <span class="icon-user"></span>
-                    <span class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</span>
+                    <!-- <span class="icon-user"></span>
+                    <span class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</span> -->
+                    <span ng-if="!headerCtrl.profileData || !headerCtrl.token">
+					<a href="javascripts:;" ng-click="headerCtrl.goState('login')">
+						<!-- <img src="/assets/images/icon_user.png"/> -->
+						<span>Đăng nhập</span>
+                    </a>
+                    <span>| <a href="javascripts:;" ng-click="headerCtrl.goState('register')">Đăng ký</a></span>
+                    </span>
+                    <p ng-if="headerCtrl.profileData  && headerCtrl.token">
+                        <span href="javascripts:;">
+                            {{headerCtrl.profileData.username}}
+                        </span>
+                        <span>|<a href="javascripts:;" ng-click="headerCtrl.openLogout()">Đăng xuất</a></span>
+                    </p>
                 </div>
                 <div class="login-popup">
                     <p class="content">Username</p>
@@ -101,4 +114,5 @@
 
         });
     })();
+
 </script>

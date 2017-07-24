@@ -37,9 +37,9 @@
                         </div>
                         <div class="mt16 d-flex align-items-center">
                             <div>Số lượng</div>
-                            <button class="button-normal-grey-small ml16 bg-grey-light text-black" ng-click="ctrl.addQuantity()">+</button>
-                            <div class="ml16 box-span">{{ctrl.quantity}}</div>
                             <button class="button-normal-grey-small ml16 bg-grey-light text-black" ng-click="ctrl.subQuantity()">-</button>
+                            <div class="ml16 box-span">{{ctrl.quantity}}</div>
+                            <button class="button-normal-grey-small ml16 bg-grey-light text-black" ng-click="ctrl.addQuantity()">+</button>
                         </div>
                         <div ng-show="ctrl.hasVariants" ng-show="ctrl.product.options.hasOwnProperty('option1')" class="mt16 d-flex align-items-center">
                             <div>{{ctrl.product.options.option1 | uppercase}}</div>

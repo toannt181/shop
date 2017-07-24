@@ -371,9 +371,8 @@ p.content-discount-tag {
 }
 
 .cart-product-amount {
-    height: 32px;
-    width: 32px;
     font-size: 16px;
+    padding: 2px 10px;
     border: 1px solid lightgrey;
 }
 
@@ -839,3 +838,5 @@ p.content-discount-tag {
     }
 
 }
+.subtraction{border:1px solid #636363;padding:2px 10px;background-color:#636363;font-size:16px}
+.addition{border:1px solid #145ca9;padding:2px 10px;background-color:#145ca9;font-size:16px}

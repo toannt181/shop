@@ -108,6 +108,22 @@
                     </div>
                     <button class="button-normal-grey w-100 mt32 bg-blue py16" type="button">Xác nhận</button>
                 </div>
+                <div class="row mt16 content py16">
+                    <div class="text-grey">
+                        <form class="from-register" name="myForm">
+                            <label for="email">Email:</label>
+                            <input class="input-control" type="email" ng-model="ctrl.email" id="email" required ng-minlength="3" type="email">
+                            <label class="mt32" for="password">Mật khẩu:</label>
+                            <input class="input-control" ng-model="ctrl.password" id="password" required ng-minlength="1" type="password">
+
+                            <div class="d-flex justify-content-between mt16">
+                                <div class="text-blue" ng-click="ctrl.openSignin()">Đăng kí tài khoản mới</div>
+                                <div class="text-grey" ng-click="ctrl.openForgotPassword()">Bạn quên mật khẩu</div>
+                            </div>
+                            <div>{{ctrl.message}}</div>
+                            <button class="button-normal-grey bg-blue w-100 mt32" type="button" ng-click="ctrl.login()" type="submit" ng-disabled="myForm.$invalid">Đăng nhập</button>
+                        </form>
+                    </div>
             </div>
         </div>
     </div>

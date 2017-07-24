@@ -18,7 +18,7 @@
         vm.profileData = $localStorage.profileData;
         vm.token = $localStorage.token;
         if(!vm.profileData || !$localStorage.token){
-            $localStorage.$reset();
+            // $localStorage.$reset();
             // $state.reload();
         }
         
@@ -87,7 +87,7 @@
                         $state.go("provinces", {categoryId: cat.id, typeId: cat.type, name:''});
                     } else {
                         if(cat.type == 1) {
-                            $state.go("productsDeal", {categoryId: cat.id, name:''});
+                            $state.go("deals", {categoryId: cat.id, name:''});
                         } else {
                             $state.go("suppliersList", {categoryId: cat.id, name:''});
                         }

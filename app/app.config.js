@@ -119,7 +119,19 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 content: {
                     controller: 'DealController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/products/deal.html'
+                    templateUrl: '/templates/' + theme + '/products/deals.html'
+                },
+                'footer': footer,
+                'header': header
+            }
+        })
+        .state('provinces', {
+            url: '/deal/provinces?categoryId&typeId',
+            views: {
+                'content': {
+                    controller: 'ProvincesController',
+                    controllerAs: 'ctrl',
+                    templateUrl: '/templates/' + theme + '/products/provinces.html'
                 },
                 'footer': footer,
                 'header': header
@@ -143,7 +155,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 content: {
                     controller: 'LoginController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/login/login.html'
+                    templateUrl: '/templates/' + theme + '/account/login.html'
                 },
                 'footer': footer,
                 'header': header
@@ -155,7 +167,7 @@ function config($httpProvider, $stateProvider, $urlRouterProvider, $authProvider
                 content: {
                     controller: 'RegisterController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/templates/' + theme + '/login/register.html'
+                    templateUrl: '/templates/' + theme + '/account/signin.html'
                 },
                 'footer': footer,
                 'header': header
