@@ -5,9 +5,9 @@
         .module('gApp.shared')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$state', '$location', '$stateParams', '$localStorage', 'categoryService'];
+    HeaderController.$inject = ['$state', '$location', '$stateParams', '$localStorage', 'categoryService', 'profileService', '$auth'];
 
-    function HeaderController($state, $location, $stateParams, $localStorage, categoryService) {
+    function HeaderController($state, $location, $stateParams, $localStorage, categoryService, profileService, $auth) {
         var vm = this;
 		
 		vm.subMenu = [];
@@ -17,11 +17,73 @@
         vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
         vm.profileData = $localStorage.profileData;
         vm.token = $localStorage.token;
+
+        vm.email = "";
+        vm.password = "";
+        vm.message = "";
+        vm.isLoginMobile = false;
+
         if(!vm.profileData || !$localStorage.token){
-            $localStorage.$reset();
+            // $localStorage.$reset();
             // $state.reload();
         }
         
+        // Start Login
+        function getProfile() {
+            return profileService.getProfile().then(function (response) {
+                $localStorage.profileData = response.data;
+                $state.reload();
+                return vm.profileData;
+            });
+        }
+
+        vm.authenticate = function (provider) {
+            $auth.authenticate(provider).then(authCompleted)
+                .catch(loginFailed);
+
+            function authCompleted(response) {
+                console.log(response.data.token);
+                if (typeof response.data.token === 'undefined' || !response.data.token) {
+                    vm.message = "Lỗi đăng nhập";
+                } else {
+                    $localStorage.token = response.data.token;
+                    getProfile();
+                }
+            }
+            function loginFailed() {
+                vm.message = 'Lỗi kết nối với server, vui lòng thử lại.';
+            }
+        };
+        
+        vm.login = function () {
+            var credentials = {
+                email: vm.email,
+                password: vm.password
+            };
+            console.log(vm.email);
+            $auth.login(credentials)
+                .then(loginCompleted)
+                .catch(loginFailed);
+
+            function loginCompleted(response) {
+                if (typeof response.data != 'undefined' && response.data.token) {
+                    $localStorage.token = response.data.token;
+                    getProfile();
+                } else {
+                    vm.message = response.data.error;
+                }
+            }
+
+            function loginFailed() {
+                vm.message = 'Lỗi kết nối với server, vui lòng thử lại.';
+            }
+        };
+
+        vm.loginMobile = function () {
+            vm.isLoginMobile = true;
+        };
+        // End Login
+
 		getSubMenu();
         function getSubMenu() {
             var param = {
@@ -87,7 +149,7 @@
                         $state.go("provinces", {categoryId: cat.id, typeId: cat.type, name:''});
                     } else {
                         if(cat.type == 1) {
-                            $state.go("productsDeal", {categoryId: cat.id, name:''});
+                            $state.go("deals", {categoryId: cat.id, name:''});
                         } else {
                             $state.go("suppliersList", {categoryId: cat.id, name:''});
                         }
@@ -127,8 +189,7 @@
 
         vm.openLogout = function(){
             $localStorage.$reset();
-            $state.reload();
-            $state.go('home');
+            $state.reload();    
         };
     }
 

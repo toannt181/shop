@@ -1,13 +1,13 @@
 <header class="fixed-top border-bottom-1 bg-white">
-    <div class="top-nav-bg hidden-lg-down">
+    <div ng-if="headerCtrl.profileData || headerCtrl.token" class="top-nav-bg hidden-lg-down">
         <div class="container">
             <nav class="top-nav content">
                 <div class="active top-nav-item"><a href="#">Quản lý tài khoản</a></div>
-                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
-                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
-                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
-                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
-                <div class="top-nav-item"><a href="#">Đăng xuât</a></div>
+                <div class="top-nav-item"><a href="#">Đơn hàng của tôi</a></div>
+                <div class="top-nav-item"><a href="#">Danh sách yêu thích</a></div>
+                <div class="top-nav-item"><a href="#">Nhận xét của tôi</a></div>
+                <div class="top-nav-item"><a href="#">Quản lý đơn hàng và đổi trả</a></div>
+                <div class="top-nav-item"><a ng-click="headerCtrl.openLogout()">Đăng xuât</a></div>
             </nav>
         </div>
     </div>
@@ -35,23 +35,35 @@
                 <div class="nav-icon icon-size-24 text-grey">
                     <a ng-click="headerCtrl.goState('cart')">
                         <span class="icon-cart"></span>
-                        <span class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng của tôi</span>
+                        <span class="content hidden-md-down">&nbsp;&nbsp;Giỏ hàng</span>
                     </a>
                 </div>
             </div>
             <div class="col-1 col-md-2 personal-icon-block">
                 <div class="nav-icon icon-size-24 text-grey">
-                    <span class="icon-user"></span>
-                    <span class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</span>
+                    <!-- <span class="icon-user"></span>
+                    <span class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</span> -->
+                    <p ng-show="!headerCtrl.profileData || !headerCtrl.token">
+					<a href="javascripts:;" id="loginBtn">
+						<!-- <img src="/assets/images/icon_user.png"/> -->
+						<span>Đăng nhập</span>
+                    </a>
+                    <span>| <a href="javascripts:;" ng-click="headerCtrl.goState('register')">Đăng ký</a></span>
+                    </p>
+                    <p ng-if="headerCtrl.profileData  && headerCtrl.token">
+                        <span href="javascripts:;">
+                            {{headerCtrl.profileData.username}}
+                        </span>
+                    </p>
                 </div>
                 <div class="login-popup">
                     <p class="content">Username</p>
-                    <input class="input-control" type="text">
+                    <input class="input-control" type="email" ng-model="headerCtrl.email" id="email" required ng-minlength="3" type="email">
                     <p class="content mt16">Password</p>
-                    <input class="input-control" type="text">
+                    <input class="input-control" ng-model="headerCtrl.password" id="password" required ng-minlength="1" type="password">
                     <div class="d-flex justify-content-between mt16 align-items-center">
-                        <button class="button-login" type="button">Đăng nhập</button>
-                        <div><a href="#">Quên mật khẩu</a></div>
+                        <button class="button-login" type="button" ng-click="headerCtrl.login()" type="submit" ng-disabled="myForm.$invalid">Đăng nhập</button>
+                        <div><a ng-click="headerCtrl.goState('forgotPassword')">Quên mật khẩu</a></div>
                     </div>
                 </div>
             </div>
@@ -67,6 +79,7 @@
 <script>
     (function () {
         var fieldSearch = $('#field-search');
+        var loginPopup = $(".login-popup");
         fieldSearch.focus(function () {
             $('.field label').hide();
         });
@@ -83,6 +96,13 @@
         $('#nav-close').click(function (e) {
             e.preventDefault();
             navToggle();
+        });
+        $('#loginBtn').click(function (e) {
+            if(loginPopup.hasClass('show')){
+                loginPopup.removeClass('show');
+            } else {
+                loginPopup.addClass('show');
+            }
         });
         function navToggle() {
             if (slideNav.hasClass('show')) {
@@ -101,4 +121,5 @@
 
         });
     })();
+
 </script>

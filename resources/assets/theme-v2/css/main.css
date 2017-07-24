@@ -1,6 +1,6 @@
 /* Config total*/
 body {
-    padding-top: 73px;
+    padding-top: 106px;
     position: relative;
 }
 
@@ -371,9 +371,8 @@ p.content-discount-tag {
 }
 
 .cart-product-amount {
-    height: 32px;
-    width: 32px;
     font-size: 16px;
+    padding: 2px 10px;
     border: 1px solid lightgrey;
 }
 
@@ -559,15 +558,19 @@ p.content-discount-tag {
 }
 
 .login-popup {
+    border: 1px solid gray;
     background: white;
     padding: 16px;
     position: absolute;
     top: 40px;
     left: -50%;
     min-width: 300px;
+    display:none;
     border-radius: 4px;
 }
-
+.show {
+    display:block !important;
+}
 
 
 /* Color */
@@ -839,3 +842,5 @@ p.content-discount-tag {
     }
 
 }
+.subtraction{border:1px solid #636363;padding:2px 10px;background-color:#636363;font-size:16px}
+.addition{border:1px solid #145ca9;padding:2px 10px;background-color:#145ca9;font-size:16px}
