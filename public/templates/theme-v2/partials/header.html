@@ -1,11 +1,24 @@
 <header class="fixed-top border-bottom-1 bg-white">
+    <div class="top-nav-bg hidden-lg-down">
+        <div class="container">
+            <nav class="top-nav content">
+                <div class="active top-nav-item"><a href="#">Quản lý tài khoản</a></div>
+                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
+                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
+                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
+                <div class="top-nav-item"><a href="#">Quản lý tài khoản</a></div>
+                <div class="top-nav-item"><a href="#">Đăng xuât</a></div>
+            </nav>
+        </div>
+    </div>
     <div class="container">
         <div class="row py16 align-items-center">
             <div class="col-1 col-md-1">
                 <a class="nav-icon" href="#" id="hamburger-icon"><span class="icon-menu"></span></a>
             </div>
             <div class="col-3 col-md-2">
-                <img ng-click="headerCtrl.goState('home')" class="logo w-75" src="/assets/images/logo_vnshop.png" alt="logo">
+                <img ng-click="headerCtrl.goState('home')" class="logo w-75" src="/assets/images/logo_vnshop.png"
+                     alt="logo">
             </div>
             <div class="col-6 col-md-5 border-right-1">
                 <div class="field">
@@ -26,10 +39,20 @@
                     </a>
                 </div>
             </div>
-            <div class="col-1 col-md-2">
+            <div class="col-1 col-md-2 personal-icon-block">
                 <div class="nav-icon icon-size-24 text-grey">
                     <span class="icon-user"></span>
                     <span class="content hidden-md-down">&nbsp;&nbsp;Đào Thái Hà</span>
+                </div>
+                <div class="login-popup">
+                    <p class="content">Username</p>
+                    <input class="input-control" type="text">
+                    <p class="content mt16">Password</p>
+                    <input class="input-control" type="text">
+                    <div class="d-flex justify-content-between mt16 align-items-center">
+                        <button class="button-login" type="button">Đăng nhập</button>
+                        <div><a href="#">Quên mật khẩu</a></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,7 +60,8 @@
 </header>
 <nav class="slide-left-nav">
     <ul class="content">
-        <li ng-repeat="submenu in headerCtrl.listCategory track by $index"><a ng-click="headerCtrl.goSubCat($index, submenu)">{{submenu.name}}</a></li>
+        <li ng-repeat="submenu in headerCtrl.listCategory track by $index"><a
+                ng-click="headerCtrl.goSubCat($index, submenu)">{{submenu.name}}</a></li>
     </ul>
 </nav>
 <script>
@@ -55,7 +79,7 @@
         $('#hamburger-icon').click(function (e) {
             e.preventDefault();
             navToggle();
-         });
+        });
         $('#nav-close').click(function (e) {
             e.preventDefault();
             navToggle();
@@ -73,5 +97,8 @@
                 }, 400);
             }
         }
+        $('#personal-info').click(function () {
+
+        });
     })();
 </script>

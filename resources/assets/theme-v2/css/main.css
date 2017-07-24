@@ -227,6 +227,14 @@ p.content-discount-tag {
     background: transparent;
 }
 
+.button-login {
+    border: transparent;
+    background: orangered;
+    border-radius: 12px;
+    color: white;
+    padding: 8px 16px;
+}
+
 .box-group {
     display: flex;
     flex-wrap: wrap;
@@ -520,6 +528,47 @@ p.content-discount-tag {
 .slide-left-nav li a:hover {
     color: #fff;
 }
+
+.top-nav-bg {
+    background: #2a2a2a;
+}
+
+.top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.top-nav-item a{
+    color: #969696;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.top-nav-item a:hover{
+    color: #fff;
+}
+
+.top-nav-item.active a{
+    color: #fff;
+}
+
+.personal-icon-block {
+    position: relative;
+}
+
+.login-popup {
+    background: white;
+    padding: 16px;
+    position: absolute;
+    top: 40px;
+    left: -50%;
+    min-width: 300px;
+    border-radius: 4px;
+}
+
+
 
 /* Color */
 

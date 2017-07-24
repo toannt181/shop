@@ -42,7 +42,7 @@
                         <div ng-repeat="data in homeData.details" class="cat-box-small">
                             <a href="{{data.link}}"><img class="w-100" src="{{data.image}}" alt=""></a>
                             <div class="cat-box-small-text">
-                                <a href="{{data.link}}"><div class="product-name" ng-bind-html="data.title"></div></a>
+
                                 <div ng-if="data.compare_at_price > 0" class="content product-price-discount">{{data.compare_at_price|number}} VND</div>
                                 <div ng-if="(data.compare_at_price - data.price) > 0 && data.price > 0" class="w-100 d-flex justify-content-between">
                                     <div class="content product-price">{{data.price|number}} VND</div>
