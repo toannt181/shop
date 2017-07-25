@@ -2,7 +2,22 @@
 body {
     padding-top: 106px;
     position: relative;
+    font-family: 'SFUHelvetica', sans-serif;
+    color: #58595b;
 }
+
+/* default <a> */
+a {
+    color: #0e90d2;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+a:hover {
+    color: #1e66ae;
+}
+
+/* end of <a> */
 
 main {
     position: relative;
@@ -227,12 +242,13 @@ p.content-discount-tag {
     background: transparent;
 }
 
+
 .button-login {
     border: transparent;
     background: orangered;
-    border-radius: 12px;
     color: white;
-    padding: 8px 16px;
+    width: 100%;
+    padding: 10px 0;
 }
 
 .box-group {
@@ -297,6 +313,10 @@ p.content-discount-tag {
 
 .flex-grow-7 {
     flex-grow: 7;
+}
+
+.w-45 {
+    width: 45%;
 }
 
 .box-search {
@@ -558,9 +578,9 @@ p.content-discount-tag {
 }
 
 .login-popup {
-    border: 1px solid gray;
+    border: 1px solid #eee;
     background: white;
-    padding: 16px;
+    padding: 24px;
     position: absolute;
     top: 40px;
     left: -50%;

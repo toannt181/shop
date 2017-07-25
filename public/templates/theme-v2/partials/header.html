@@ -61,9 +61,16 @@
                     <input class="input-control" type="email" ng-model="headerCtrl.email" id="email" required ng-minlength="3" type="email">
                     <p class="content mt16">Password</p>
                     <input class="input-control" ng-model="headerCtrl.password" id="password" required ng-minlength="1" type="password">
-                    <div class="d-flex justify-content-between mt16 align-items-center">
-                        <button class="button-login" type="button" ng-click="headerCtrl.login()" type="submit" ng-disabled="myForm.$invalid">Đăng nhập</button>
-                        <div><a ng-click="headerCtrl.goState('forgotPassword')">Quên mật khẩu</a></div>
+                    <div class="text-center">
+                        <button class="button-login mt16" type="button" ng-click="headerCtrl.login()" type="submit" ng-disabled="myForm.$invalid">Đăng nhập</button>
+                    </div>
+                    <div class="mt16 text-center">
+                        <div class="d-flex justify-content-between">
+                            <p class="content">Đăng nhập với</p>
+                            <div><a ng-click="headerCtrl.goState('forgotPassword')">Quên mật khẩu</a></div>
+                        </div>
+                        <a href=""><img class="w-100 mt8" src="assets/images/login-fb.png" alt=""></a>
+                        <a href=""><img class="w-100 mt8" src="assets/images/login-google.png" alt=""></a>
                     </div>
                 </div>
             </div>
