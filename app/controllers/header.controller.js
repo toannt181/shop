@@ -98,24 +98,41 @@
             });
         }
 
-        vm.gotoCatPage = function (catId, typeId) {
-            if (typeof typeId !== 'undefined' && typeId != '0') {
-				if (typeId == 1) {
-					vm.categoryId = catId;
-					if(typeof $localStorage.provinceId === 'undefined') {
-						$('#popupProvince').modal({
-							escapeClose: false,
-							clickClose: false,
-							showClose: false
-						});
-					} else {
-						$state.go("deals", {categoryId: catId});
-					}
-				} else {
-					$state.go("foods", {categoryId: catId});
+        // vm.gotoCatPage = function (catId, typeId) {
+        //     if (typeof typeId !== 'undefined' && typeId != '0') {
+		// 		if (typeId == 1) {
+		// 			vm.categoryId = catId;
+		// 			if(typeof $localStorage.provinceId === 'undefined') {
+		// 				$('#popupProvince').modal({
+		// 					escapeClose: false,
+		// 					clickClose: false,
+		// 					showClose: false
+		// 				});
+		// 			} else {
+		// 				$state.go("deals", {categoryId: catId});
+		// 			}
+		// 		} else {
+		// 			$state.go("foods", {categoryId: catId});
+        //         }
+        //     } else {
+        //         $state.go("productsList", {categoryId: catId});
+        //     }
+        // };
+
+        vm.goCatPage = function(cat){
+            if (typeof cat.type !== 'undefined' && cat.type != '0') {
+                if (typeof $localStorage.provinceId === 'undefined') {
+                    // $state.go("provinces", {categoryId: cat.id, typeId: cat.type, name:''});
+                    $localStorage.provinceId = 1;
+                } else {
+                    if(cat.type == 1) {
+                        $state.go("deals", {categoryId: cat.id, name:''});
+                    } else {
+                        $state.go("suppliersList", {categoryId: cat.id, name:''});
+                    }
                 }
             } else {
-                $state.go("productsList", {categoryId: catId});
+                $state.go("productsList", {categoryId: cat.id, supplierId:0, name:''});
             }
         };
 
@@ -140,7 +157,7 @@
                 return vm.searchResult;
             });
         };
-
+        console.log($localStorage.listCategory);
         vm.goSubCat = function(i, cat){
             $localStorage.listCategory = vm.listCategory;
             if(cat.children.length===0){

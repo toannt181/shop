@@ -16,10 +16,10 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <img ng-repeat="slideImage in ctrl.product.images.slice(1,ctrl.product.images.length)" class="w-100" ng-src="{{slideImage.path}}" alt="">
+                        <img ng-repeat="slideImage in ctrl.product.images track by $index" ng-click="ctrl.changeImage($index)" class="w-100" ng-src="{{slideImage.path}}" alt="">
                     </div>
                     <div class="col-5">
-                        <img class="w-100" src="{{ctrl.product.images[0].path}}" alt="">
+                        <img class="w-100" src="{{ctrl.product.images[ctrl.image].path}}" alt="">
                     </div>
                     <div class="col-5">
                         <div class="font-size-16">Combo bộ trang điểm và phấn nền Babor

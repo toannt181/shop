@@ -50,7 +50,7 @@
                     </a>
                     <span>| <a href="javascripts:;" ng-click="headerCtrl.goState('register')">Đăng ký</a></span>
                     </p>
-                    <p ng-if="headerCtrl.profileData  && headerCtrl.token">
+                    <p ng-if="headerCtrl.profileData && headerCtrl.token">
                         <span href="javascripts:;">
                             {{headerCtrl.profileData.username}}
                         </span>
@@ -69,8 +69,8 @@
                             <p class="content">Đăng nhập với</p>
                             <div><a ng-click="headerCtrl.goState('forgotPassword')">Quên mật khẩu</a></div>
                         </div>
-                        <a href=""><img class="w-100 mt8" src="assets/images/login-fb.png" alt=""></a>
-                        <a href=""><img class="w-100 mt8" src="assets/images/login-google.png" alt=""></a>
+                        <a ng-click="headerCtrl.authenticate('facebook')"><img class="w-100 mt8" src="assets/images/login-fb.png" alt=""></a>
+                        <a ng-click="headerCtrl.authenticate('google')"><img class="w-100 mt8" src="assets/images/login-google.png" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -78,11 +78,68 @@
     </div>
 </header>
 <nav class="slide-left-nav">
-    <ul class="content">
-        <li ng-repeat="submenu in headerCtrl.listCategory track by $index"><a
-                ng-click="headerCtrl.goSubCat($index, submenu)">{{submenu.name}}</a></li>
+    <ul class="nav navbar-nav megamenu">
+        <li ng-repeat="submenu in headerCtrl.listCategory track by $index" class="dropdown">
+            <a ng-click="headerCtrl.goCatPage(submenu)">
+                <span>
+                    {{submenu.name}}
+                </span>
+                <b class="caret" ng-if="submenu.children.length != 0">
+                </b>
+            </a>
+            <!-- Menu Level 2 -->
+            <div class="dropdown-megamenu level1" ng-if="submenu.children.length != 0">
+                <div class="dropdown-megamenu-inner">
+                    <div class="row">
+                        <div class="mega-col col-xs-12 col-sm-12 col-md-12">
+                            <div class="mega-col-inner">
+                                <ul>
+                                    <li ng-repeat="child in submenu.children" class="dropdown-submenu">
+                                        <a ng-click="headerCtrl.goCatPage(child)">
+                                            <span>{{child.name}}</span>
+                                            <b class="caret" ng-if="child.children.length != 0"></b>
+                                        </a>
+                                        <!-- Menu Level 3 -->
+                                        <div class="dropdown-megamenu level2" ng-if="child.children.length != 0">
+                                            <div class="dropdown-megamenu-inner">
+                                                <div class="row">
+                                                    <div class="mega-col col-xs-12 col-sm-12 col-md-12">
+                                                        <div class="mega-col-inner">
+                                                            <ul>
+                                                                <li ng-repeat="child2 in child.children">
+                                                                    <a ng-click="headerCtrl.goCatPage(child2)">
+                                                                        <span>{{child2.name}}</span>
+                                                                        <b class="caret" ng-if="child2.children.length != 0"></b>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
     </ul>
 </nav>
+<div id="popupProvince" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content location">
+		<a class="close" rel="modal:close"> &nbsp </a>
+		<div class="clearfix"></div>
+		<div class="text-center title">Bạn muốn sử dụng dịch vụ ở đâu?</div>
+		<form class="from-position">
+			<input type="text" ng-model="headerCtrl.provinceId" placeholder="Tỉnh / thành phố" />
+			<button ng-click="headerCtrl.goState('deals')">TIẾP TỤC</button>
+		</form>
+	</div>
+</div>
 <script>
     (function () {
         var fieldSearch = $('#field-search');
@@ -115,12 +172,12 @@
             if (slideNav.hasClass('show')) {
                 slideNav.removeClass('show');
                 $('.slide-left-nav').animate({
-                    left: "-=200"
+                    left: "-=250"
                 }, 400);
             } else {
                 slideNav.addClass('show');
                 $('.slide-left-nav').animate({
-                    left: "+=200"
+                    left: "+=250"
                 }, 400);
             }
         }
