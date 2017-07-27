@@ -31,6 +31,7 @@
         vm.variantExtra = null;
         vm.totalAmount = 0;
         vm.totalFee = 0;
+        vm.image = 0;
 
         vm.accordionStatus1 = '';
         vm.accordionStatus2 = '';
@@ -38,7 +39,9 @@
         vm.clientCart = $localStorage.clientCart;
         vm.totalPrice = $localStorage.totalPrice;
 
-        console.log($localStorage.clientCart);
+        vm.changeImage = function(i){
+            vm.image = i;
+        };
 
         if(typeof $localStorage.clientCart === 'undefined' || $localStorage.clientCart === 0){
             $localStorage.clientCart = [];

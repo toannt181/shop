@@ -519,8 +519,9 @@ p.content-discount-tag {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: -200px;
-    width: 200px;
+    left: -250px;
+    width: 250px;
+    min-height:1000px;
     background: #2a2a2a;
     z-index: 9999;
     padding: 16px 0;
@@ -541,7 +542,7 @@ p.content-discount-tag {
     color: #969696;
     text-decoration: none;
     display: block;
-    padding: 16px;
+    padding: 10px 30px;
 }
 
 .slide-left-nav li a:hover {
@@ -864,3 +865,74 @@ p.content-discount-tag {
 }
 .subtraction{border:1px solid #636363;padding:2px 10px;background-color:#636363;font-size:16px}
 .addition{border:1px solid #145ca9;padding:2px 10px;background-color:#145ca9;font-size:16px}
+.megamenu > li {
+    float: none;
+    display: block;
+    margin: 0px;
+    border-bottom: 1px solid #484848;
+}
+.megamenu > li > a .caret{
+    right: 30px;
+    position:absolute;
+}
+.megamenu > li > a .caret:after{
+    content: "\f105";
+    font-family: 'FontAwesome';
+    font-size: 12px;
+}
+.caret{
+    right: 30px;
+    position:absolute;
+}
+.caret:after{
+    content: "\f107";
+    font-family: 'FontAwesome';
+    font-size: 12px;
+}
+.dropdown-megamenu {
+    position: absolute;
+    z-index: 1000;
+    opacity: 0;
+    min-width: 250px;
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    text-align: left;
+    background-color:#2a2a2a;
+    visibility: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    top: 130%;
+    display: block;
+    transition: all ease 0.35s;
+    top: 0px;
+    left: calc(100%);
+    margin: 0px;
+}
+.megamenu > li .dropdown-megamenu{
+    right: auto;
+    /* padding: 30px; */
+    z-index: 100;
+}
+
+.megamenu > li .dropdown-megamenu .dropdown-submenu .dropdown-menu {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.megamenu > li .dropdown-megamenu .dropdown-megamenu {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.dropdown:hover .dropdown-megamenu {
+  opacity: 1;
+  visibility: visible;
+}
+.megamenu > li .dropdown-megamenu .dropdown-submenu{
+    position: relative;
+}
+
+.megamenu > li .dropdown-megamenu .dropdown-submenu:hover > .dropdown-megamenu {
+  opacity: 1;
+  visibility: visible;
+}
