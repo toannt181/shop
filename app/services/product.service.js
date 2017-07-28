@@ -12,7 +12,9 @@
             getListByCategoryId: getListByCategoryId,
             findById: findById,
             getList: getList,
-            countProduct: countProduct
+            countProduct: countProduct,
+            getListDeal: getListDeal,
+            getListProvinces: getListProvinces
         };
 
         function getListByCategoryId(categoryId, offset, limit) {
@@ -78,6 +80,42 @@
             }
             return $http
                 .get(env.API_URL + '/v2/products?offset=' + offset + '&limit=' + limit + query)
+                .then(getListCompleted, getListFailed);
+
+            function getListCompleted(response) {
+                return response.data;
+            }
+
+            function getListFailed(response) {
+                console.log(response.data);
+            }
+        }
+        
+        function getListDeal(params, offset, limit) {
+            offset = typeof offset !== 'undefined' ? offset : 0;
+            limit = typeof limit !== 'undefined' ? limit : 15;
+            var query = '';
+            for (var i = 0; i < params.length; i++) {
+                if (typeof params[i].name !== 'undefined' && typeof params[i].value !== 'undefined') {
+                    query = query + "&" + params[i].name + "=" + params[i].value;
+                }
+            }
+            return $http
+                .get(env.API_URL + '/v2/products?offset=' + offset + '&limit=' + limit + query)
+                .then(getListCompleted, getListFailed);
+
+            function getListCompleted(response) {
+                return response.data;
+            }
+
+            function getListFailed(response) {
+                console.log(response.data);
+            }
+        }
+
+        function getListProvinces() {
+            return $http
+                .get(env.API_URL + '/v2/districts')
                 .then(getListCompleted, getListFailed);
 
             function getListCompleted(response) {

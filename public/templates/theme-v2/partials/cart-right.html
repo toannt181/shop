@@ -8,9 +8,9 @@
     </div>
     <div class="side-bar-content">
         <p class="content text-uppercase py16 text-center">Giỏ hàng của bạn</p>
-        <section class="sidebar-group">
-            <div class="sidebar-item border-bottom-1 py8" ng-repeat="product in cartCtrl.clientCart">
-                <div class="d-flex">
+        <div class="cart">
+            <div class="product-content" ng-repeat="cart in cartCtrl.clientCart">
+                <!-- <div class="d-flex">
                     <div class="flex-base-3">
                         <img src="{{product.image}}" class="w-100" alt="">
                     </div>
@@ -29,9 +29,25 @@
                         <p class="content font-size-18">{{product.price*product.quantity | number}}đ</p>
                         <p class="content text-price-discount">909.000VND (-40%)</p>
                     </div>
-                </div>
+                </div> -->
+                <div class="product-cart-quantity">
+					<a ng-click="cartCtrl.addProductClient(cart.product_id)" class="cart-quantity-up"><div class="fa fa-angle-up fa-2x"></div></a>
+					<div class="cart-quantity-number text-gray-6">{{cart.quantity}}</div>
+					<a ng-click="cartCtrl.removeProductClient(cart.product_id)" class="cart-quantity-down"><div class="fa fa-angle-down fa-2x"></div></a>
+				</div>
+				<a ng-click="cartCtrl.openDetail(cart.product_id)" class="cart-image">
+					<div class="img-holder">
+						<div class="img-helper">
+							<img src="{{cart.image}}">
+						</div>
+					</div>
+                </a>
+                <div class="product-price">
+					<p>{{cart.price*cart.quantity | number}}đ</p>
+				</div>
+				<a ng-click="cartCtrl.removeItemCartClient(cart.product_id)" class="product-remove"><i class="fa fa-times fa-2x"></i></a>
             </div>
-        </section>
+        </div>
         <div class="mt16 d-flex align-items-center">
             <div class="flex-base-3">
                 <p class="content-bold text-grey-less text-center">Tổng cộng</p>

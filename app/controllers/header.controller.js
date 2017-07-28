@@ -5,16 +5,16 @@
         .module('gApp.shared')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$state', '$location', '$stateParams', '$localStorage', 'categoryService', 'profileService', '$auth'];
+    HeaderController.$inject = ['$state', '$location', '$stateParams', '$localStorage', 'categoryService', 'profileService', '$auth', 'productService'];
 
-    function HeaderController($state, $location, $stateParams, $localStorage, categoryService, profileService, $auth) {
+    function HeaderController($state, $location, $stateParams, $localStorage, categoryService, profileService, $auth, productService) {
         var vm = this;
-		
-		vm.subMenu = [];
+
+        vm.subMenu = [];
         vm.listCategory = $localStorage.listCategory;
-		vm.searchResult = [];
-		vm.provinceId = $localStorage.provinceId;
-        vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ?  $location.search().categoryId : false);
+        vm.searchResult = [];
+        vm.provinceId = $localStorage.provinceId;
+        vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ? $location.search().categoryId : false);
         vm.profileData = $localStorage.profileData;
         vm.token = $localStorage.token;
 
@@ -22,12 +22,24 @@
         vm.password = "";
         vm.message = "";
         vm.isLoginMobile = false;
+        vm.provinces = [];
 
-        if(!vm.profileData || !$localStorage.token){
+        if (typeof vm.provinces === 'undefined' || vm.provinces.length === 0) {
+            getProvinces();
+        }
+
+        if (!vm.profileData || !$localStorage.token) {
             // $localStorage.$reset();
             // $state.reload();
         }
-        
+
+        function getProvinces() {
+            productService.getListProvinces().then(function (response) {
+                vm.provinces = response.data;
+                return vm.provinces;
+            });
+        }
+
         // Start Login
         function getProfile() {
             return profileService.getProfile().then(function (response) {
@@ -42,7 +54,6 @@
                 .catch(loginFailed);
 
             function authCompleted(response) {
-                console.log(response.data.token);
                 if (typeof response.data.token === 'undefined' || !response.data.token) {
                     vm.message = "Lỗi đăng nhập";
                 } else {
@@ -54,13 +65,12 @@
                 vm.message = 'Lỗi kết nối với server, vui lòng thử lại.';
             }
         };
-        
+
         vm.login = function () {
             var credentials = {
                 email: vm.email,
                 password: vm.password
             };
-            console.log(vm.email);
             $auth.login(credentials)
                 .then(loginCompleted)
                 .catch(loginFailed);
@@ -84,7 +94,7 @@
         };
         // End Login
 
-		getSubMenu();
+        getSubMenu();
         function getSubMenu() {
             var param = {
                 parent_id: 0
@@ -98,41 +108,56 @@
             });
         }
 
-        // vm.gotoCatPage = function (catId, typeId) {
-        //     if (typeof typeId !== 'undefined' && typeId != '0') {
-		// 		if (typeId == 1) {
-		// 			vm.categoryId = catId;
-		// 			if(typeof $localStorage.provinceId === 'undefined') {
-		// 				$('#popupProvince').modal({
-		// 					escapeClose: false,
-		// 					clickClose: false,
-		// 					showClose: false
-		// 				});
-		// 			} else {
-		// 				$state.go("deals", {categoryId: catId});
-		// 			}
-		// 		} else {
-		// 			$state.go("foods", {categoryId: catId});
-        //         }
-        //     } else {
-        //         $state.go("productsList", {categoryId: catId});
-        //     }
-        // };
+        vm.gotoCatPage = function (catId, typeId) {
+            if (typeof typeId !== 'undefined' && typeId != '0') {
+                if (typeId == 1) {
+                    vm.categoryId = catId;
+                    if (typeof $localStorage.provinceId === 'undefined') {
+                        $('#popupProvince').modal({
+                            escapeClose: false,
+                            clickClose: false,
+                            showClose: false
+                        });
+                    } else {
+                        $state.go("productsDeal", { categoryId: catId });
+                    }
+                } else {
+                    $state.go("suppliersList", { categoryId: catId });
+                }
+            } else {
+                $state.go("productsList", { categoryId: catId });
+            }
+        };
 
-        vm.goCatPage = function(cat){
+        vm.goCatPage = function (cat) {
             if (typeof cat.type !== 'undefined' && cat.type != '0') {
                 if (typeof $localStorage.provinceId === 'undefined') {
                     // $state.go("provinces", {categoryId: cat.id, typeId: cat.type, name:''});
-                    $localStorage.provinceId = 1;
+                    $('#popupProvince').modal('show');
                 } else {
-                    if(cat.type == 1) {
-                        $state.go("deals", {categoryId: cat.id, name:''});
+                    if (cat.type == 1) {
+                        $state.go("productsDeal", { categoryId: cat.id, name: '' });
                     } else {
-                        $state.go("suppliersList", {categoryId: cat.id, name:''});
+                        $state.go("suppliersList", { categoryId: cat.id, name: '' });
                     }
                 }
             } else {
-                $state.go("productsList", {categoryId: cat.id, supplierId:0, name:''});
+                $state.go("productsList", { categoryId: cat.id, supplierId: 0, name: '' });
+            }
+        };
+
+        vm.addProvince = function (typeId) {
+            $localStorage.provinceId = vm.provinceId;
+            vm.categoryId = (typeof $location.search().categoryId !== 'undefined' ? $location.search().categoryId : '');
+            // var typeId = (typeof $location.search().typeId !== 'undefined' ?  $location.search().typeId : '');
+            if (typeId == 1) {
+                setTimeout(function () {
+                    $state.go("productsDeal", { categoryId: vm.categoryId });
+                }, 500);
+            } else {
+                setTimeout(function () {
+                    $state.go("suppliersList", { categoryId: vm.categoryId });
+                }, 500);
             }
         };
 
@@ -157,42 +182,42 @@
                 return vm.searchResult;
             });
         };
-        console.log($localStorage.listCategory);
-        vm.goSubCat = function(i, cat){
+
+        vm.goSubCat = function (i, cat) {
             $localStorage.listCategory = vm.listCategory;
-            if(cat.children.length===0){
+            if (cat.children.length === 0) {
                 if (typeof cat.type !== 'undefined' && cat.type != '0') {
                     if (typeof $localStorage.provinceId === 'undefined') {
-                        $state.go("provinces", {categoryId: cat.id, typeId: cat.type, name:''});
+                        $state.go("provinces", { categoryId: cat.id, typeId: cat.type, name: '' });
                     } else {
-                        if(cat.type == 1) {
-                            $state.go("deals", {categoryId: cat.id, name:''});
+                        if (cat.type == 1) {
+                            $state.go("productsDeal", { categoryId: cat.id, name: '' });
                         } else {
-                            $state.go("suppliersList", {categoryId: cat.id, name:''});
+                            $state.go("suppliersList", { categoryId: cat.id, name: '' });
                         }
                     }
                 } else {
-                    $state.go("productsList", {categoryId: cat.id, supplierId:0, name:''});
+                    $state.go("productsList", { categoryId: cat.id, supplierId: 0, name: '' });
                 }
                 $localStorage.isShowMenu = false;
             } else {
                 $localStorage.catParent = cat;
                 vm.catParent = $localStorage.catParent;
-                $localStorage.listCategory  = vm.listCategory[i].children;
+                $localStorage.listCategory = vm.listCategory[i].children;
                 vm.listCategory = $localStorage.listCategory;
             }
         };
-		
-        vm.goState = function(state){
+
+        vm.goState = function (state) {
             $state.go(state);
         };
 
-        vm.openDetail = function(productId){
-            $state.go('productsDetail',{productId: productId});
+        vm.openDetail = function (productId) {
+            $state.go('productsDetail', { productId: productId });
         };
 
-        vm.search = function(){
-            $state.go('productSearches',{name: vm.keySearch});
+        vm.search = function () {
+            $state.go('productSearches', { name: vm.keySearch });
         };
 
         vm.toggleSearch = function () {
@@ -200,13 +225,13 @@
         };
 
         vm.openDeal = function () {
-			$localStorage.provinceId = vm.provinceId;
-			$state.go("deals", {categoryId: vm.categoryId});
+            $localStorage.provinceId = vm.provinceId;
+            $state.go("productsDeal", { categoryId: vm.categoryId });
         };
 
-        vm.openLogout = function(){
+        vm.openLogout = function () {
             $localStorage.$reset();
-            $state.reload();    
+            $state.reload();
         };
     }
 
