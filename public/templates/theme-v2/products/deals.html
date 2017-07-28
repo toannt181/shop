@@ -59,7 +59,7 @@
                     <div ng-if="!ctrl.hasData">Không tìm thấy sản phẩm</div>
                     <div ng-repeat="product in ctrl.products track by $index" class="col-6 mt16 d-flex">
                         <div class="flex-grow-7">
-                            <a ng-click="ctrl.openDetail(product.id)"><img class="w-100" src="{{product.image}}" alt=""></a>
+                            <a ng-click="ctrl.openDetail(product.id)"><img style="width:200px" src="{{product.image}}" alt=""></a>
                         </div>
                         <div class="flex-grow-5">
                             <div class="voucher-box h-100">
